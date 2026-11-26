@@ -101,11 +101,16 @@ void main() {
       selector = AnimationSelector(repository: animations);
     });
 
+    // 固定时钟：仲夏下午三点，不落在任何时段分支（0-5 / 5-9 / 11-13 / 22+），
+    // 也不是节日。这样情境层只会注入一个被 ×0.35 压到阈值以下的 season 标签，
+    // 选片结果才不会随 CI 所在时区漂移。
+    final neutralNow = DateTime(2026, 6, 15, 15);
+
     String pickFor(String user, String reply, {DateTime? now}) {
       final profile = analyzer.analyze(
         userText: user,
         replyText: reply,
-        now: now,
+        now: now ?? neutralNow,
       );
       return selector.select(profile).id;
     }
@@ -151,8 +156,26 @@ void main() {
     });
 
     test('没有情绪信号时不硬凑表情，回到待机', () {
+      // 必须显式给时钟：否则 CI（UTC）与本地（UTC+8）跑出的时段不同，
+      // 情境层注入的 morning / night 会把结果从待机抢走。
       final id = pickFor('18:30 的航班', '好的');
       expect(id, animations.idleClip.id);
+    });
+
+    test('凌晨即使没有情绪词，也会被情境层带到困倦类素材', () {
+      final id = pickFor('18:30 的航班', '好的', now: DateTime(2026, 6, 15, 3));
+      final clip = animations.byId(id)!;
+      expect(
+        clip.tags.keys.any(const ['night', 'sleepy'].contains),
+        isTrue,
+        reason: '$id 未命中夜晚 / 困倦标签',
+      );
+    });
+
+    test('清晨会把表情带向早安类素材', () {
+      final id = pickFor('18:30 的航班', '好的', now: DateTime(2026, 6, 15, 8));
+      final clip = animations.byId(id)!;
+      expect(clip.tags.containsKey('morning'), isTrue, reason: id);
     });
 
     test('每次选片都返回可播放素材', () {
