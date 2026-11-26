@@ -147,7 +147,6 @@ jobs:
         with:
           name: dsh-pet-emoji ${{ github.ref_name }}
           body_path: dist/RELEASE-NOTES.md
-          generate_release_notes: true
           files: |
             dist/*.zip
             dist/*.apk
