@@ -1,7 +1,8 @@
 /// 全局常量与对外链接。
 ///
-/// 注意：`kRepoOwner` 是占位符。创建 GitHub 仓库后执行
-/// `bash tool/set_owner.sh <你的GitHub用户名>` 一次性替换全部文档与代码中的地址。
+/// `kRepoOwner` 是本仓库的账号名。若要迁移到其他账号 / 组织，执行
+/// `bash tool/set_owner.sh <新用户名>`，它会以本文件的值为准，一次性替换
+/// README、docs、NOTICE 等全部文档与代码中的地址。
 library;
 
 const String kAppName = '大肥鱼桌宠';
