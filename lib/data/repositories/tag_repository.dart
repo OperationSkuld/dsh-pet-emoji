@@ -1,7 +1,6 @@
-import 'dart:convert';
-
 import 'package:flutter/services.dart';
 
+import '../../core/asset_json.dart';
 import '../models/tag_definition.dart';
 
 /// 标签仓库：读取分类法，供语义分析器与 UI（标签胶囊、说明气泡）共用。
@@ -16,10 +15,10 @@ class TagRepository {
   };
 
   static Future<TagRepository> load({AssetBundle? bundle}) async {
-    final raw = await (bundle ?? rootBundle).loadString(
+    final decoded = await loadJsonAsset(
+      bundle ?? rootBundle,
       'assets/manifest/tags.json',
     );
-    final decoded = jsonDecode(raw) as Map<String, dynamic>;
     final tags = (decoded['tags'] as List<dynamic>)
         .map((item) => TagDefinition.fromJson(item as Map<String, dynamic>))
         .toList(growable: false);

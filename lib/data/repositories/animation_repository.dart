@@ -1,7 +1,6 @@
-import 'dart:convert';
-
 import 'package:flutter/services.dart';
 
+import '../../core/asset_json.dart';
 import '../../core/logger.dart';
 import '../models/animation_clip.dart';
 
@@ -60,8 +59,10 @@ class AnimationRepository {
 
   static Future<AnimationRepository> load({AssetBundle? bundle}) async {
     final source = bundle ?? rootBundle;
-    final raw = await source.loadString('assets/manifest/animations.json');
-    final decoded = jsonDecode(raw) as Map<String, dynamic>;
+    final decoded = await loadJsonAsset(
+      source,
+      'assets/manifest/animations.json',
+    );
     final frame = decoded['frame'] as Map<String, dynamic>? ?? const {};
     final list = (decoded['clips'] as List<dynamic>)
         .map((item) => AnimationClip.fromJson(item as Map<String, dynamic>))
