@@ -27,7 +27,6 @@ class AppSettings {
     this.petZoom = 1,
     this.petOffsetX = -1,
     this.petOffsetY = -1,
-    this.petWindowAlwaysOnTop = true,
     this.petWindowBackground = PetWindowBackground.card,
     this.speechBubble = true,
   });
@@ -45,17 +44,15 @@ class AppSettings {
   /// 对话页显示「语义标签」调试面板。
   final bool showSemanticPanel;
 
-  /// 桌宠显示倍率：1× 为素材原生尺寸（640×360，与 WebM 母版一致），
-  /// 0.5× 为半尺寸（降采样），2× 为整数放大。
+  /// 桌宠显示倍率：1× 为素材原生尺寸（与 WebM 母版同像素），0.5× 为半尺寸。
   ///
-  /// 只允许这三档，避免半像素缩放把画面插值糊掉——见 [normalizedPetZoom]。
+  /// 只允许这两档，避免半像素缩放把画面插值糊掉——见 [normalizedPetZoom]。
   final double petZoom;
 
   /// 浮动桌宠在窗口内的左上角位置（逻辑像素）。-1 表示尚未拖动过，
-  /// 由界面按「右下角留白 28」的默认位置摆放。
+  /// 由界面按「右下角留白 20」的默认位置摆放。
   final double petOffsetX;
   final double petOffsetY;
-  final bool petWindowAlwaysOnTop;
   final PetWindowBackground petWindowBackground;
 
   /// 桌宠是否冒气泡转述回复。
@@ -63,8 +60,11 @@ class AppSettings {
 
   bool get isConfigured => apiKey.trim().isNotEmpty;
 
-  /// 可选的显示倍率。0.5 是降采样、1 是原生像素、2 是整数放大，都清晰。
-  static const List<double> petZoomSteps = [0.5, 1, 2];
+  /// 可选的显示倍率。0.5 是降采样、1 是原生像素，两者都清晰。
+  ///
+  /// 不再提供 2×：全屏放大在桌面上没有实际用途，而且会把窗口撑得很占地方。
+  /// 历史存过 2 的用户会被 [normalizedPetZoom] 吸附到 1。
+  static const List<double> petZoomSteps = [0.5, 1];
 
   /// 把历史遗留的任意值（0.8~1.6 连续缩放、旧版 1/2/3）吸附到最近的一档。
   double get normalizedPetZoom {
@@ -88,7 +88,6 @@ class AppSettings {
     double? petZoom,
     double? petOffsetX,
     double? petOffsetY,
-    bool? petWindowAlwaysOnTop,
     PetWindowBackground? petWindowBackground,
     bool? speechBubble,
   }) {
@@ -102,7 +101,6 @@ class AppSettings {
       petZoom: petZoom ?? this.petZoom,
       petOffsetX: petOffsetX ?? this.petOffsetX,
       petOffsetY: petOffsetY ?? this.petOffsetY,
-      petWindowAlwaysOnTop: petWindowAlwaysOnTop ?? this.petWindowAlwaysOnTop,
       petWindowBackground: petWindowBackground ?? this.petWindowBackground,
       speechBubble: speechBubble ?? this.speechBubble,
     );

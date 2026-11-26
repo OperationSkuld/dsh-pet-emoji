@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../app_services.dart';
+import '../../core/app_links.dart';
 import '../../data/models/app_settings.dart';
 import '../../data/models/chat_message.dart';
 import '../theme/app_theme.dart';
@@ -211,19 +212,14 @@ class _HeaderBar extends StatelessWidget {
           ),
           child: Row(
             children: [
-              Container(
-                width: 28,
-                height: 28,
-                decoration: BoxDecoration(
-                  gradient: const LinearGradient(
-                    colors: [Color(0xFF4D6BFE), Color(0xFF7B93FF)],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                  ),
-                  borderRadius: BorderRadius.circular(9),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(9),
+                child: Image.asset(
+                  kBrandIconPath,
+                  width: 28,
+                  height: 28,
+                  filterQuality: FilterQuality.medium,
                 ),
-                alignment: Alignment.center,
-                child: const Text('🐳', style: TextStyle(fontSize: 14)),
               ),
               const SizedBox(width: 10),
               const Text(
@@ -420,26 +416,11 @@ class _WelcomeView extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               const SizedBox(height: 24),
-              Container(
-                width: 56,
-                height: 56,
-                decoration: BoxDecoration(
-                  gradient: const LinearGradient(
-                    colors: [Color(0xFF4D6BFE), Color(0xFF8AA0FF)],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                  ),
-                  borderRadius: BorderRadius.circular(18),
-                  boxShadow: [
-                    BoxShadow(
-                      color: const Color(0xFF4D6BFE).withValues(alpha: 0.25),
-                      blurRadius: 22,
-                      offset: const Offset(0, 8),
-                    ),
-                  ],
-                ),
-                alignment: Alignment.center,
-                child: const Text('🐳', style: TextStyle(fontSize: 26)),
+              Image.asset(
+                kBrandIconPath,
+                width: 84,
+                height: 84,
+                filterQuality: FilterQuality.medium,
               ),
               const SizedBox(height: 18),
               const Text(

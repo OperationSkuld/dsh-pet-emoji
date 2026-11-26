@@ -33,6 +33,9 @@ jobs:
           python3 -c "import PIL; print('Pillow', PIL.__version__)"
           python3 tool/gen_icons.py --check
 
+      - name: 校验动画内容框数据覆盖全部素材
+        run: python3 tool/gen_boxes.py --check
+
       - name: 校验运行时素材为 640 宽动画 WebP
         run: python3 tool/gen_webp.py --check
 

@@ -34,12 +34,20 @@ class FloatingPet extends StatefulWidget {
 }
 
 class _FloatingPetState extends State<FloatingPet> {
+  /// 桌宠到窗口边缘、以及气泡/操作条到角色本体的间距，统一 20。
+  ///
+  /// 这里的 20 是「角色边缘」到目标边缘的距离——PetView 已经裁掉了画布上的
+  /// 透明留白，所以摆出来就是眼睛看到的 20，不会被素材边距放大。
   static const double _margin = 20;
+  static const double _gapAbovePet = 20;
+  static const double _gapBelowPet = 20;
 
   final GlobalKey _contentKey = GlobalKey();
 
   Offset? _pos;
-  Size _content = const Size(kPetNativeWidth, kPetNativeHeight + 70);
+  /// 内容尺寸的初始估值（气泡 + 本体 + 两段 20 间距 + 工具条），
+  /// 首帧之后由 [_measure] 用真实尺寸覆盖。
+  Size _content = const Size(250, 380);
   Size _viewport = Size.zero;
   bool _hovering = false;
   bool _dragging = false;
@@ -47,6 +55,22 @@ class _FloatingPetState extends State<FloatingPet> {
   AppServices get _services => widget.services;
 
   double get _zoom => _services.settings.normalizedPetZoom;
+
+  /// 浮动块的宽度：至少容得下气泡（240），但不超过窗口可用宽度。
+  ///
+  /// 气泡与操作条都以角色为中心居中，所以取两者的较大值即可。
+  double get _columnWidth {
+    final limit = math.max(160.0, _viewport.width - _margin * 2);
+    return math.min(math.max(_petWidth, 240.0), limit);
+  }
+
+  /// 角色本体在当前倍率下的目标宽度，并兜底不超过窗口可用宽度。
+  double get _petWidth {
+    final rect = _services.pet.current.contentRect;
+    final natural = kPetNativeWidth * rect.width * _zoom;
+    final limit = math.max(120.0, _viewport.width - _margin * 2);
+    return math.min(natural, limit);
+  }
 
   @override
   void initState() {
@@ -66,16 +90,27 @@ class _FloatingPetState extends State<FloatingPet> {
 
   void _onSettingsChanged() => setState(() {});
 
-  /// 内容尺寸（气泡 + 本体 + 工具条）会随气泡开关变化，量一次用于边界钳制。
+  /// 量出内容尺寸（气泡 + 本体 + 工具条），用于边界钳制与默认位置。
+  ///
+  /// 整个浮动块是**底边锚定**的（气泡出现时向上长，不推着桌宠往下跑），
+  /// 所以尺寸变化时同步把 [_pos] 上移同样的量，底边保持不动。
   void _measure() {
     final box = _contentKey.currentContext?.findRenderObject() as RenderBox?;
     if (box == null || !box.hasSize) return;
-    if (box.size != _content) {
-      // 布局期不能直接 setState，挪到帧末。
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        if (mounted && box.hasSize) setState(() => _content = box.size);
+    final size = box.size;
+    if (size == _content) return;
+    // 布局期不能直接 setState，挪到帧末。
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted || !box.hasSize) return;
+      setState(() {
+        final grew = box.size.height - _content.height;
+        _content = box.size;
+        final pos = _pos;
+        if (pos != null && grew != 0) {
+          _pos = _clamp(Offset(pos.dx, math.max(0.0, pos.dy - grew)));
+        }
       });
-    }
+    });
   }
 
   Offset _clamp(Offset raw) {
@@ -135,7 +170,12 @@ class _FloatingPetState extends State<FloatingPet> {
           children: [
             Positioned(
               left: pos.dx,
-              top: pos.dy,
+              // 用 bottom 而不是 top：只给 left/bottom 时 Stack 不会限制高度，
+              // 内容（气泡变高、换更大的素材）向上生长，永远不会 overflow。
+              bottom: math.max(
+                0.0,
+                _viewport.height - (pos.dy + _content.height),
+              ),
               child: MouseRegion(
                 onEnter: (_) => setState(() => _hovering = true),
                 onExit: (_) => setState(() => _hovering = false),
@@ -146,14 +186,16 @@ class _FloatingPetState extends State<FloatingPet> {
                     return KeyedSubtree(
                       key: _contentKey,
                       child: SizedBox(
-                        width: kPetNativeWidth * _zoom,
+                        // 宽度必须显式给定：Positioned 只给 left/top 时，
+                        // Stack 不会给子树任何宽度约束，Column 会被撑成无限宽。
+                        width: _columnWidth,
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             PetBubbleHost(text: _services.pet.bubble),
-                            const SizedBox(height: 8),
+                            const SizedBox(height: _gapAbovePet),
                             _buildPetBody(),
-                            const SizedBox(height: 4),
+                            const SizedBox(height: _gapBelowPet),
                             _buildToolbar(),
                           ],
                         ),
@@ -183,7 +225,10 @@ class _FloatingPetState extends State<FloatingPet> {
         onPanUpdate: (details) => _updateDrag(details.delta),
         onPanEnd: (_) => _endDrag(),
         onPanCancel: _endDrag,
-        child: PetView(clip: pet.current, zoom: _zoom, showShadow: true),
+        child: SizedBox(
+          width: _petWidth,
+          child: PetView(clip: pet.current, zoom: _zoom, showShadow: true),
+        ),
       ),
     );
   }

@@ -30,6 +30,10 @@ SOURCE = ROOT / "tool" / "brand" / "app_icon.ico"
 
 WINDOWS_TARGET = ROOT / "windows" / "runner" / "resources" / "app_icon.ico"
 
+# 应用内也要用同一个形象（标题栏 logo、欢迎页图标），导出成 PNG 随包分发。
+# 256 是母版最大档，界面上最大只用到 56 逻辑像素，足够 3 倍屏。
+BRAND_TARGET = ROOT / "assets" / "brand" / "app_icon.png"
+
 ANDROID_TARGETS = {
     "mipmap-mdpi": 48,
     "mipmap-hdpi": 72,
@@ -152,6 +156,9 @@ def build_outputs() -> list[tuple[Path, bytes]]:
     # Windows：整个 .ico 原样复制，保留 16/24/32/48/64/128/256 七档
     outputs.append((WINDOWS_TARGET, SOURCE.read_bytes()))
 
+    # 应用内使用的品牌图：母版最大档原样导出（透明底）
+    outputs.append((BRAND_TARGET, encode_png(master)))
+
     for folder, size in ANDROID_TARGETS.items():
         path = ROOT / "android" / "app" / "src" / "main" / "res" / folder / "ic_launcher.png"
         png = encode_png(resize(master, size))
@@ -220,7 +227,10 @@ def main() -> int:
         return 0
 
     print(f"已生成 {len(outputs)} 个图标文件")
-    print(f"  Windows 1 · Android {len(ANDROID_TARGETS)} · iOS {len(IOS_TARGETS)}")
+    print(
+        f"  Windows 1 · 应用内品牌图 1 · "
+        f"Android {len(ANDROID_TARGETS)} · iOS {len(IOS_TARGETS)}"
+    )
     return 0
 
 

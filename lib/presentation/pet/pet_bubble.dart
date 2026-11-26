@@ -62,7 +62,13 @@ class PetBubbleHost extends StatelessWidget {
         ),
       ),
       child: text == null
-          ? SizedBox(height: placeholderHeight, key: const ValueKey('empty'))
+          // 宽度必须是 0 而不是「未指定」：浮动桌宠给气泡的是无界宽度约束，
+          // 只给 height 的 SizedBox 会要求无限宽，进而把整个 Column 撑成无限宽。
+          ? SizedBox(
+              key: const ValueKey('empty'),
+              width: 0,
+              height: placeholderHeight,
+            )
           : PetBubble(key: ValueKey(text), text: text!),
     );
   }

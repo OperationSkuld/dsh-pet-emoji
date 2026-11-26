@@ -10,16 +10,22 @@ void main() {
       }
     });
 
-    test('历史遗留的小数缩放被吸附到最近整数', () {
+    test('历史遗留的小数缩放被吸附到最近档位', () {
       // 旧版本存的是 0.8~1.6 的连续缩放
       expect(const AppSettings(petZoom: 1.24).normalizedPetZoom, 1);
-      expect(const AppSettings(petZoom: 1.65).normalizedPetZoom, 2);
+      expect(const AppSettings(petZoom: 1.65).normalizedPetZoom, 1);
       expect(const AppSettings(petZoom: 0.8).normalizedPetZoom, 1);
     });
 
-    test('超出范围的旧值吸附到最近档位', () {
-      expect(const AppSettings(petZoom: 5).normalizedPetZoom, 2);
+    test('已下线的 2× 档位回落到原尺寸', () {
+      // 2× 在 1.2.0 移除：老用户存的 2 不应该把界面撑爆
+      expect(const AppSettings(petZoom: 2).normalizedPetZoom, 1);
+      expect(const AppSettings(petZoom: 5).normalizedPetZoom, 1);
       expect(const AppSettings(petZoom: 0.2).normalizedPetZoom, 0.5);
+    });
+
+    test('只保留半尺寸与原尺寸两档', () {
+      expect(AppSettings.petZoomSteps, [0.5, 1]);
     });
   });
 
@@ -36,9 +42,9 @@ void main() {
     });
 
     test('copyWith 能单独更新位置而保留倍率', () {
-      const settings = AppSettings(petZoom: 2);
+      const settings = AppSettings(petZoom: 0.5);
       final moved = settings.copyWith(petOffsetX: 40, petOffsetY: 60);
-      expect(moved.petZoom, 2);
+      expect(moved.petZoom, 0.5);
       expect(moved.hasPetOffset, isTrue);
     });
   });

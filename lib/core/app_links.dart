@@ -7,7 +7,13 @@ library;
 
 const String kAppName = '大肥鱼桌宠';
 const String kAppNameEn = 'DSH Pet Emoji';
-const String kVersion = '1.0.0';
+const String kVersion = '1.2.0';
+
+/// 应用内的品牌图（标题栏 logo、欢迎页图标）。
+///
+/// 由 `tool/gen_icons.py` 从 `tool/brand/app_icon.ico` 的 256 档导出，
+/// 三端启动图标与界面内形象因此始终是同一个。
+const String kBrandIconPath = 'assets/brand/app_icon.png';
 
 /// 本仓库（Flutter 版）。
 const String kRepoOwner = 'OperationSkuld';

@@ -1,0 +1,1148 @@
+{
+ "boxes": {
+  "beiluoye-yanmo": [
+   87,
+   30,
+   496,
+   323
+  ],
+  "beishubiao-tuozhuai-xuankong-fankui": [
+   201,
+   23,
+   252,
+   310
+  ],
+  "beixiayitiao-zhamao": [
+   203,
+   29,
+   233,
+   304
+  ],
+  "bian-gezi": [
+   116,
+   16,
+   411,
+   318
+  ],
+  "ceshen-jizao-pao": [
+   30,
+   50,
+   435,
+   285
+  ],
+  "cha-zhuyu-shangju": [
+   210,
+   60,
+   232,
+   274
+  ],
+  "chai-liwu": [
+   155,
+   43,
+   289,
+   299
+  ],
+  "chaoda-shenlanyao": [
+   208,
+   55,
+   226,
+   278
+  ],
+  "chenjian-shuaya": [
+   194,
+   60,
+   240,
+   289
+  ],
+  "chi-baifan": [
+   198,
+   60,
+   240,
+   267
+  ],
+  "chi-bingqilin-ronghua": [
+   205,
+   57,
+   229,
+   281
+  ],
+  "chi-changshoumian": [
+   125,
+   57,
+   317,
+   275
+  ],
+  "chi-chongyanggao": [
+   209,
+   59,
+   225,
+   274
+  ],
+  "chi-dazhaxie": [
+   201,
+   61,
+   240,
+   287
+  ],
+  "chi-fan-wanfan": [
+   200,
+   62,
+   234,
+   272
+  ],
+  "chi-fantuan": [
+   205,
+   59,
+   247,
+   275
+  ],
+  "chi-labazhou": [
+   199,
+   61,
+   233,
+   272
+  ],
+  "chi-niangao": [
+   198,
+   60,
+   237,
+   274
+  ],
+  "chi-qingtuan": [
+   206,
+   59,
+   230,
+   274
+  ],
+  "chi-tanghulu": [
+   202,
+   58,
+   240,
+   275
+  ],
+  "chi-token": [
+   140,
+   55,
+   361,
+   279
+  ],
+  "chi-wancan": [
+   96,
+   58,
+   444,
+   281
+  ],
+  "chi-wucan": [
+   202,
+   61,
+   231,
+   270
+  ],
+  "chi-xigua": [
+   203,
+   58,
+   235,
+   277
+  ],
+  "chi-zaocan": [
+   207,
+   57,
+   227,
+   276
+  ],
+  "chi-zongzi": [
+   206,
+   61,
+   234,
+   274
+  ],
+  "chijiaozi": [
+   190,
+   59,
+   246,
+   285
+  ],
+  "chitangyuan": [
+   209,
+   60,
+   227,
+   273
+  ],
+  "chou-tuoluo": [
+   162,
+   62,
+   278,
+   284
+  ],
+  "chuanzhenqiqiao": [
+   191,
+   62,
+   347,
+   272
+  ],
+  "chui-dizi": [
+   70,
+   47,
+   468,
+   291
+  ],
+  "chui-qiqiu": [
+   16,
+   30,
+   594,
+   330
+  ],
+  "da-keshui-bei-jingxing": [
+   198,
+   18,
+   252,
+   316
+  ],
+  "dai-kong-ru-xi": [
+   71,
+   36,
+   478,
+   324
+  ],
+  "daiji-huxi-xiuxian": [
+   197,
+   57,
+   242,
+   276
+  ],
+  "dakou-chi-lingshi": [
+   82,
+   58,
+   496,
+   300
+  ],
+  "dangqiuqian": [
+   186,
+   14,
+   294,
+   320
+  ],
+  "dianji-huiying-aojiao-shengqi-ceshen-zhanshi": [
+   200,
+   58,
+   232,
+   278
+  ],
+  "dianji-huiying-haixiu-jingya": [
+   111,
+   61,
+   328,
+   274
+  ],
+  "dianji-huiying-kaixin-yuedong": [
+   181,
+   14,
+   280,
+   320
+  ],
+  "dianji-huiying-naoyang-gegexiao": [
+   202,
+   55,
+   239,
+   278
+  ],
+  "dianji-huiying-yuanqi-huishou": [
+   206,
+   34,
+   228,
+   300
+  ],
+  "dongwu-huanrao": [
+   81,
+   26,
+   457,
+   321
+  ],
+  "dongzhangxiwang": [
+   206,
+   60,
+   239,
+   274
+  ],
+  "duixueren": [
+   195,
+   61,
+   253,
+   284
+  ],
+  "fang-fengzheng": [
+   130,
+   0,
+   382,
+   334
+  ],
+  "fang-kongmingdeng": [
+   171,
+   28,
+   267,
+   326
+  ],
+  "fang-yanhua": [
+   49,
+   0,
+   528,
+   360
+  ],
+  "fanghedeng": [
+   205,
+   62,
+   231,
+   272
+  ],
+  "fen-wen-bu-sheng": [
+   74,
+   38,
+   474,
+   322
+  ],
+  "gongzuozhuangtai-chuitou-tanqi-maohan": [
+   157,
+   46,
+   272,
+   287
+  ],
+  "gongzuozhuangtai-manglu-dianan": [
+   179,
+   6,
+   264,
+   327
+  ],
+  "gongzuozhuangtai-qingdian-guidang": [
+   211,
+   60,
+   221,
+   273
+  ],
+  "gongzuozhuangtai-queyue-qingzhu": [
+   170,
+   14,
+   304,
+   320
+  ],
+  "gongzuozhuangtai-sikao-maopao": [
+   182,
+   49,
+   256,
+   285
+  ],
+  "gongzuozhuangtai-yuandi-duobu-zhangwang": [
+   183,
+   39,
+   259,
+   296
+  ],
+  "haqian-liantian": [
+   204,
+   57,
+   231,
+   276
+  ],
+  "hudie-mifeng-huanrao-touding-kaihua": [
+   2,
+   10,
+   632,
+   328
+  ],
+  "jin-dai-ding-dang": [
+   75,
+   46,
+   493,
+   293
+  ],
+  "jingyu-tu-paopao-texiao": [
+   110,
+   33,
+   323,
+   301
+  ],
+  "kaixin-xiaopao": [
+   209,
+   58,
+   234,
+   277
+  ],
+  "keai-zhaiwu": [
+   207,
+   53,
+   239,
+   282
+  ],
+  "lanjing-xianshi": [
+   131,
+   35,
+   355,
+   299
+  ],
+  "lu-mao": [
+   207,
+   60,
+   227,
+   272
+  ],
+  "menghua-xiaoyouling": [
+   158,
+   45,
+   327,
+   296
+  ],
+  "nvpu-quxi-liyi": [
+   206,
+   61,
+   226,
+   276
+  ],
+  "pangxie-zoulu": [
+   187,
+   62,
+   266,
+   273
+  ],
+  "pingkong-shenghua": [
+   123,
+   39,
+   428,
+   299
+  ],
+  "puke-moshu": [
+   177,
+   60,
+   262,
+   273
+  ],
+  "qi-muma": [
+   150,
+   22,
+   347,
+   338
+  ],
+  "qian-dai-man-yi": [
+   80,
+   37,
+   478,
+   313
+  ],
+  "qian-dai-ru-chang": [
+   71,
+   38,
+   479,
+   322
+  ],
+  "qidai-kaifan": [
+   202,
+   58,
+   229,
+   276
+  ],
+  "qingkuai-jilu": [
+   190,
+   59,
+   248,
+   274
+  ],
+  "qingkuai-yaobaiwu": [
+   192,
+   59,
+   282,
+   275
+  ],
+  "sanqiu-paojie": [
+   209,
+   34,
+   229,
+   300
+  ],
+  "shendu-sikao-suisuinian": [
+   105,
+   50,
+   449,
+   288
+  ],
+  "shia-chishenme": [
+   52,
+   41,
+   553,
+   304
+  ],
+  "shou-hongbao": [
+   205,
+   61,
+   237,
+   272
+  ],
+  "shu-jin-zhou-mei": [
+   206,
+   59,
+   246,
+   274
+  ],
+  "shuan-huoguo": [
+   206,
+   59,
+   233,
+   295
+  ],
+  "shuijiao-kaishi": [
+   208,
+   54,
+   235,
+   284
+  ],
+  "shuijiao-qilai": [
+   182,
+   90,
+   257,
+   256
+  ],
+  "shuijiao-xunhuan": [
+   130,
+   36,
+   300,
+   302
+  ],
+  "suisuinian-cazhuo-suisuinian": [
+   198,
+   62,
+   233,
+   272
+  ],
+  "suisuinian-duiping-suisuinian": [
+   210,
+   58,
+   221,
+   275
+  ],
+  "suisuinian-fadai-suisuinian": [
+   202,
+   62,
+   228,
+   272
+  ],
+  "taotang-nanguadeng": [
+   199,
+   58,
+   250,
+   278
+  ],
+  "ti-jianzi": [
+   201,
+   38,
+   241,
+   296
+  ],
+  "touchi-lingshi-bei-zhuazhu": [
+   206,
+   26,
+   235,
+   307
+  ],
+  "wan-shuiqiang": [
+   29,
+   62,
+   569,
+   298
+  ],
+  "wan-youxi-qijibaituai": [
+   165,
+   54,
+   287,
+   291
+  ],
+  "wu-shitou": [
+   199,
+   30,
+   247,
+   303
+  ],
+  "xiaofudu-yuandi-360du-xuanzhuan-zhanshi": [
+   188,
+   45,
+   282,
+   289
+  ],
+  "xiaotiqin-yanzou": [
+   188,
+   58,
+   283,
+   277
+  ],
+  "xiawuziqi": [
+   200,
+   61,
+   234,
+   272
+  ],
+  "xie-daima": [
+   208,
+   61,
+   226,
+   272
+  ],
+  "xie-fuzi": [
+   168,
+   59,
+   269,
+   278
+  ],
+  "yaoshan-naliang": [
+   151,
+   50,
+   323,
+   283
+  ],
+  "yong-jingyu-weiba-paidadi": [
+   206,
+   59,
+   265,
+   274
+  ],
+  "youxian-hengga": [
+   186,
+   4,
+   306,
+   329
+  ],
+  "youya-nvpuwu": [
+   206,
+   57,
+   232,
+   278
+  ],
+  "yuandi-dunxia-wan-wanju-qiche": [
+   71,
+   51,
+   479,
+   297
+  ],
+  "yuandi-piaofu-tabu": [
+   209,
+   57,
+   226,
+   280
+  ],
+  "yuandi-qiaoji-zhuomian-hudong": [
+   199,
+   62,
+   232,
+   271
+  ],
+  "yuandi-tiaoyue-zhuasui-touding-wupin": [
+   191,
+   0,
+   255,
+   338
+  ],
+  "yuandi-xiaoqi-chenmian": [
+   203,
+   26,
+   230,
+   309
+  ],
+  "yuandi-zhongli-xiadun-yasuo": [
+   204,
+   62,
+   252,
+   277
+  ],
+  "yuandi-zhuanxin-wan-mofang": [
+   206,
+   62,
+   228,
+   272
+  ],
+  "yuandi-zuozhuan-benpao": [
+   118,
+   54,
+   352,
+   284
+  ],
+  "zhao-jingzi": [
+   194,
+   53,
+   248,
+   280
+  ],
+  "zhengti-huanzhuang-shise": [
+   191,
+   50,
+   286,
+   284
+  ],
+  "zhongqiu-shangyue-chi-yuebing": [
+   194,
+   48,
+   392,
+   286
+  ],
+  "zhuangdian-shengdanshu": [
+   78,
+   38,
+   472,
+   322
+  ]
+ },
+ "frames": {
+  "beiluoye-yanmo": [
+   640,
+   360
+  ],
+  "beishubiao-tuozhuai-xuankong-fankui": [
+   640,
+   360
+  ],
+  "beixiayitiao-zhamao": [
+   640,
+   360
+  ],
+  "bian-gezi": [
+   640,
+   360
+  ],
+  "ceshen-jizao-pao": [
+   640,
+   360
+  ],
+  "cha-zhuyu-shangju": [
+   640,
+   360
+  ],
+  "chai-liwu": [
+   640,
+   360
+  ],
+  "chaoda-shenlanyao": [
+   640,
+   360
+  ],
+  "chenjian-shuaya": [
+   640,
+   360
+  ],
+  "chi-baifan": [
+   640,
+   360
+  ],
+  "chi-bingqilin-ronghua": [
+   640,
+   360
+  ],
+  "chi-changshoumian": [
+   640,
+   360
+  ],
+  "chi-chongyanggao": [
+   640,
+   360
+  ],
+  "chi-dazhaxie": [
+   640,
+   360
+  ],
+  "chi-fan-wanfan": [
+   640,
+   360
+  ],
+  "chi-fantuan": [
+   640,
+   360
+  ],
+  "chi-labazhou": [
+   640,
+   360
+  ],
+  "chi-niangao": [
+   640,
+   360
+  ],
+  "chi-qingtuan": [
+   640,
+   360
+  ],
+  "chi-tanghulu": [
+   640,
+   360
+  ],
+  "chi-token": [
+   640,
+   360
+  ],
+  "chi-wancan": [
+   640,
+   360
+  ],
+  "chi-wucan": [
+   640,
+   360
+  ],
+  "chi-xigua": [
+   640,
+   360
+  ],
+  "chi-zaocan": [
+   640,
+   360
+  ],
+  "chi-zongzi": [
+   640,
+   360
+  ],
+  "chijiaozi": [
+   640,
+   360
+  ],
+  "chitangyuan": [
+   640,
+   360
+  ],
+  "chou-tuoluo": [
+   640,
+   360
+  ],
+  "chuanzhenqiqiao": [
+   640,
+   360
+  ],
+  "chui-dizi": [
+   640,
+   360
+  ],
+  "chui-qiqiu": [
+   640,
+   360
+  ],
+  "da-keshui-bei-jingxing": [
+   640,
+   360
+  ],
+  "dai-kong-ru-xi": [
+   640,
+   360
+  ],
+  "daiji-huxi-xiuxian": [
+   640,
+   360
+  ],
+  "dakou-chi-lingshi": [
+   640,
+   360
+  ],
+  "dangqiuqian": [
+   640,
+   360
+  ],
+  "dianji-huiying-aojiao-shengqi-ceshen-zhanshi": [
+   640,
+   360
+  ],
+  "dianji-huiying-haixiu-jingya": [
+   640,
+   360
+  ],
+  "dianji-huiying-kaixin-yuedong": [
+   640,
+   360
+  ],
+  "dianji-huiying-naoyang-gegexiao": [
+   640,
+   360
+  ],
+  "dianji-huiying-yuanqi-huishou": [
+   640,
+   360
+  ],
+  "dongwu-huanrao": [
+   640,
+   360
+  ],
+  "dongzhangxiwang": [
+   640,
+   360
+  ],
+  "duixueren": [
+   640,
+   360
+  ],
+  "fang-fengzheng": [
+   640,
+   360
+  ],
+  "fang-kongmingdeng": [
+   640,
+   360
+  ],
+  "fang-yanhua": [
+   640,
+   360
+  ],
+  "fanghedeng": [
+   640,
+   360
+  ],
+  "fen-wen-bu-sheng": [
+   640,
+   360
+  ],
+  "gongzuozhuangtai-chuitou-tanqi-maohan": [
+   640,
+   360
+  ],
+  "gongzuozhuangtai-manglu-dianan": [
+   640,
+   360
+  ],
+  "gongzuozhuangtai-qingdian-guidang": [
+   640,
+   360
+  ],
+  "gongzuozhuangtai-queyue-qingzhu": [
+   640,
+   360
+  ],
+  "gongzuozhuangtai-sikao-maopao": [
+   640,
+   360
+  ],
+  "gongzuozhuangtai-yuandi-duobu-zhangwang": [
+   640,
+   360
+  ],
+  "haqian-liantian": [
+   640,
+   360
+  ],
+  "hudie-mifeng-huanrao-touding-kaihua": [
+   640,
+   360
+  ],
+  "jin-dai-ding-dang": [
+   640,
+   360
+  ],
+  "jingyu-tu-paopao-texiao": [
+   640,
+   360
+  ],
+  "kaixin-xiaopao": [
+   640,
+   360
+  ],
+  "keai-zhaiwu": [
+   640,
+   360
+  ],
+  "lanjing-xianshi": [
+   640,
+   360
+  ],
+  "lu-mao": [
+   640,
+   360
+  ],
+  "menghua-xiaoyouling": [
+   640,
+   360
+  ],
+  "nvpu-quxi-liyi": [
+   640,
+   360
+  ],
+  "pangxie-zoulu": [
+   640,
+   360
+  ],
+  "pingkong-shenghua": [
+   640,
+   360
+  ],
+  "puke-moshu": [
+   640,
+   360
+  ],
+  "qi-muma": [
+   640,
+   360
+  ],
+  "qian-dai-man-yi": [
+   640,
+   360
+  ],
+  "qian-dai-ru-chang": [
+   640,
+   360
+  ],
+  "qidai-kaifan": [
+   640,
+   360
+  ],
+  "qingkuai-jilu": [
+   640,
+   360
+  ],
+  "qingkuai-yaobaiwu": [
+   640,
+   360
+  ],
+  "sanqiu-paojie": [
+   640,
+   360
+  ],
+  "shendu-sikao-suisuinian": [
+   640,
+   360
+  ],
+  "shia-chishenme": [
+   640,
+   360
+  ],
+  "shou-hongbao": [
+   640,
+   360
+  ],
+  "shu-jin-zhou-mei": [
+   640,
+   360
+  ],
+  "shuan-huoguo": [
+   640,
+   360
+  ],
+  "shuijiao-kaishi": [
+   640,
+   360
+  ],
+  "shuijiao-qilai": [
+   640,
+   360
+  ],
+  "shuijiao-xunhuan": [
+   640,
+   360
+  ],
+  "suisuinian-cazhuo-suisuinian": [
+   640,
+   360
+  ],
+  "suisuinian-duiping-suisuinian": [
+   640,
+   360
+  ],
+  "suisuinian-fadai-suisuinian": [
+   640,
+   360
+  ],
+  "taotang-nanguadeng": [
+   640,
+   360
+  ],
+  "ti-jianzi": [
+   640,
+   360
+  ],
+  "touchi-lingshi-bei-zhuazhu": [
+   640,
+   360
+  ],
+  "wan-shuiqiang": [
+   640,
+   360
+  ],
+  "wan-youxi-qijibaituai": [
+   640,
+   360
+  ],
+  "wu-shitou": [
+   640,
+   360
+  ],
+  "xiaofudu-yuandi-360du-xuanzhuan-zhanshi": [
+   640,
+   360
+  ],
+  "xiaotiqin-yanzou": [
+   640,
+   360
+  ],
+  "xiawuziqi": [
+   640,
+   360
+  ],
+  "xie-daima": [
+   640,
+   360
+  ],
+  "xie-fuzi": [
+   640,
+   360
+  ],
+  "yaoshan-naliang": [
+   640,
+   360
+  ],
+  "yong-jingyu-weiba-paidadi": [
+   640,
+   360
+  ],
+  "youxian-hengga": [
+   640,
+   360
+  ],
+  "youya-nvpuwu": [
+   640,
+   360
+  ],
+  "yuandi-dunxia-wan-wanju-qiche": [
+   640,
+   360
+  ],
+  "yuandi-piaofu-tabu": [
+   640,
+   360
+  ],
+  "yuandi-qiaoji-zhuomian-hudong": [
+   640,
+   360
+  ],
+  "yuandi-tiaoyue-zhuasui-touding-wupin": [
+   640,
+   360
+  ],
+  "yuandi-xiaoqi-chenmian": [
+   640,
+   360
+  ],
+  "yuandi-zhongli-xiadun-yasuo": [
+   640,
+   360
+  ],
+  "yuandi-zhuanxin-wan-mofang": [
+   640,
+   360
+  ],
+  "yuandi-zuozhuan-benpao": [
+   640,
+   360
+  ],
+  "zhao-jingzi": [
+   640,
+   360
+  ],
+  "zhengti-huanzhuang-shise": [
+   640,
+   360
+  ],
+  "zhongqiu-shangyue-chi-yuebing": [
+   640,
+   360
+  ],
+  "zhuangdian-shengdanshu": [
+   640,
+   360
+  ]
+ },
+ "generator": "tool/gen_boxes.py",
+ "note": "每段动画的内容包围盒 [x, y, w, h]，单位是画面像素；外扩 2px 抗锯齿余量"
+}

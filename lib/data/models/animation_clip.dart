@@ -1,4 +1,5 @@
 import 'dart:math' as math;
+import 'dart:ui' show Rect;
 
 /// 动画停留策略。
 enum ClipHold {
@@ -28,6 +29,10 @@ class AnimationClip {
     this.webmPath,
     this.width,
     this.height,
+    this.boxX,
+    this.boxY,
+    this.boxWidth,
+    this.boxHeight,
   });
 
   /// 主键，与 `assets/animations/<id>.webp` 对应。
@@ -51,6 +56,40 @@ class AnimationClip {
   final String? webmPath;
   final int? width;
   final int? height;
+
+  /// 内容包围盒（画面像素坐标）：这段素材里真正有像素的区域。
+  ///
+  /// 640×360 是统一画布，角色本身往往只占中间一小块；按它排版才能让气泡、
+  /// 操作条贴着角色边缘，而不是贴着透明的画布边缘。
+  /// 由 `tool/gen_boxes.py` 量出，经 `tool/gen_manifest.py` 写进清单。
+  final int? boxX;
+  final int? boxY;
+  final int? boxWidth;
+  final int? boxHeight;
+
+  /// 内容框在画面中的归一化矩形（0~1）。数据缺失时退化为整幅画面。
+  Rect get contentRect {
+    final frameWidth = width;
+    final frameHeight = height;
+    final boxW = boxWidth;
+    final boxH = boxHeight;
+    if (frameWidth == null ||
+        frameHeight == null ||
+        frameWidth <= 0 ||
+        frameHeight <= 0 ||
+        boxW == null ||
+        boxH == null ||
+        boxW <= 0 ||
+        boxH <= 0) {
+      return const Rect.fromLTWH(0, 0, 1, 1);
+    }
+    return Rect.fromLTWH(
+      (boxX ?? 0) / frameWidth,
+      (boxY ?? 0) / frameHeight,
+      boxW / frameWidth,
+      boxH / frameHeight,
+    );
+  }
 
   /// 有运行时素材才参与调度。现在 114 段全部都有，保留这个判断是为了
   /// 在素材缺失时能安静跳过而不是崩在 `Image.asset`。
@@ -81,6 +120,7 @@ class AnimationClip {
 
   static AnimationClip fromJson(Map<String, dynamic> json) {
     final rawTags = json['tags'] as Map<String, dynamic>? ?? const {};
+    final box = (json['box'] as List<dynamic>?)?.cast<num>();
     return AnimationClip(
       id: json['id'] as String,
       name: json['name'] as String? ?? json['id'] as String,
@@ -94,6 +134,10 @@ class AnimationClip {
       webmPath: json['webm'] as String?,
       width: (json['width'] as num?)?.toInt(),
       height: (json['height'] as num?)?.toInt(),
+      boxX: box != null && box.length == 4 ? box[0].toInt() : null,
+      boxY: box != null && box.length == 4 ? box[1].toInt() : null,
+      boxWidth: box != null && box.length == 4 ? box[2].toInt() : null,
+      boxHeight: box != null && box.length == 4 ? box[3].toInt() : null,
     );
   }
 

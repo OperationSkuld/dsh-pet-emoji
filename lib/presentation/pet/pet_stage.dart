@@ -47,7 +47,7 @@ class PetStage extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             PetBubbleHost(text: pet.bubble),
-            const SizedBox(height: 10),
+            const SizedBox(height: 20),
             PetView(
               clip: clip,
               zoom: zoom,
@@ -60,7 +60,7 @@ class PetStage extends StatelessWidget {
             const SizedBox(height: 6),
             if (showTags) _TagLine(clip: clip, tags: tags),
             if (showActions) ...[
-              const SizedBox(height: 18),
+              const SizedBox(height: 20),
               _ActionBar(pet: pet, onBalance: onBalance, onGallery: onGallery),
             ],
           ],

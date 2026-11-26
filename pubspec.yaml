@@ -1,7 +1,7 @@
 name: dsh_pet_emoji
 description: "语义化表情桌宠：唤起对话 → DeepSeek 回复 → 语义标签 → 匹配动画表情。"
 publish_to: "none"
-version: 1.0.0+1
+version: 1.2.0+3
 
 environment:
   sdk: ^3.13.0
@@ -24,6 +24,8 @@ flutter:
   uses-material-design: true
 
   assets:
+    # 应用内品牌图：标题栏 logo 与欢迎页图标（由 tool/gen_icons.py 从 ico 母版导出）
+    - assets/brand/
     # 语义清单：标签分类法 + 动画标注（由 tool/gen_manifest.py 生成）
     - assets/manifest/
     # 运行时动画：114 段 640x360 透明动画 WebP（Windows / Android / iOS 通用）

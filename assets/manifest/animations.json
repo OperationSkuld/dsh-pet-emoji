@@ -18,6 +18,12 @@
       "anim": "assets/animations/daiji-huxi-xiuxian.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        197,
+        57,
+        242,
+        276
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/待机呼吸休闲.webm"
     },
@@ -34,6 +40,12 @@
       "anim": "assets/animations/yuandi-piaofu-tabu.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        209,
+        57,
+        226,
+        280
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/原地漂浮踏步.webm"
     },
@@ -50,6 +62,12 @@
       "anim": "assets/animations/dongzhangxiwang.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        206,
+        60,
+        239,
+        274
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/东张西望.webm"
     },
@@ -66,6 +84,12 @@
       "anim": "assets/animations/suisuinian-fadai-suisuinian.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        202,
+        62,
+        228,
+        272
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/碎碎念-发呆碎碎念.webm"
     },
@@ -83,6 +107,12 @@
       "anim": "assets/animations/suisuinian-duiping-suisuinian.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        210,
+        58,
+        221,
+        275
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/碎碎念-对屏碎碎念.webm"
     },
@@ -99,6 +129,12 @@
       "anim": "assets/animations/suisuinian-cazhuo-suisuinian.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        198,
+        62,
+        233,
+        272
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/碎碎念-擦桌碎碎念.webm"
     },
@@ -115,6 +151,12 @@
       "anim": "assets/animations/chaoda-shenlanyao.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        208,
+        55,
+        226,
+        278
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/超大伸懒腰.webm"
     },
@@ -131,6 +173,12 @@
       "anim": "assets/animations/haqian-liantian.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        204,
+        57,
+        231,
+        276
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/哈欠连天.webm"
     },
@@ -146,6 +194,12 @@
       "anim": "assets/animations/chenjian-shuaya.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        194,
+        60,
+        240,
+        289
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/晨间刷牙.webm"
     },
@@ -161,6 +215,12 @@
       "anim": "assets/animations/zhao-jingzi.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        194,
+        53,
+        248,
+        280
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/照镜子.webm"
     },
@@ -177,6 +237,12 @@
       "anim": "assets/animations/xiaofudu-yuandi-360du-xuanzhuan-zhanshi.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        188,
+        45,
+        282,
+        289
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/小幅度原地360度旋转展示.webm"
     },
@@ -193,6 +259,12 @@
       "anim": "assets/animations/dianji-huiying-kaixin-yuedong.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        181,
+        14,
+        280,
+        320
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/点击回应-开心跃动.webm"
     },
@@ -210,6 +282,12 @@
       "anim": "assets/animations/dianji-huiying-naoyang-gegexiao.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        202,
+        55,
+        239,
+        278
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/点击回应-挠痒咯咯笑.webm"
     },
@@ -226,6 +304,12 @@
       "anim": "assets/animations/dianji-huiying-haixiu-jingya.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        111,
+        61,
+        328,
+        274
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/点击回应-害羞惊讶.webm"
     },
@@ -243,6 +327,12 @@
       "anim": "assets/animations/dianji-huiying-aojiao-shengqi-ceshen-zhanshi.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        200,
+        58,
+        232,
+        278
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/点击回应-傲娇生气.webm"
     },
@@ -260,6 +350,12 @@
       "anim": "assets/animations/dianji-huiying-yuanqi-huishou.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        206,
+        34,
+        228,
+        300
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/点击回应-元气挥手.webm"
     },
@@ -276,6 +372,12 @@
       "anim": "assets/animations/yuandi-tiaoyue-zhuasui-touding-wupin.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        191,
+        0,
+        255,
+        338
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/原地跳跃抓碎头顶物品.webm"
     },
@@ -292,6 +394,12 @@
       "anim": "assets/animations/gongzuozhuangtai-queyue-qingzhu.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        170,
+        14,
+        304,
+        320
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/工作状态-雀跃庆祝.webm"
     },
@@ -309,6 +417,12 @@
       "anim": "assets/animations/gongzuozhuangtai-chuitou-tanqi-maohan.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        157,
+        46,
+        272,
+        287
+      ],
       "durationMs": 4916,
       "webm": "assets/webm/工作状态-垂头叹气冒汗.webm"
     },
@@ -325,6 +439,12 @@
       "anim": "assets/animations/wan-youxi-qijibaituai.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        165,
+        54,
+        287,
+        291
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/玩游戏气急败坏.webm"
     },
@@ -341,6 +461,12 @@
       "anim": "assets/animations/yong-jingyu-weiba-paidadi.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        206,
+        59,
+        265,
+        274
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/用鲸鱼尾巴拍打地面.webm"
     },
@@ -356,6 +482,12 @@
       "anim": "assets/animations/beixiayitiao-zhamao.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        203,
+        29,
+        233,
+        304
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/被吓一跳.webm"
     },
@@ -372,6 +504,12 @@
       "anim": "assets/animations/da-keshui-bei-jingxing.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        198,
+        18,
+        252,
+        316
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/打瞌睡被惊醒.webm"
     },
@@ -388,6 +526,12 @@
       "anim": "assets/animations/touchi-lingshi-bei-zhuazhu.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        206,
+        26,
+        235,
+        307
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/偷吃零食被抓住.webm"
     },
@@ -404,6 +548,12 @@
       "anim": "assets/animations/shendu-sikao-suisuinian.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        105,
+        50,
+        449,
+        288
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/深度思考碎碎念.webm"
     },
@@ -420,6 +570,12 @@
       "anim": "assets/animations/gongzuozhuangtai-sikao-maopao.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        182,
+        49,
+        256,
+        285
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/工作状态-思考冒泡.webm"
     },
@@ -436,6 +592,12 @@
       "anim": "assets/animations/qi-muma.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        150,
+        22,
+        347,
+        338
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/骑木马.webm"
     },
@@ -452,6 +614,12 @@
       "anim": "assets/animations/dangqiuqian.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        186,
+        14,
+        294,
+        320
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/荡秋千.webm"
     },
@@ -468,6 +636,12 @@
       "anim": "assets/animations/menghua-xiaoyouling.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        158,
+        45,
+        327,
+        296
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/萌化小幽灵.webm"
     },
@@ -484,6 +658,12 @@
       "anim": "assets/animations/lanjing-xianshi.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        131,
+        35,
+        355,
+        299
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/蓝鲸现世.webm"
     },
@@ -501,6 +681,12 @@
       "anim": "assets/animations/jingyu-tu-paopao-texiao.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        110,
+        33,
+        323,
+        301
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/鲸鱼吐泡泡特效.webm"
     },
@@ -518,6 +704,12 @@
       "anim": "assets/animations/hudie-mifeng-huanrao-touding-kaihua.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        2,
+        10,
+        632,
+        328
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/蝴蝶蜜蜂环绕头顶开花.webm"
     },
@@ -534,6 +726,12 @@
       "anim": "assets/animations/pangxie-zoulu.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        187,
+        62,
+        266,
+        273
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/螃蟹走路.webm"
     },
@@ -551,6 +749,12 @@
       "anim": "assets/animations/nvpu-quxi-liyi.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        206,
+        61,
+        226,
+        276
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/女仆屈膝礼仪.webm"
     },
@@ -567,6 +771,12 @@
       "anim": "assets/animations/youya-nvpuwu.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        206,
+        57,
+        232,
+        278
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/优雅女仆舞.webm"
     },
@@ -584,6 +794,12 @@
       "anim": "assets/animations/shou-hongbao.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        205,
+        61,
+        237,
+        272
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/收红包.webm"
     },
@@ -600,6 +816,12 @@
       "anim": "assets/animations/chai-liwu.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        155,
+        43,
+        289,
+        299
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/拆礼物.webm"
     },
@@ -616,6 +838,12 @@
       "anim": "assets/animations/chui-qiqiu.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        16,
+        30,
+        594,
+        330
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/吹气球.webm"
     },
@@ -633,6 +861,12 @@
       "anim": "assets/animations/fang-yanhua.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        49,
+        0,
+        528,
+        360
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/放烟花.webm"
     },
@@ -649,6 +883,12 @@
       "anim": "assets/animations/wu-shitou.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        199,
+        30,
+        247,
+        303
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/舞狮头.webm"
     },
@@ -665,6 +905,12 @@
       "anim": "assets/animations/sanqiu-paojie.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        209,
+        34,
+        229,
+        300
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/三球抛接.webm"
     },
@@ -681,6 +927,12 @@
       "anim": "assets/animations/puke-moshu.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        177,
+        60,
+        262,
+        273
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/扑克魔术.webm"
     },
@@ -696,6 +948,12 @@
       "anim": "assets/animations/bian-gezi.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        116,
+        16,
+        411,
+        318
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/变鸽子.webm"
     },
@@ -712,6 +970,12 @@
       "anim": "assets/animations/pingkong-shenghua.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        123,
+        39,
+        428,
+        299
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/凭空生花.webm"
     },
@@ -728,6 +992,12 @@
       "anim": "assets/animations/chi-token.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        140,
+        55,
+        361,
+        279
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/吃Token.webm"
     },
@@ -743,6 +1013,12 @@
       "anim": "assets/animations/chi-zaocan.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        207,
+        57,
+        227,
+        276
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/吃早餐.webm"
     },
@@ -758,6 +1034,12 @@
       "anim": "assets/animations/chi-wucan.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        202,
+        61,
+        231,
+        270
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/吃午餐.webm"
     },
@@ -773,6 +1055,12 @@
       "anim": "assets/animations/chi-wancan.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        96,
+        58,
+        444,
+        281
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/吃晚餐.webm"
     },
@@ -788,6 +1076,12 @@
       "anim": "assets/animations/chi-baifan.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        198,
+        60,
+        240,
+        267
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/吃白饭.webm"
     },
@@ -804,6 +1098,12 @@
       "anim": "assets/animations/dakou-chi-lingshi.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        82,
+        58,
+        496,
+        300
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/大口吃零食.webm"
     },
@@ -819,6 +1119,12 @@
       "anim": "assets/animations/shia-chishenme.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        52,
+        41,
+        553,
+        304
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/是啊，吃什么.webm"
     },
@@ -835,6 +1141,12 @@
       "anim": "assets/animations/shuan-huoguo.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        206,
+        59,
+        233,
+        295
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/涮火锅.webm"
     },
@@ -851,6 +1163,12 @@
       "anim": "assets/animations/chi-bingqilin-ronghua.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        205,
+        57,
+        229,
+        281
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/吃冰淇淋融化.webm"
     },
@@ -866,6 +1184,12 @@
       "anim": "assets/animations/chi-xigua.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        203,
+        58,
+        235,
+        277
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/吃西瓜.webm"
     },
@@ -881,6 +1205,12 @@
       "anim": "assets/animations/chijiaozi.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        190,
+        59,
+        246,
+        285
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/吃饺子.webm"
     },
@@ -896,6 +1226,12 @@
       "anim": "assets/animations/chitangyuan.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        209,
+        60,
+        227,
+        273
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/吃汤圆.webm"
     },
@@ -911,6 +1247,12 @@
       "anim": "assets/animations/chi-zongzi.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        206,
+        61,
+        234,
+        274
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/吃粽子.webm"
     },
@@ -926,6 +1268,12 @@
       "anim": "assets/animations/chi-niangao.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        198,
+        60,
+        237,
+        274
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/吃年糕.webm"
     },
@@ -942,6 +1290,12 @@
       "anim": "assets/animations/chi-tanghulu.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        202,
+        58,
+        240,
+        275
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/吃糖葫芦.webm"
     },
@@ -958,6 +1312,12 @@
       "anim": "assets/animations/chi-labazhou.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        199,
+        61,
+        233,
+        272
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/吃腊八粥.webm"
     },
@@ -974,6 +1334,12 @@
       "anim": "assets/animations/chi-chongyanggao.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        209,
+        59,
+        225,
+        274
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/吃重阳糕.webm"
     },
@@ -990,6 +1356,12 @@
       "anim": "assets/animations/chi-changshoumian.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        125,
+        57,
+        317,
+        275
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/吃长寿面.webm"
     },
@@ -1006,6 +1378,12 @@
       "anim": "assets/animations/chi-qingtuan.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        206,
+        59,
+        230,
+        274
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/吃青团.webm"
     },
@@ -1022,6 +1400,12 @@
       "anim": "assets/animations/chi-dazhaxie.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        201,
+        61,
+        240,
+        287
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/吃大闸蟹.webm"
     },
@@ -1039,6 +1423,12 @@
       "anim": "assets/animations/zhongqiu-shangyue-chi-yuebing.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        194,
+        48,
+        392,
+        286
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/中秋赏月吃月饼.webm"
     },
@@ -1054,6 +1444,12 @@
       "anim": "assets/animations/qidai-kaifan.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        202,
+        58,
+        229,
+        276
+      ],
       "durationMs": 5166,
       "webm": "assets/webm/期待开饭.webm"
     },
@@ -1070,6 +1466,12 @@
       "anim": "assets/animations/xie-daima.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        208,
+        61,
+        226,
+        272
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/写代码.webm"
     },
@@ -1086,6 +1488,12 @@
       "anim": "assets/animations/gongzuozhuangtai-manglu-dianan.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        179,
+        6,
+        264,
+        327
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/工作状态-忙碌点按.webm"
     },
@@ -1102,6 +1510,12 @@
       "anim": "assets/animations/gongzuozhuangtai-yuandi-duobu-zhangwang.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        183,
+        39,
+        259,
+        296
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/工作状态-原地踱步张望.webm"
     },
@@ -1118,6 +1532,12 @@
       "anim": "assets/animations/gongzuozhuangtai-qingdian-guidang.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        211,
+        60,
+        221,
+        273
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/工作状态-清点归档.webm"
     },
@@ -1134,6 +1554,12 @@
       "anim": "assets/animations/qingkuai-jilu.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        190,
+        59,
+        248,
+        274
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/轻快记录.webm"
     },
@@ -1150,6 +1576,12 @@
       "anim": "assets/animations/xiawuziqi.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        200,
+        61,
+        234,
+        272
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/下五子棋.webm"
     },
@@ -1166,6 +1598,12 @@
       "anim": "assets/animations/yuandi-zhuanxin-wan-mofang.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        206,
+        62,
+        228,
+        272
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/原地专心玩魔方.webm"
     },
@@ -1182,6 +1620,12 @@
       "anim": "assets/animations/chuanzhenqiqiao.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        191,
+        62,
+        347,
+        272
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/穿针乞巧.webm"
     },
@@ -1198,6 +1642,12 @@
       "anim": "assets/animations/keai-zhaiwu.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        207,
+        53,
+        239,
+        282
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/可爱宅舞.webm"
     },
@@ -1214,6 +1664,12 @@
       "anim": "assets/animations/qingkuai-yaobaiwu.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        192,
+        59,
+        282,
+        275
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/轻快摇摆舞.webm"
     },
@@ -1230,6 +1686,12 @@
       "anim": "assets/animations/xiaotiqin-yanzou.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        188,
+        58,
+        283,
+        277
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/小提琴演奏.webm"
     },
@@ -1245,6 +1707,12 @@
       "anim": "assets/animations/chui-dizi.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        70,
+        47,
+        468,
+        291
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/吹笛子.webm"
     },
@@ -1261,6 +1729,12 @@
       "anim": "assets/animations/youxian-hengga.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        186,
+        4,
+        306,
+        329
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/悠闲哼歌.webm"
     },
@@ -1276,6 +1750,12 @@
       "anim": "assets/animations/yuandi-qiaoji-zhuomian-hudong.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        199,
+        62,
+        232,
+        271
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/原地敲击桌面互动.webm"
     },
@@ -1291,6 +1771,12 @@
       "anim": "assets/animations/chou-tuoluo.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        162,
+        62,
+        278,
+        284
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/抽陀螺.webm"
     },
@@ -1306,6 +1792,12 @@
       "anim": "assets/animations/ti-jianzi.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        201,
+        38,
+        241,
+        296
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/踢毽子.webm"
     },
@@ -1322,6 +1814,12 @@
       "anim": "assets/animations/yuandi-zuozhuan-benpao.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        118,
+        54,
+        352,
+        284
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/原地左转奔跑.webm"
     },
@@ -1337,6 +1835,12 @@
       "anim": "assets/animations/yuandi-dunxia-wan-wanju-qiche.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        71,
+        51,
+        479,
+        297
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/原地蹲下玩玩具汽车.webm"
     },
@@ -1353,6 +1857,12 @@
       "anim": "assets/animations/yuandi-zhongli-xiadun-yasuo.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        204,
+        62,
+        252,
+        277
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/原地重力下蹲压缩.webm"
     },
@@ -1368,6 +1878,12 @@
       "anim": "assets/animations/wan-shuiqiang.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        29,
+        62,
+        569,
+        298
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/玩水枪.webm"
     },
@@ -1384,6 +1900,12 @@
       "anim": "assets/animations/zhengti-huanzhuang-shise.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        191,
+        50,
+        286,
+        284
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/整体换装试色.webm"
     },
@@ -1400,6 +1922,12 @@
       "anim": "assets/animations/fang-fengzheng.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        130,
+        0,
+        382,
+        334
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/放风筝.webm"
     },
@@ -1416,6 +1944,12 @@
       "anim": "assets/animations/duixueren.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        195,
+        61,
+        253,
+        284
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/堆雪人.webm"
     },
@@ -1431,6 +1965,12 @@
       "anim": "assets/animations/yaoshan-naliang.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        151,
+        50,
+        323,
+        283
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/摇扇纳凉.webm"
     },
@@ -1447,6 +1987,12 @@
       "anim": "assets/animations/lu-mao.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        207,
+        60,
+        227,
+        272
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/撸猫.webm"
     },
@@ -1463,6 +2009,12 @@
       "anim": "assets/animations/dongwu-huanrao.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        81,
+        26,
+        457,
+        321
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/动物环绕.webm"
     },
@@ -1479,6 +2031,12 @@
       "anim": "assets/animations/beiluoye-yanmo.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        87,
+        30,
+        496,
+        323
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/被落叶淹没.webm"
     },
@@ -1495,6 +2053,12 @@
       "anim": "assets/animations/xie-fuzi.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        168,
+        59,
+        269,
+        278
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/写福字.webm"
     },
@@ -1511,6 +2075,12 @@
       "anim": "assets/animations/zhuangdian-shengdanshu.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        78,
+        38,
+        472,
+        322
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/装点圣诞树.webm"
     },
@@ -1527,6 +2097,12 @@
       "anim": "assets/animations/taotang-nanguadeng.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        199,
+        58,
+        250,
+        278
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/讨糖南瓜灯.webm"
     },
@@ -1543,6 +2119,12 @@
       "anim": "assets/animations/cha-zhuyu-shangju.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        210,
+        60,
+        232,
+        274
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/插茱萸赏菊.webm"
     },
@@ -1559,6 +2141,12 @@
       "anim": "assets/animations/fang-kongmingdeng.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        171,
+        28,
+        267,
+        326
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/放孔明灯.webm"
     },
@@ -1575,6 +2163,12 @@
       "anim": "assets/animations/fanghedeng.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        205,
+        62,
+        231,
+        272
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/放河灯.webm"
     },
@@ -1591,6 +2185,12 @@
       "anim": "assets/animations/fen-wen-bu-sheng.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        74,
+        38,
+        474,
+        322
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/余额-分文不剩.webm"
     },
@@ -1607,6 +2207,12 @@
       "anim": "assets/animations/dai-kong-ru-xi.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        71,
+        36,
+        478,
+        324
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/余额-袋空如洗.webm"
     },
@@ -1623,6 +2229,12 @@
       "anim": "assets/animations/shu-jin-zhou-mei.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        206,
+        59,
+        246,
+        274
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/余额-数金皱眉.webm"
     },
@@ -1639,6 +2251,12 @@
       "anim": "assets/animations/qian-dai-ru-chang.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        71,
+        38,
+        479,
+        322
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/余额-钱袋如常.webm"
     },
@@ -1655,6 +2273,12 @@
       "anim": "assets/animations/jin-dai-ding-dang.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        75,
+        46,
+        493,
+        293
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/余额-金袋叮当.webm"
     },
@@ -1671,6 +2295,12 @@
       "anim": "assets/animations/qian-dai-man-yi.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        80,
+        37,
+        478,
+        313
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/余额-钱袋满溢.webm"
     },
@@ -1686,6 +2316,12 @@
       "anim": "assets/animations/shuijiao-kaishi.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        208,
+        54,
+        235,
+        284
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/睡觉-开始.webm"
     },
@@ -1701,6 +2337,12 @@
       "anim": "assets/animations/shuijiao-xunhuan.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        130,
+        36,
+        300,
+        302
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/睡觉-循环.webm"
     },
@@ -1717,6 +2359,12 @@
       "anim": "assets/animations/shuijiao-qilai.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        182,
+        90,
+        257,
+        256
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/睡觉-起来.webm"
     },
@@ -1733,6 +2381,12 @@
       "anim": "assets/animations/yuandi-xiaoqi-chenmian.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        203,
+        26,
+        230,
+        309
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/原地小憩沉眠.webm"
     },
@@ -1748,6 +2402,12 @@
       "anim": "assets/animations/beishubiao-tuozhuai-xuankong-fankui.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        201,
+        23,
+        252,
+        310
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/被鼠标拖拽悬空反馈.webm"
     },
@@ -1764,6 +2424,12 @@
       "anim": "assets/animations/kaixin-xiaopao.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        209,
+        58,
+        234,
+        277
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/开心小跑.webm"
     },
@@ -1780,6 +2446,12 @@
       "anim": "assets/animations/ceshen-jizao-pao.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        30,
+        50,
+        435,
+        285
+      ],
       "durationMs": 5999,
       "webm": "assets/webm/侧身急躁跑.webm"
     },
@@ -1795,6 +2467,12 @@
       "anim": "assets/animations/chi-fan-wanfan.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        200,
+        62,
+        234,
+        272
+      ],
       "durationMs": 5166,
       "webm": "assets/webm/吃饭·碗饭.webm"
     },
@@ -1810,6 +2488,12 @@
       "anim": "assets/animations/chi-fantuan.webp",
       "width": 640,
       "height": 360,
+      "box": [
+        205,
+        59,
+        247,
+        275
+      ],
       "durationMs": 5166,
       "webm": "assets/webm/吃饭团.webm"
     }

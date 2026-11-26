@@ -100,6 +100,31 @@ void main() {
       }
     });
 
+    test('每段动画都有内容框，且落在画面内', () {
+      // 内容框决定气泡 / 操作条贴多近。缺了它会退回整幅 640×360，
+      // 界面就又变成「留白太大」。
+      for (final clip in animations.clips) {
+        final rect = clip.contentRect;
+        expect(rect.width, greaterThan(0), reason: clip.id);
+        expect(rect.height, greaterThan(0), reason: clip.id);
+        expect(rect.left, greaterThanOrEqualTo(0), reason: clip.id);
+        expect(rect.top, greaterThanOrEqualTo(0), reason: clip.id);
+        expect(rect.right, lessThanOrEqualTo(1.0), reason: clip.id);
+        expect(rect.bottom, lessThanOrEqualTo(1.0), reason: clip.id);
+        expect(clip.boxWidth, isNotNull, reason: '${clip.id} 缺少 box 字段');
+      }
+    });
+
+    test('站姿类素材的内容框明显小于整幅画面', () {
+      // 若这条挂了，说明内容框没被 gen_boxes.py 真正量出来（退化成整幅）。
+      final idle = animations.idleClip.contentRect;
+      expect(
+        idle.width,
+        lessThan(0.75),
+        reason: '待机素材的内容宽度应该远小于 640 画布',
+      );
+    });
+
     test('素材路径缺失时才会被标记为不可播放', () {
       // 现实中 114 段都有素材；这里构造一条缺路径的，确认兜底判断还在
       final broken = AnimationClip(

@@ -236,7 +236,6 @@ class _SettingsPageState extends State<SettingsPage> {
                         segments: const [
                           ButtonSegment(value: 0.5, label: Text('半尺寸')),
                           ButtonSegment(value: 1, label: Text('原尺寸')),
-                          ButtonSegment(value: 2, label: Text('2×')),
                         ],
                         selected: {settings.normalizedPetZoom},
                         onSelectionChanged: (selection) => _save(
@@ -251,8 +250,8 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
               const SizedBox(height: 4),
               const Text(
-                '「原尺寸」按素材原生 640×360 显示，与 WebM 母版一致、不拉伸；'
-                '「半尺寸」是等比缩小，依旧锐利；「2×」用最近邻整数放大，边界是硬像素。',
+                '「原尺寸」按素材原生像素显示，与 WebM 母版一致、不拉伸；'
+                '「半尺寸」是等比缩小，依旧锐利。',
                 style: TextStyle(
                   fontSize: 11,
                   height: 1.55,
@@ -264,19 +263,8 @@ class _SettingsPageState extends State<SettingsPage> {
           if (widget.services.isDesktop)
             _Section(
               title: '桌面窗口',
-              subtitle: '无边框置顶小窗，适合把宠物摆在角落。',
+              subtitle: '无边框小窗，适合把宠物摆在角落；不占用「始终置顶」。',
               children: [
-                _SwitchRow(
-                  title: '始终置顶',
-                  subtitle: '小窗模式下压在其他窗口之上',
-                  value: settings.petWindowAlwaysOnTop,
-                  onChanged: (value) => _save(
-                    (current) => widget.services.updateSettings(
-                      current.copyWith(petWindowAlwaysOnTop: value),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 4),
                 for (final background in PetWindowBackground.values)
                   InkWell(
                     borderRadius: BorderRadius.circular(8),

@@ -22,7 +22,6 @@ class SettingsRepository {
   static const _kLegacyPetScale = 'dsh.petScale';
   static const _kPetOffsetX = 'dsh.petOffsetX';
   static const _kPetOffsetY = 'dsh.petOffsetY';
-  static const _kAlwaysOnTop = 'dsh.alwaysOnTop';
   static const _kPetBackground = 'dsh.petBackground';
   static const _kSpeech = 'dsh.speech';
 
@@ -43,7 +42,6 @@ class SettingsRepository {
           1,
       petOffsetX: prefs.getDouble(_kPetOffsetX) ?? -1,
       petOffsetY: prefs.getDouble(_kPetOffsetY) ?? -1,
-      petWindowAlwaysOnTop: prefs.getBool(_kAlwaysOnTop) ?? true,
       petWindowBackground: PetWindowBackground.parse(
         prefs.getString(_kPetBackground),
       ),
@@ -64,7 +62,6 @@ class SettingsRepository {
       _prefs.setDouble(_kPetZoom, settings.petZoom),
       _prefs.setDouble(_kPetOffsetX, settings.petOffsetX),
       _prefs.setDouble(_kPetOffsetY, settings.petOffsetY),
-      _prefs.setBool(_kAlwaysOnTop, settings.petWindowAlwaysOnTop),
       _prefs.setString(_kPetBackground, settings.petWindowBackground.name),
       _prefs.setBool(_kSpeech, settings.speechBubble),
     ]);

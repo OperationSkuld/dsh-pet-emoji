@@ -68,17 +68,22 @@ class _HomeShellState extends State<HomeShell> {
     final settings = widget.services.settings;
     await widget.window.enterCompact(settings);
     if (!mounted) return;
-    await Navigator.of(context).push(
-      PageRouteBuilder<void>(
-        opaque: false,
-        transitionDuration: const Duration(milliseconds: 180),
-        pageBuilder: (context, animation, secondaryAnimation) =>
-            CompactPetPage(services: widget.services, window: widget.window),
-        transitionsBuilder: (context, animation, secondaryAnimation, child) =>
-            FadeTransition(opacity: animation, child: child),
-      ),
-    );
-    await widget.window.exitCompact();
+    try {
+      await Navigator.of(context).push(
+        PageRouteBuilder<void>(
+          opaque: false,
+          transitionDuration: const Duration(milliseconds: 180),
+          pageBuilder: (context, animation, secondaryAnimation) =>
+              CompactPetPage(services: widget.services, window: widget.window),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) =>
+              FadeTransition(opacity: animation, child: child),
+        ),
+      );
+    } finally {
+      // 无论怎么退出，都要把窗口还原成有边框、可缩放的完整窗口，
+      // 否则标题栏会一直消失、布局停在 384 宽的小窗排版。
+      await widget.window.exitCompact();
+    }
   }
 
   Future<void> _sendFromPetTab() async {

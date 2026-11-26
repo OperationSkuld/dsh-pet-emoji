@@ -25,6 +25,9 @@ import sys
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ANIM_DIR = os.path.join(ROOT, "assets", "animations")
 WEBM_DIR = os.path.join(ROOT, "assets", "webm")
+# 每段动画的内容包围盒（由 tool/gen_boxes.py 用 Pillow 量出来并提交）。
+# 界能据此把气泡与操作条贴着角色真实边缘摆，而不是贴着整张 640×360 画布。
+BOXES_PATH = os.path.join(ROOT, "tool", "boxes.json")
 OUT_DIR = os.path.join(ROOT, "assets", "manifest")
 
 
@@ -463,12 +466,23 @@ def parse_webp(path: str) -> tuple[int, int, int, int]:
     return width, height, total_ms, frames
 
 
+def load_boxes() -> dict:
+    """读 tool/boxes.json；缺文件时返回空表（各段按整幅画面处理）。"""
+    if not os.path.exists(BOXES_PATH):
+        print("⚠ 缺少 tool/boxes.json，内容框按整幅画面处理"
+              "（运行 python tool/gen_boxes.py 可生成）")
+        return {}
+    with open(BOXES_PATH, encoding="utf-8") as file:
+        return json.load(file).get("boxes", {})
+
+
 def build() -> dict:
     tag_ids = {t["id"] for t in TAGS}
     anim_files = {f[:-5] for f in os.listdir(ANIM_DIR) if f.endswith(".webp")}
     webm_files = {f[:-5] for f in os.listdir(WEBM_DIR) if f.endswith(".webm")}
 
     clips = []
+    boxes = load_boxes()
     seen_ids, seen_webm = set(), set()
     for cid, name, group, hold, tags in CLIPS:
         if not cid:
@@ -499,10 +513,16 @@ def build() -> dict:
             tags={k: round(float(v), 2) for k, v in tags.items()},
         )
         w, h, ms, _frames = parse_webp(os.path.join(ANIM_DIR, f"{cid}.webp"))
+        box = boxes.get(cid) or [0, 0, w, h]
+        if not (0 <= box[0] and 0 <= box[1]
+                and box[2] > 0 and box[3] > 0
+                and box[0] + box[2] <= w and box[1] + box[3] <= h):
+            raise SystemExit(f"{cid}: 内容框 {box} 超出画面 {w}×{h}")
         entry.update(
             anim=f"assets/animations/{cid}.webp",
             width=w,
             height=h,
+            box=list(box),
             durationMs=max(1200, ms),
             webm=f"assets/webm/{name}.webm",
         )

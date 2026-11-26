@@ -31,7 +31,8 @@ flutter run -d windows # 或 android / ios 设备
    `assets/animations/<id>.webp`（`<id>` 用英文小写 + 连字符，例如 `chi-baifan`）。
    不要手工做 GIF——体积是 WebP 的 5 倍以上且只有 256 色。
 3. 在 `tool/gen_manifest.py` 的 `CLIPS` 里加一行：分组、停留策略、1~6 个标签及契合度。
-4. `python tool/gen_manifest.py`，再 `python tool/gen_docs.py`。
+4. `python tool/gen_boxes.py` 重新量内容框，再 `python tool/gen_manifest.py`
+   与 `python tool/gen_docs.py`。
 5. `flutter test` —— 清单完整性测试会检查文件、标签与命名是否对得上。
 
 ## 新增一个语义标签
