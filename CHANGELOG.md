@@ -21,8 +21,9 @@
 
 ### 修复
 
-- **切回完整窗口后标题栏消失**：小窗用 `setAsFrameless` 去掉边框，退出时没恢复
-  `TitleBarStyle.normal`，于是最小化 / 还原 / 关闭按钮再也不出现。
+- **切回完整窗口后标题栏消失**：小窗用 `setTitleBarStyle(TitleBarStyle.hidden)`
+  隐掉了标题栏，退出时没恢复 `TitleBarStyle.normal`，于是最小化 / 还原 / 关闭
+  按钮再也不出现。
 - **小窗切回后布局错乱**：切换小窗时最小尺寸仍是 880×620，384×468 会被顶回去，
   小窗内容挤在超大窗口里。现在进小窗前先放开最小尺寸，退出时再恢复。
 - **`flutter test` 卡死**：`AssetBundle.loadString` 对超过 50 KB 的字符串会

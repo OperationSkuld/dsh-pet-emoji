@@ -53,3 +53,14 @@ flutter run -d windows # 或 android / ios 设备
 
 - 一个 PR 只做一件事，标题写清楚改了什么。
 - 涉及行为的改动请附带测试；涉及 UI 的请附截图。
+
+## 发版
+
+1. 改 `pubspec.yaml` 的 `version:`（`1.2.0+N`，N 是构建号）。
+2. 在 `CHANGELOG.md` 顶部加一段 `## [1.2.0] - YYYY-MM-DD`——
+   这段文字会原样出现在 GitHub Release 正文里，由 `tool/gen_release_notes.py`
+   拼到 `docs/release-notes-template.md` 前面。可以先 `python tool/gen_release_notes.py`
+   预览效果。
+3. `git tag -a v1.2.0 -m "..."` 再 `git push origin v1.2.0`。
+4. `release.yml` 会构建 Windows / Android / iOS 三端并创建 Release。
+   打 tag 前先确认线上没有同名 Release，否则 asset 会撞名。

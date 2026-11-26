@@ -151,8 +151,8 @@ jobs:
           cp artifacts/ios-unsigned/*.zip dist/
           ls -lh dist
 
-      - name: 生成 Release Note 附录
-        run: cp docs/release-notes-template.md dist/RELEASE-NOTES.md
+      - name: 生成 Release Note（版本变更 + 安装说明）
+        run: python3 tool/gen_release_notes.py --out dist/RELEASE-NOTES.md
 
       - name: 创建 Release
         uses: softprops/action-gh-release@v2
