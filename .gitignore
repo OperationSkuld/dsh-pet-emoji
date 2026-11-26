@@ -1,0 +1,58 @@
+# ── Flutter / Dart ──
+.dart_tool/
+.packages
+build/
+.flutter-plugins
+.flutter-plugins-dependencies
+
+# ── IDE ──
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+*.swp
+
+# ── 平台产物 ──
+android/.gradle/
+android/local.properties
+android/app/debug/
+android/app/profile/
+android/app/release/
+android/key.properties
+*.jks
+*.keystore
+ios/Pods/
+ios/.symlinks/
+ios/Flutter/Flutter.framework
+ios/Flutter/Flutter.podspec
+ios/Flutter/ephemeral/
+ios/Runner.xcworkspace/xcuserdata/
+ios/Runner.xcodeproj/xcuserdata/
+windows/flutter/ephemeral/
+linux/flutter/ephemeral/
+macos/Pods/
+
+# ── 构建/发布产物 ──
+*.apk
+*.aab
+*.ipa
+*.exe
+*.msix
+*.dmg
+dist/
+release/
+
+# ── 系统 ──
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── 临时 ──
+*.log
+*.tmp
+.env
+.env.*
+
+# 注意：assets/animations、assets/webm、assets/manifest 是**有意入库**的，
+# 不要在此忽略它们——运行时依赖这些素材，且素材本身是分发内容的一部分。

@@ -1,0 +1,990 @@
+{
+  "schemaVersion": 1,
+  "generator": "tool/gen_manifest.py",
+  "groups": [
+    {
+      "id": "emotion",
+      "label": "情绪",
+      "desc": "由对话内容推断的情感状态，决定表情基调"
+    },
+    {
+      "id": "social",
+      "label": "社交",
+      "desc": "对话意图层面的社交行为"
+    },
+    {
+      "id": "action",
+      "label": "行为",
+      "desc": "正在进行的动作或话题领域"
+    },
+    {
+      "id": "scene",
+      "label": "时令",
+      "desc": "时间与季节情境，用于叠加氛围加成"
+    },
+    {
+      "id": "system",
+      "label": "系统",
+      "desc": "由 App 事件直接注入，优先级最高"
+    }
+  ],
+  "tags": [
+    {
+      "id": "joy",
+      "label": "开心",
+      "group": "emotion",
+      "base": 0.75,
+      "description": "愉快、满足、被逗乐等正向情绪",
+      "keywords": [
+        "开心",
+        "高兴",
+        "快乐",
+        "太好了",
+        "真好",
+        "喜欢",
+        "棒",
+        "幸福",
+        "嘿嘿",
+        "好耶"
+      ]
+    },
+    {
+      "id": "excited",
+      "label": "兴奋",
+      "group": "emotion",
+      "base": 0.85,
+      "description": "高唤醒的正向情绪，动作幅度大",
+      "keywords": [
+        "兴奋",
+        "激动",
+        "太棒了",
+        "冲",
+        "起飞",
+        "燃",
+        "哇塞",
+        "迫不及待"
+      ]
+    },
+    {
+      "id": "laugh",
+      "label": "大笑",
+      "group": "emotion",
+      "base": 0.8,
+      "description": "被逗笑、咯咯笑",
+      "keywords": [
+        "哈哈",
+        "笑哭",
+        "笑死",
+        "咯咯",
+        "笑出声",
+        "有趣",
+        "好笑"
+      ]
+    },
+    {
+      "id": "shy",
+      "label": "害羞",
+      "group": "emotion",
+      "base": 0.7,
+      "description": "被夸奖、被注视时的羞怯",
+      "keywords": [
+        "害羞",
+        "不好意思",
+        "脸红",
+        "羞涩",
+        "羞",
+        "别夸了",
+        "讨厌啦"
+      ]
+    },
+    {
+      "id": "love",
+      "label": "亲昵",
+      "group": "emotion",
+      "base": 0.7,
+      "description": "撒娇、依恋、贴贴",
+      "keywords": [
+        "喜欢",
+        "爱你",
+        "贴贴",
+        "抱抱",
+        "想你",
+        "陪",
+        "蹭",
+        "亲亲"
+      ]
+    },
+    {
+      "id": "proud",
+      "label": "得意",
+      "group": "emotion",
+      "base": 0.65,
+      "description": "自信、炫耀、小骄傲",
+      "keywords": [
+        "厉害",
+        "厉害吧",
+        "当然",
+        "小意思",
+        "看我的",
+        "轻轻松松",
+        "so easy",
+        "炫耀"
+      ]
+    },
+    {
+      "id": "calm",
+      "label": "平静",
+      "group": "emotion",
+      "base": 0.5,
+      "description": "平稳、放松、无强情绪",
+      "keywords": [
+        "慢慢",
+        "安静",
+        "放心",
+        "平稳",
+        "还好",
+        "随意",
+        "轻松"
+      ]
+    },
+    {
+      "id": "sleepy",
+      "label": "困倦",
+      "group": "emotion",
+      "base": 0.8,
+      "description": "犯困、打哈欠、想睡",
+      "keywords": [
+        "困",
+        "睡",
+        "乏",
+        "哈欠",
+        "瞌睡",
+        "熬夜",
+        "晚安",
+        "睡意"
+      ]
+    },
+    {
+      "id": "tired",
+      "label": "疲惫",
+      "group": "emotion",
+      "base": 0.75,
+      "description": "劳累、心累、力不从心",
+      "keywords": [
+        "累",
+        "疲惫",
+        "心累",
+        "撑不住",
+        "筋疲力尽",
+        "摆烂",
+        "干不动",
+        "加班"
+      ]
+    },
+    {
+      "id": "sad",
+      "label": "难过",
+      "group": "emotion",
+      "base": 0.8,
+      "description": "失落、沮丧、遗憾",
+      "keywords": [
+        "难过",
+        "伤心",
+        "失落",
+        "沮丧",
+        "遗憾",
+        "可惜",
+        "emo",
+        "委屈",
+        "想哭"
+      ]
+    },
+    {
+      "id": "angry",
+      "label": "生气",
+      "group": "emotion",
+      "base": 0.85,
+      "description": "愤怒、暴躁、气急",
+      "keywords": [
+        "生气",
+        "愤怒",
+        "气死",
+        "烦死",
+        "可恶",
+        "讨厌",
+        "滚",
+        "火大",
+        "爆炸"
+      ]
+    },
+    {
+      "id": "annoyed",
+      "label": "不耐烦",
+      "group": "emotion",
+      "base": 0.7,
+      "description": "嫌弃、不耐、被打扰",
+      "keywords": [
+        "烦",
+        "啰嗦",
+        "别吵",
+        "啧",
+        "又来了",
+        "催",
+        "没完没了",
+        "无语"
+      ]
+    },
+    {
+      "id": "surprised",
+      "label": "惊讶",
+      "group": "emotion",
+      "base": 0.8,
+      "description": "意外、错愕、被吓到",
+      "keywords": [
+        "惊讶",
+        "没想到",
+        "居然",
+        "竟然",
+        "天啊",
+        "什么",
+        "诶",
+        "惊了",
+        "突然"
+      ]
+    },
+    {
+      "id": "scared",
+      "label": "害怕",
+      "group": "emotion",
+      "base": 0.85,
+      "description": "恐惧、发怵、被吓",
+      "keywords": [
+        "害怕",
+        "恐怖",
+        "好可怕",
+        "吓人",
+        "发抖",
+        "救命",
+        "别过来",
+        "毛骨悚然"
+      ]
+    },
+    {
+      "id": "confused",
+      "label": "困惑",
+      "group": "emotion",
+      "base": 0.75,
+      "description": "不明白、为难、选择困难",
+      "keywords": [
+        "不懂",
+        "困惑",
+        "为什么",
+        "什么意思",
+        "看不懂",
+        "奇怪",
+        "迷茫",
+        "怎么办"
+      ]
+    },
+    {
+      "id": "thinking",
+      "label": "思考",
+      "group": "emotion",
+      "base": 0.8,
+      "description": "推理、专注、深度思考",
+      "keywords": [
+        "思考",
+        "分析",
+        "推理",
+        "想一想",
+        "让我想想",
+        "逻辑",
+        "推导",
+        "原理",
+        "思路"
+      ]
+    },
+    {
+      "id": "dazed",
+      "label": "发呆",
+      "group": "emotion",
+      "base": 0.6,
+      "description": "放空、走神、碎碎念",
+      "keywords": [
+        "发呆",
+        "走神",
+        "放空",
+        "碎碎念",
+        "念叨",
+        "无聊",
+        "空白",
+        "出神"
+      ]
+    },
+    {
+      "id": "guilty",
+      "label": "心虚",
+      "group": "emotion",
+      "base": 0.7,
+      "description": "被抓包、理亏、偷偷摸摸",
+      "keywords": [
+        "被抓",
+        "偷吃",
+        "心虚",
+        "糟糕",
+        "说漏",
+        "完蛋",
+        "被发现",
+        "溜了"
+      ]
+    },
+    {
+      "id": "greet",
+      "label": "问候",
+      "group": "social",
+      "base": 0.85,
+      "description": "打招呼、欢迎、回应呼唤",
+      "keywords": [
+        "你好",
+        "您好",
+        "hi",
+        "hello",
+        "嗨",
+        "在吗",
+        "早上好",
+        "晚上好",
+        "欢迎",
+        "哈喽"
+      ]
+    },
+    {
+      "id": "farewell",
+      "label": "告别",
+      "group": "social",
+      "base": 0.8,
+      "description": "再见、道别、离开",
+      "keywords": [
+        "再见",
+        "拜拜",
+        "bye",
+        "晚安",
+        "下次见",
+        "先走了",
+        "下线",
+        "回头聊"
+      ]
+    },
+    {
+      "id": "thanks",
+      "label": "感谢",
+      "group": "social",
+      "base": 0.8,
+      "description": "道谢、感激",
+      "keywords": [
+        "谢谢",
+        "感谢",
+        "多谢",
+        "thank",
+        "辛苦了",
+        "麻烦你了",
+        "感恩"
+      ]
+    },
+    {
+      "id": "apology",
+      "label": "道歉",
+      "group": "social",
+      "base": 0.75,
+      "description": "认错、致歉",
+      "keywords": [
+        "抱歉",
+        "对不起",
+        "不好意思",
+        "我的错",
+        "sorry",
+        "失误",
+        "搞错了"
+      ]
+    },
+    {
+      "id": "praise",
+      "label": "夸奖",
+      "group": "social",
+      "base": 0.8,
+      "description": "称赞、肯定、鼓励对方",
+      "keywords": [
+        "真棒",
+        "厉害",
+        "优秀",
+        "聪明",
+        "好看",
+        "可爱",
+        "牛",
+        "佩服",
+        "绝了"
+      ]
+    },
+    {
+      "id": "comfort",
+      "label": "安慰",
+      "group": "social",
+      "base": 0.7,
+      "description": "安抚、陪伴、给予支持",
+      "keywords": [
+        "别难过",
+        "没关系",
+        "抱抱",
+        "会好的",
+        "我在",
+        "别怕",
+        "慢慢来",
+        "别担心"
+      ]
+    },
+    {
+      "id": "refuse",
+      "label": "拒绝",
+      "group": "social",
+      "base": 0.7,
+      "description": "拒绝、做不到、划清边界",
+      "keywords": [
+        "不行",
+        "不能",
+        "拒绝",
+        "做不到",
+        "不可以",
+        "别想",
+        "免谈",
+        "no"
+      ]
+    },
+    {
+      "id": "tease",
+      "label": "傲娇",
+      "group": "social",
+      "base": 0.7,
+      "description": "嘴硬、调侃、口是心非",
+      "keywords": [
+        "才不是",
+        "哼",
+        "才不",
+        "谁要",
+        "别自作多情",
+        "嘴上",
+        "傲娇",
+        "嘴硬"
+      ]
+    },
+    {
+      "id": "cheer",
+      "label": "庆祝",
+      "group": "social",
+      "base": 0.85,
+      "description": "庆祝、加油、欢呼",
+      "keywords": [
+        "恭喜",
+        "庆祝",
+        "加油",
+        "成功",
+        "完成",
+        "通了",
+        "赢了",
+        "太强了",
+        "耶"
+      ]
+    },
+    {
+      "id": "eat",
+      "label": "吃饭",
+      "group": "action",
+      "base": 0.85,
+      "description": "进食、食物、饿、点餐",
+      "keywords": [
+        "吃",
+        "饭",
+        "饿",
+        "好吃",
+        "外卖",
+        "火锅",
+        "零食",
+        "早餐",
+        "午餐",
+        "晚餐",
+        "夜宵",
+        "奶茶"
+      ]
+    },
+    {
+      "id": "sleep",
+      "label": "睡觉",
+      "group": "action",
+      "base": 0.85,
+      "description": "入睡、休息",
+      "keywords": [
+        "睡觉",
+        "睡了",
+        "休息",
+        "做梦",
+        "躺",
+        "打盹",
+        "被窝"
+      ]
+    },
+    {
+      "id": "play",
+      "label": "玩耍",
+      "group": "action",
+      "base": 0.7,
+      "description": "玩耍、娱乐、消遣",
+      "keywords": [
+        "玩",
+        "游戏",
+        "玩具",
+        "摸鱼",
+        "划水",
+        "消遣",
+        "耍"
+      ]
+    },
+    {
+      "id": "dance",
+      "label": "跳舞",
+      "group": "action",
+      "base": 0.85,
+      "description": "跳舞、律动、表演",
+      "keywords": [
+        "跳舞",
+        "舞",
+        "律动",
+        "蹦迪",
+        "摇摆",
+        "宅舞",
+        "跳一段"
+      ]
+    },
+    {
+      "id": "music",
+      "label": "音乐",
+      "group": "action",
+      "base": 0.8,
+      "description": "音乐、演奏、哼唱",
+      "keywords": [
+        "音乐",
+        "歌",
+        "唱",
+        "演奏",
+        "钢琴",
+        "小提琴",
+        "笛子",
+        "旋律",
+        "听歌"
+      ]
+    },
+    {
+      "id": "magic",
+      "label": "魔法",
+      "group": "action",
+      "base": 0.8,
+      "description": "魔法、魔术、不可思议",
+      "keywords": [
+        "魔法",
+        "魔术",
+        "变",
+        "奇迹",
+        "咒语",
+        "不可思议",
+        "凭空"
+      ]
+    },
+    {
+      "id": "work",
+      "label": "工作",
+      "group": "action",
+      "base": 0.8,
+      "description": "上班、任务、忙",
+      "keywords": [
+        "工作",
+        "上班",
+        "任务",
+        "项目",
+        "需求",
+        "开会",
+        "加班",
+        "ddl",
+        "忙"
+      ]
+    },
+    {
+      "id": "code",
+      "label": "写代码",
+      "group": "action",
+      "base": 0.9,
+      "description": "编程、调试、代码",
+      "keywords": [
+        "代码",
+        "编程",
+        "bug",
+        "debug",
+        "函数",
+        "报错",
+        "编译",
+        "重构",
+        "python",
+        "flutter",
+        "接口"
+      ]
+    },
+    {
+      "id": "study",
+      "label": "学习",
+      "group": "action",
+      "base": 0.75,
+      "description": "学习、复盘、记录",
+      "keywords": [
+        "学习",
+        "复习",
+        "笔记",
+        "记录",
+        "背单词",
+        "考试",
+        "读书",
+        "总结"
+      ]
+    },
+    {
+      "id": "sport",
+      "label": "运动",
+      "group": "action",
+      "base": 0.75,
+      "description": "跑步、锻炼、活跃",
+      "keywords": [
+        "运动",
+        "跑",
+        "健身",
+        "锻炼",
+        "散步",
+        "跳绳",
+        "出汗",
+        "体育"
+      ]
+    },
+    {
+      "id": "game",
+      "label": "游戏",
+      "group": "action",
+      "base": 0.75,
+      "description": "下棋、玩局、竞技",
+      "keywords": [
+        "下棋",
+        "五子棋",
+        "对局",
+        "开黑",
+        "排位",
+        "通关",
+        "关卡",
+        "扑克"
+      ]
+    },
+    {
+      "id": "festival",
+      "label": "节日",
+      "group": "action",
+      "base": 0.85,
+      "description": "节庆、年节、纪念日",
+      "keywords": [
+        "节日",
+        "春节",
+        "中秋",
+        "端午",
+        "圣诞",
+        "万圣",
+        "七夕",
+        "重阳",
+        "元宵",
+        "过年",
+        "红包",
+        "烟花"
+      ]
+    },
+    {
+      "id": "money",
+      "label": "金钱",
+      "group": "action",
+      "base": 0.8,
+      "description": "钱、余额、花费、充值",
+      "keywords": [
+        "钱",
+        "余额",
+        "充值",
+        "花销",
+        "账单",
+        "贵",
+        "免费",
+        "余额不足",
+        "token",
+        "额度"
+      ]
+    },
+    {
+      "id": "cute",
+      "label": "卖萌",
+      "group": "action",
+      "base": 0.6,
+      "description": "可爱、撒欢、软萌",
+      "keywords": [
+        "可爱",
+        "萌",
+        "软",
+        "撒娇",
+        "卖萌",
+        "小可爱"
+      ]
+    },
+    {
+      "id": "pet",
+      "label": "撸猫",
+      "group": "action",
+      "base": 0.7,
+      "description": "猫、宠物、撸毛",
+      "keywords": [
+        "猫",
+        "撸猫",
+        "宠物",
+        "毛茸茸",
+        "喵",
+        "吸猫"
+      ]
+    },
+    {
+      "id": "idle",
+      "label": "待机",
+      "group": "action",
+      "base": 0.3,
+      "description": "无事发生、等待、静置",
+      "keywords": [
+        "待机",
+        "无聊",
+        "随便",
+        "嗯",
+        "哦",
+        "在",
+        "没事"
+      ]
+    },
+    {
+      "id": "tap",
+      "label": "点击",
+      "group": "action",
+      "base": 0.9,
+      "description": "用户点击/触摸宠物",
+      "keywords": []
+    },
+    {
+      "id": "drag",
+      "label": "拖拽",
+      "group": "action",
+      "base": 0.9,
+      "description": "用户拖拽宠物",
+      "keywords": []
+    },
+    {
+      "id": "error",
+      "label": "出错",
+      "group": "action",
+      "base": 0.85,
+      "description": "请求失败、网络/鉴权异常",
+      "keywords": [
+        "错误",
+        "失败",
+        "异常",
+        "超时",
+        "连不上",
+        "401",
+        "403",
+        "500",
+        "报错",
+        "重试"
+      ]
+    },
+    {
+      "id": "waiting",
+      "label": "等待",
+      "group": "action",
+      "base": 0.7,
+      "description": "请求进行中、等待结果",
+      "keywords": [
+        "稍等",
+        "等待",
+        "马上",
+        "正在",
+        "处理中",
+        "加载",
+        "请求中"
+      ]
+    },
+    {
+      "id": "question",
+      "label": "疑问",
+      "group": "action",
+      "base": 0.6,
+      "description": "用户在提问",
+      "keywords": [
+        "吗",
+        "呢",
+        "怎么",
+        "如何",
+        "什么",
+        "为什么",
+        "?",
+        "？"
+      ]
+    },
+    {
+      "id": "token",
+      "label": "Token",
+      "group": "action",
+      "base": 0.8,
+      "description": "API token、计费单位",
+      "keywords": [
+        "token",
+        "tokens",
+        "计费",
+        "消耗",
+        "上下文长度"
+      ]
+    },
+    {
+      "id": "season_spring",
+      "label": "春天",
+      "group": "scene",
+      "base": 0.6,
+      "description": "春、花开、踏青",
+      "keywords": [
+        "春天",
+        "春季",
+        "花开",
+        "踏青",
+        "清明",
+        "风筝",
+        "发芽"
+      ]
+    },
+    {
+      "id": "season_summer",
+      "label": "夏天",
+      "group": "scene",
+      "base": 0.6,
+      "description": "夏、炎热、纳凉",
+      "keywords": [
+        "夏天",
+        "夏季",
+        "热",
+        "西瓜",
+        "空调",
+        "纳凉",
+        "冰"
+      ]
+    },
+    {
+      "id": "season_autumn",
+      "label": "秋天",
+      "group": "scene",
+      "base": 0.6,
+      "description": "秋、落叶、赏菊",
+      "keywords": [
+        "秋天",
+        "秋季",
+        "落叶",
+        "赏菊",
+        "重阳",
+        "凉快"
+      ]
+    },
+    {
+      "id": "season_winter",
+      "label": "冬天",
+      "group": "scene",
+      "base": 0.6,
+      "description": "冬、雪、火锅",
+      "keywords": [
+        "冬天",
+        "冬季",
+        "下雪",
+        "雪人",
+        "火锅",
+        "腊八",
+        "圣诞"
+      ]
+    },
+    {
+      "id": "night",
+      "label": "夜晚",
+      "group": "scene",
+      "base": 0.5,
+      "description": "夜间时段",
+      "keywords": [
+        "晚上",
+        "夜里",
+        "深夜",
+        "凌晨",
+        "熬夜",
+        "睡前"
+      ]
+    },
+    {
+      "id": "morning",
+      "label": "早晨",
+      "group": "scene",
+      "base": 0.5,
+      "description": "清晨时段",
+      "keywords": [
+        "早上",
+        "早晨",
+        "清晨",
+        "起床",
+        "早安",
+        "刷牙"
+      ]
+    },
+    {
+      "id": "balance_empty",
+      "label": "余额耗尽",
+      "group": "system",
+      "base": 1.0,
+      "description": "余额 ≤ 0",
+      "keywords": []
+    },
+    {
+      "id": "balance_low",
+      "label": "余额偏低",
+      "group": "system",
+      "base": 1.0,
+      "description": "余额 < 5",
+      "keywords": []
+    },
+    {
+      "id": "balance_normal",
+      "label": "余额正常",
+      "group": "system",
+      "base": 1.0,
+      "description": "5 ≤ 余额 < 20",
+      "keywords": []
+    },
+    {
+      "id": "balance_good",
+      "label": "余额充足",
+      "group": "system",
+      "base": 1.0,
+      "description": "20 ≤ 余额 < 100",
+      "keywords": []
+    },
+    {
+      "id": "balance_rich",
+      "label": "余额富余",
+      "group": "system",
+      "base": 1.0,
+      "description": "余额 ≥ 100",
+      "keywords": []
+    }
+  ]
+}

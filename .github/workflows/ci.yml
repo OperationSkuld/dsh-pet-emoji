@@ -1,0 +1,52 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  analyze-and-test:
+    name: analyze / test / manifest
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: 校验语义清单与标注表一致
+        run: python3 tool/gen_manifest.py --check
+
+      - name: 校验文档与清单同步
+        run: python3 tool/gen_docs.py --check
+
+      - name: pub get
+        run: flutter pub get
+
+      - name: analyze
+        run: flutter analyze --no-fatal-infos
+
+      - name: test
+        run: flutter test --reporter expanded
+
+  web-preview:
+    name: 素材清单摘要
+    runs-on: ubuntu-latest
+    needs: analyze-and-test
+    steps:
+      - uses: actions/checkout@v4
+      - name: 输出素材统计
+        run: |
+          echo "GIF: $(ls assets/animations/*.gif | wc -l) 段"
+          echo "WebM: $(ls assets/webm/*.webm | wc -l) 段"
+          python3 - <<'PY'
+          import json
+          m = json.load(open('assets/manifest/animations.json', encoding='utf-8'))
+          t = json.load(open('assets/manifest/tags.json', encoding='utf-8'))
+          print(f"动画 {len(m['clips'])} 段，标签 {len(t['tags'])} 个")
+          PY

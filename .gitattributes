@@ -1,0 +1,22 @@
+# 统一换行符，避免 Windows 提交把整个仓库变成 CRLF
+* text=auto eol=lf
+
+# 代码
+*.dart text
+*.yaml text
+*.yml text
+*.json text
+*.md text
+*.sh text eol=lf
+
+# 素材一律按二进制处理，禁止换行符转换
+*.gif binary
+*.webm binary
+*.png binary
+*.jpg binary
+*.ico binary
+*.ttf binary
+
+# Windows 脚本源码保持 CRLF
+*.bat text eol=crlf
+*.ps1 text eol=crlf
