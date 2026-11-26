@@ -8,6 +8,14 @@
 
 装好后打开设置填入 DeepSeek API Key，即可开始对话。
 
+## 已知限制
+
+- **Android**：APK 使用 debug 密钥签名（Flutter 默认模板行为），可直接安装，
+  但无法上传应用商店；如需上架请自备 keystore 并改 `android/app/build.gradle.kts`。
+- **iOS**：IPA 未签名，必须重签后才能安装；`dsh-pet-emoji-ios-app.zip` 里是原始
+  `Runner.app`，便于自行签名。
+- **Windows**：未做代码签名，SmartScreen 可能提示「未知发布者」。
+
 ## 源码
 
 GitHub 自动附带的 `Source code (zip / tar.gz)` 即为完整源码，

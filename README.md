@@ -84,9 +84,9 @@ Flutter 写的语义化表情桌宠，Windows / Android / iOS 三端同一套代
 
 | 平台 | 文件 | 说明 |
 | --- | --- | --- |
-| Windows x64 | `dsh-pet-emoji-windows-x64.zip` | 解压运行 `dsh_pet_emoji.exe` |
-| Android | `dsh-pet-emoji-android.apk` | 允许未知来源后安装 |
-| iOS | `dsh-pet-emoji-ios-unsigned.ipa` | 未签名，需 AltStore / Sideloadly 重签 |
+| Windows x64 | `dsh-pet-emoji-windows-x64.zip` | 解压运行 `dsh_pet_emoji.exe`（未做代码签名，SmartScreen 可能提示未知发布者） |
+| Android | `dsh-pet-emoji-android.apk` | 允许未知来源后安装；使用 debug 密钥签名，可直接装但不可上架商店 |
+| iOS | `dsh-pet-emoji-ios-unsigned.ipa` | 未签名，需 AltStore / Sideloadly 重签；另附 `ios-app.zip` 为原始 `Runner.app` |
 
 ### 从源码运行
 
