@@ -45,9 +45,10 @@ class AppSettings {
   /// 对话页显示「语义标签」调试面板。
   final bool showSemanticPanel;
 
-  /// 桌宠显示倍率：1× 为素材原生尺寸（220×124），2×/3× 为整数倍放大。
+  /// 桌宠显示倍率：1× 为素材原生尺寸（640×360，与 WebM 母版一致），
+  /// 0.5× 为半尺寸（降采样），2× 为整数放大。
   ///
-  /// 只允许整数，避免半像素缩放把 GIF 插值糊掉——见 [normalizedPetZoom]。
+  /// 只允许这三档，避免半像素缩放把画面插值糊掉——见 [normalizedPetZoom]。
   final double petZoom;
 
   /// 浮动桌宠在窗口内的左上角位置（逻辑像素）。-1 表示尚未拖动过，
@@ -62,8 +63,17 @@ class AppSettings {
 
   bool get isConfigured => apiKey.trim().isNotEmpty;
 
-  /// 合法的显示倍率：把历史遗留的 0.8~1.6 小数吸附到 1/2/3。
-  double get normalizedPetZoom => petZoom.roundToDouble().clamp(1.0, 3.0);
+  /// 可选的显示倍率。0.5 是降采样、1 是原生像素、2 是整数放大，都清晰。
+  static const List<double> petZoomSteps = [0.5, 1, 2];
+
+  /// 把历史遗留的任意值（0.8~1.6 连续缩放、旧版 1/2/3）吸附到最近的一档。
+  double get normalizedPetZoom {
+    var best = petZoomSteps.first;
+    for (final step in petZoomSteps) {
+      if ((step - petZoom).abs() < (best - petZoom).abs()) best = step;
+    }
+    return best;
+  }
 
   /// 是否已经记录过浮动位置。
   bool get hasPetOffset => petOffsetX >= 0 && petOffsetY >= 0;

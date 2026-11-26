@@ -14,7 +14,7 @@
                     ▼
           AnimationSelector（契合度打分 + 防重复 + 氛围降权）
                     ▼
-             AnimationClip ──▶ PetController ──▶ Image.asset(GIF)
+             AnimationClip ──▶ PetController ──▶ Image.asset(动画 WebP)
 ```
 
 余额链路独立：`BalanceSheet → ChatController.refreshBalance() →

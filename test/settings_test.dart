@@ -3,8 +3,8 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('桌宠倍率', () {
-    test('合法倍率保持整数不变', () {
-      for (final value in [1.0, 2.0, 3.0]) {
+    test('合法倍率保持档位不变', () {
+      for (final value in AppSettings.petZoomSteps) {
         final settings = AppSettings(petZoom: value);
         expect(settings.normalizedPetZoom, value);
       }
@@ -17,9 +17,9 @@ void main() {
       expect(const AppSettings(petZoom: 0.8).normalizedPetZoom, 1);
     });
 
-    test('超出范围被夹到 1~3', () {
-      expect(const AppSettings(petZoom: 5).normalizedPetZoom, 3);
-      expect(const AppSettings(petZoom: 0.2).normalizedPetZoom, 1);
+    test('超出范围的旧值吸附到最近档位', () {
+      expect(const AppSettings(petZoom: 5).normalizedPetZoom, 2);
+      expect(const AppSettings(petZoom: 0.2).normalizedPetZoom, 0.5);
     });
   });
 

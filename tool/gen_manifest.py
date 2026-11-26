@@ -5,13 +5,13 @@
 本脚本是「语义标签 ↔ 动画素材」映射的唯一事实源：
   - TAGS   : 标签分类法（分组、中文名、说明、关键词词典、基础强度）
   - CLIPS  : 114 段动画的逐条标注（标签权重、停留策略）
-  - GIF 解析: 直接从二进制读出帧数与总时长，避免手写 duration 漂移
+  - WebP 解析: 直接从 RIFF 二进制读出画布尺寸、帧数与总时长，避免手写 duration 漂移
 
 用法:
     python tool/gen_manifest.py            # 生成 manifest
     python tool/gen_manifest.py --check    # 只校验（CI 用，不写文件）
 
-素材来源: dsh-pet-0.4.9/dsh-pet/assets/preview (GIF 预览) 与 assets/webm (WebM 母版)。
+素材来源: assets/animations (由 tool/gen_webp.py 从 assets/webm 母版导出) 与 assets/webm。
 """
 
 from __future__ import annotations
@@ -23,7 +23,7 @@ import struct
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-GIF_DIR = os.path.join(ROOT, "assets", "animations")
+ANIM_DIR = os.path.join(ROOT, "assets", "animations")
 WEBM_DIR = os.path.join(ROOT, "assets", "webm")
 OUT_DIR = os.path.join(ROOT, "assets", "manifest")
 
@@ -171,7 +171,7 @@ GROUPS = {
 
 # --------------------------------------------------------------------------
 # 动画清单：每段动画的语义标注
-#   id      : clip 主键，与 assets/animations/<id>.gif 对应
+#   id      : clip 主键，与 assets/animations/<id>.webp 对应
 #   name    : 中文原名（同时用于定位 assets/webm/<name>.webm）
 #   group   : 素材分组（仅用于文档归类）
 #   hold    : "once" 播完回待机 / "loop" 长时间停留
@@ -418,7 +418,7 @@ CLIPS = [
     ("beishubiao-tuozhuai-xuankong-fankui", "被鼠标拖拽悬空反馈", "interaction", "once",
      dict(drag=1.0, surprised=0.4)),
 
-    # ---- WebM 独有（暂无 GIF 预览，运行时跳过）----
+    # ---- 早期缺 GIF 预览、只有 WebM 的 5 段（现在都有运行时素材了）----
     ("kaixin-xiaopao", "开心小跑", "emotion", "once",
      dict(joy=0.9, excited=0.7, sport=0.4)),
     ("ceshen-jizao-pao", "侧身急躁跑", "emotion", "once",
@@ -430,65 +430,42 @@ CLIPS = [
 ]
 
 
-def parse_gif(path: str) -> tuple[int, int, int]:
-    """返回 (宽, 高, 总时长毫秒)。纯二进制解析，不依赖 Pillow。"""
+def parse_webp(path: str) -> tuple[int, int, int, int]:
+    """返回 (宽, 高, 总时长毫秒, 帧数)。纯二进制解析 RIFF，不依赖 Pillow。
+
+    动画 WebP 的结构：RIFF/WEBP 容器，VP8X 给出画布尺寸，每个 ANMF 块
+    携带一帧的时长（3 字节，毫秒）。
+    """
     with open(path, "rb") as fh:
         data = fh.read()
-    if data[:6] not in (b"GIF87a", b"GIF89a"):
-        raise ValueError(f"不是合法 GIF: {path}")
-    width, height, packed = struct.unpack("<HHB", data[6:11])
-    pos = 13
-    if packed & 0x80:
-        pos += 3 * (2 ** ((packed & 0x07) + 1))
-
-    frames = 0
+    if data[:4] != b"RIFF" or data[8:12] != b"WEBP":
+        raise ValueError(f"不是合法 WebP: {path}")
+    pos = 12
+    width = height = 0
     total_ms = 0
-    delay_cs = 0
-    while pos < len(data):
-        block = data[pos]
-        pos += 1
-        if block == 0x3B:  # trailer
-            break
-        if block == 0x21:  # extension
-            label = data[pos]
-            pos += 1
-            if label == 0xF9:
-                size = data[pos]
-                pos += 1
-                if size >= 4:
-                    delay_cs = struct.unpack("<H", data[pos + 1:pos + 3])[0]
-                pos += size
-                pos += 1  # block terminator
-            else:
-                while True:
-                    size = data[pos]
-                    pos += 1
-                    if size == 0:
-                        break
-                    pos += size
-        elif block == 0x2C:  # image descriptor
-            lpacked = data[pos + 8]
-            pos += 9
-            if lpacked & 0x80:
-                pos += 3 * (2 ** ((lpacked & 0x07) + 1))
-            pos += 1  # LZW minimum code size
-            while True:
-                size = data[pos]
-                pos += 1
-                if size == 0:
-                    break
-                pos += size
+    frames = 0
+    while pos + 8 <= len(data):
+        fourcc = data[pos : pos + 4]
+        size = struct.unpack("<I", data[pos + 4 : pos + 8])[0]
+        body = data[pos + 8 : pos + 8 + size]
+        if fourcc == b"VP8X":
+            width = int.from_bytes(body[4:7], "little") + 1
+            height = int.from_bytes(body[7:10], "little") + 1
+        elif fourcc == b"ANMF":
+            total_ms += int.from_bytes(body[12:15], "little")
             frames += 1
-            total_ms += (delay_cs if delay_cs > 0 else 10) * 10
-            delay_cs = 0
-        else:
-            raise ValueError(f"未知 GIF 块 0x{block:02X} @ {pos} in {path}")
-    return width, height, total_ms
+            if not width:
+                width = int.from_bytes(body[6:9], "little") + 1
+                height = int.from_bytes(body[9:12], "little") + 1
+        pos += 8 + size + (size & 1)
+    if not width or frames == 0:
+        raise ValueError(f"不是动画 WebP: {path}")
+    return width, height, total_ms, frames
 
 
 def build() -> dict:
     tag_ids = {t["id"] for t in TAGS}
-    gif_files = {f[:-4] for f in os.listdir(GIF_DIR) if f.endswith(".gif")}
+    anim_files = {f[:-5] for f in os.listdir(ANIM_DIR) if f.endswith(".webp")}
     webm_files = {f[:-5] for f in os.listdir(WEBM_DIR) if f.endswith(".webm")}
 
     clips = []
@@ -505,11 +482,14 @@ def build() -> dict:
         if not 0 < len(tags) <= 6:
             raise SystemExit(f"{cid}: 标签数量应在 1~6 之间，实际 {len(tags)}")
 
-        has_gif = cid in gif_files
-        if not has_gif and name not in webm_files:
-            raise SystemExit(f"{cid}: 既无 GIF 预览也无同名 WebM（{name}）")
-        if name in webm_files:
-            seen_webm.add(name)
+        if cid not in anim_files:
+            raise SystemExit(
+                f"{cid}: 缺少运行时素材 assets/animations/{cid}.webp，"
+                f"请先运行 python tool/gen_webp.py"
+            )
+        if name not in webm_files:
+            raise SystemExit(f"{cid}: 缺少同名 WebM 母版（{name}）")
+        seen_webm.add(name)
 
         entry = dict(
             id=cid,
@@ -518,24 +498,19 @@ def build() -> dict:
             hold=hold,
             tags={k: round(float(v), 2) for k, v in tags.items()},
         )
-        if has_gif:
-            w, h, ms = parse_gif(os.path.join(GIF_DIR, f"{cid}.gif"))
-            entry.update(
-                gif=f"assets/animations/{cid}.gif",
-                width=w,
-                height=h,
-                frames=None,  # 帧数不影响运行，省略以减小体积
-                durationMs=max(1200, ms),
-            )
-        else:
-            entry.update(gif=None, width=None, height=None, durationMs=3000)
-        if name in webm_files:
-            entry["webm"] = f"assets/webm/{name}.webm"
+        w, h, ms, _frames = parse_webp(os.path.join(ANIM_DIR, f"{cid}.webp"))
+        entry.update(
+            anim=f"assets/animations/{cid}.webp",
+            width=w,
+            height=h,
+            durationMs=max(1200, ms),
+            webm=f"assets/webm/{name}.webm",
+        )
         clips.append(entry)
 
-    missing_gif = gif_files - seen_ids
-    if missing_gif:
-        raise SystemExit(f"以下 GIF 未标注: {sorted(missing_gif)}")
+    missing_anim = anim_files - seen_ids
+    if missing_anim:
+        raise SystemExit(f"以下运行时素材未标注: {sorted(missing_anim)}")
     missing_webm = webm_files - seen_webm
     if missing_webm:
         raise SystemExit(f"以下 WebM 未标注: {sorted(missing_webm)}")
@@ -543,7 +518,7 @@ def build() -> dict:
     manifest = dict(
         schemaVersion=1,
         generator="tool/gen_manifest.py",
-        frame=dict(width=220, height=124),
+        frame=dict(width=640, height=360),
         clips=clips,
     )
     tags_doc = dict(
@@ -594,8 +569,8 @@ def main() -> int:
             fh.write("\n")
 
     clips = docs["manifest"]["clips"]
-    playable = [c for c in clips if c["gif"]]
-    print(f"标签 {len(TAGS)} 个 / 动画 {len(clips)} 段（可播放 {len(playable)}，仅 WebM {len(clips) - len(playable)}）")
+    playable = [c for c in clips if c.get("anim")]
+    print(f"标签 {len(TAGS)} 个 / 动画 {len(clips)} 段（全部可播放 {len(playable)}）")
     print(f"平均时长 {sum(c['durationMs'] for c in playable) / len(playable) / 1000:.1f}s")
     print(f"写出: {os.path.relpath(man_path, ROOT)} / {os.path.relpath(tag_path, ROOT)}")
     return 0

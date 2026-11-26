@@ -31,7 +31,7 @@ git branch -M main
 git push -u origin main
 ```
 
-首次 push 约 123MB（67MB GIF + 56MB WebM），慢是正常的。
+首次 push 约 175MB（117MB 运行时 WebP + 56MB WebM 母版），慢是正常的。
 若超过单文件 100MB 限制才会被拒——本仓库最大的文件约 0.9MB，不会触发。
 
 ## 3. 本地构建

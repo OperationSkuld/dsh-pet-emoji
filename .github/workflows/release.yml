@@ -42,7 +42,13 @@ jobs:
         run: |
           $src = "build/windows/x64/runner/Release"
           $out = "$env:APP_NAME-windows-x64.zip"
-          Compress-Archive -Path "$src/*" -DestinationPath $out -CompressionLevel Optimal
+          $sevenZip = "C:\Program Files\7-Zip\7z.exe"
+          if (Test-Path $sevenZip) {
+            # 7z 的 deflate 比 Compress-Archive 更紧，素材包能省几 MB
+            & $sevenZip a -tzip -mx=9 -bso0 -bsp0 $out "$src\*"
+          } else {
+            Compress-Archive -Path "$src/*" -DestinationPath $out -CompressionLevel Optimal
+          }
           Get-Item $out | Select-Object Name, Length
 
       - uses: actions/upload-artifact@v4
@@ -71,7 +77,8 @@ jobs:
       - run: flutter pub get
 
       - name: Build APK
-        run: flutter build apk --release
+        # 只编真机用得到的两个 ABI：x86_64 只服务模拟器，白占约 17MB
+        run: flutter build apk --release --target-platform android-arm,android-arm64
 
       - name: 重命名产物
         run: |

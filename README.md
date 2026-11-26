@@ -6,10 +6,10 @@
 
 Flutter 写的语义化表情桌宠，Windows / Android / iOS 三端同一套代码。
 
-<img src="assets/animations/daiji-huxi-xiuxian.gif" width="150" alt="待机呼吸休闲">
-<img src="assets/animations/dianji-huiying-kaixin-yuedong.gif" width="150" alt="开心跃动">
-<img src="assets/animations/chi-token.gif" width="150" alt="吃Token">
-<img src="assets/animations/xie-daima.gif" width="150" alt="写代码">
+<img src="assets/animations/daiji-huxi-xiuxian.webp" width="150" alt="待机呼吸休闲">
+<img src="assets/animations/dianji-huiying-kaixin-yuedong.webp" width="150" alt="开心跃动">
+<img src="assets/animations/chi-token.webp" width="150" alt="吃Token">
+<img src="assets/animations/xie-daima.webp" width="150" alt="写代码">
 
 ![platform](https://img.shields.io/badge/platform-Windows%20%7C%20Android%20%7C%20iOS-4D6BFE)
 ![flutter](https://img.shields.io/badge/Flutter-3.35%2B-02569B?logo=flutter)
@@ -112,23 +112,23 @@ Key 只存在本机 SharedPreferences，不上报任何第三方（安全取舍�
 
 | 标签 | id | 可用动画 | 代表表情 |
 | --- | --- | --- | --- |
-| **不耐烦** | `annoyed` | 4 | 用鲸鱼尾巴拍打地面、玩游戏气急败坏 |
+| **不耐烦** | `annoyed` | 5 | 用鲸鱼尾巴拍打地面、侧身急躁跑 |
 | **亲昵** | `love` | 5 | 撸猫、鲸鱼吐泡泡特效 |
-| **兴奋** | `excited` | 12 | 原地跳跃抓碎头顶物品、点击回应-开心跃动 |
+| **兴奋** | `excited` | 14 | 原地跳跃抓碎头顶物品、点击回应-开心跃动 |
 | **发呆** | `dazed` | 5 | 碎碎念-发呆碎碎念、碎碎念-对屏碎碎念 |
 | **困倦** | `sleepy` | 6 | 哈欠连天、原地小憩沉眠 |
 | **困惑** | `confused` | 4 | 是啊，吃什么、余额-数金皱眉 |
 | **大笑** | `laugh` | 1 | 点击回应-挠痒咯咯笑 |
 | **害怕** | `scared` | 2 | 被吓一跳、打瞌睡被惊醒 |
 | **害羞** | `shy` | 2 | 点击回应-害羞惊讶、点击回应-挠痒咯咯笑 |
-| **平静** | `calm` | 26 | 待机呼吸休闲、悠闲哼歌 |
-| **开心** | `joy` | 25 | 点击回应-开心跃动、工作状态-雀跃庆祝 |
+| **平静** | `calm` | 27 | 待机呼吸休闲、悠闲哼歌 |
+| **开心** | `joy` | 26 | 点击回应-开心跃动、工作状态-雀跃庆祝 |
 | **得意** | `proud` | 6 | 照镜子、小幅度原地360度旋转展示 |
 | **心虚** | `guilty` | 2 | 偷吃零食被抓住、大口吃零食 |
 | **思考** | `thinking` | 11 | 深度思考碎碎念、工作状态-思考冒泡 |
 | **惊讶** | `surprised` | 11 | 被吓一跳、打瞌睡被惊醒 |
 | **生气** | `angry` | 3 | 玩游戏气急败坏、点击回应-傲娇生气 |
-| **疲惫** | `tired` | 2 | 工作状态-垂头叹气冒汗、哈欠连天 |
+| **疲惫** | `tired` | 3 | 工作状态-垂头叹气冒汗、哈欠连天 |
 | **难过** | `sad` | 3 | 工作状态-垂头叹气冒汗、余额-分文不剩 |
 
 **社交**（对话意图层面的社交行为）
@@ -152,8 +152,8 @@ Key 只存在本机 SharedPreferences，不上报任何第三方（安全取舍�
 | **Token** | `token` | 1 | 吃Token |
 | **写代码** | `code` | 2 | 写代码、工作状态-忙碌点按 |
 | **出错** | `error` | — | *无专属素材，按回落链取相近表情* |
-| **卖萌** | `cute` | 19 | 萌化小幽灵、鲸鱼吐泡泡特效 |
-| **吃饭** | `eat` | 22 | 吃早餐、吃午餐 |
+| **卖萌** | `cute` | 20 | 萌化小幽灵、鲸鱼吐泡泡特效 |
+| **吃饭** | `eat` | 25 | 吃早餐、吃午餐 |
 | **学习** | `study` | 4 | 轻快记录、工作状态-清点归档 |
 | **工作** | `work` | 8 | 工作状态-忙碌点按、写代码 |
 | **待机** | `idle` | 7 | 待机呼吸休闲、东张西望 |
@@ -167,7 +167,7 @@ Key 只存在本机 SharedPreferences，不上报任何第三方（安全取舍�
 | **等待** | `waiting` | 5 | 工作状态-原地踱步张望、工作状态-思考冒泡 |
 | **节日** | `festival` | 22 | 收红包、舞狮头 |
 | **跳舞** | `dance` | 3 | 优雅女仆舞、可爱宅舞 |
-| **运动** | `sport` | 2 | 踢毽子、原地左转奔跑 |
+| **运动** | `sport` | 4 | 踢毽子、原地左转奔跑 |
 | **金钱** | `money` | 7 | 收红包、余额-分文不剩 |
 | **音乐** | `music` | 4 | 小提琴演奏、吹笛子 |
 | **魔法** | `magic` | 5 | 扑克魔术、变鸽子 |
@@ -258,9 +258,9 @@ sad     → tired → calm        praise  → shy → joy
 
 ```
 assets/
-├─ animations/        109 段 220×124 透明 GIF —— 运行时素材，参与打包
-│  ├─ daiji-huxi-xiuxian.gif     待机呼吸休闲
-│  ├─ chi-baifan.gif             吃白饭
+├─ animations/        114 段 640×360 透明动画 WebP —— 运行时素材，参与打包
+│  ├─ daiji-huxi-xiuxian.webp    待机呼吸休闲
+│  ├─ chi-baifan.webp            吃白饭
 │  └─ …
 ├─ webm/              114 段 WebM 高清母版 —— 不打包，仅随仓库分发
 │  ├─ 待机呼吸休闲.webm          与 clip 的 name 字段同名
@@ -270,16 +270,20 @@ assets/
    └─ tags.json       60 个标签的标题 / 分组 / 说明 / 关键词词典
 ```
 
-对应到具体文件：`assets/animations/chi-baifan.gif`（吃白饭）、
+对应到具体文件：`assets/animations/chi-baifan.webp`（吃白饭）、
 `assets/webm/吃白饭.webm`（同一段的母版）、`assets/manifest/animations.json`（语义标注）。
 
-- **文件名规则**：GIF 用拼音连字符 id（`chi-baifan`），WebM 用中文原名，
+- **文件名规则**：运行时素材用拼音连字符 id（`chi-baifan`），WebM 用中文原名，
   两者靠 `name` 字段对应，生成脚本会校验，不一致直接报错。
-- **为什么运行时是 GIF**：Flutter 的 `Image` 原生支持动态 GIF，三端一致；
-  WebM 的 VP9 透明通道在桌面端没有可靠的官方播放器。想要更高画质可以用
-  `python tool/rebuild_gifs.py` 从 WebM 重新导出更高分辨率 GIF。
-- **5 段只有 WebM 没有 GIF** 的动画（期待开饭、开心小跑、侧身急躁跑、吃饭·碗饭、吃饭团）
-  在清单里标记为不可播放，不参与调度。
+- **为什么运行时是动画 WebP 而不是 WebM**：Flutter 的 `Image` 原生支持多帧 WebP
+  与 alpha，三端一致；而 VP9+alpha 的视频在 Flutter 里没有可用的透明管线
+  （iOS 的 AVFoundation 根本不支持 VP9），直连会变成一块黑底。
+  动画 WebP 与母版同为 640×360、保留真 alpha，12fps / q45 / 6 秒约 1.0 MB/段，
+  由 `python tool/gen_webp.py` 从 WebM 批量导出。
+- **帧率取 12 而不是 15**：母版是 24fps，24→12 是整数二分频、帧间隔均匀；
+  24→15 是 1/2/1/2 的不均匀采样，同码率下 SSIM 更低且体积大 20%。
+- 114 段动画**全部可播放**：原先只有 WebM、无 GIF 的 5 段（期待开饭、开心小跑、
+  侧身急躁跑、吃饭·碗饭、吃饭团）已随 WebP 迁移补齐。
 
 细节见 [docs/ASSETS.md](docs/ASSETS.md)。
 
@@ -309,10 +313,8 @@ tool/
 | 桌面小窗 | ✅ 无边框置顶 | — | — |
 | 真·逐像素透明窗口 | ⚠️ 受 Flutter 桌面合成限制，可能退化为圆角卡片 | — | — |
 
-- **桌宠清晰度**：运行时素材是 220×124 的透明 GIF，所以默认按 1× 原生尺寸渲染，
-  不做任何拉伸；设置里可切 2×/3×，整数倍用最近邻放大，边缘是硬像素而不是糊。
-  再往上就受素材分辨率限制——`assets/webm/` 里的 640×360 母版才是画质上限，
-  重导办法见 [docs/ASSETS.md](docs/ASSETS.md)。
+- **桌宠清晰度**：运行时素材与母版同为 640×360，默认按「原尺寸」1:1 渲染、
+  不做任何拉伸；可切半尺寸（降采样，仍锐利）或 2×（最近邻整数放大，硬边不糊）。
 - **Windows 透明窗口**：Flutter 桌面端不支持逐像素 alpha，设置里的「尝试透明」
   在部分系统上会变成不透明窗口，此时请用「圆角卡片」。要真透明需接入
   `flutter_acrylic` 或改用 Web overlay，本仓库不默认引入。

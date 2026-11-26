@@ -234,9 +234,9 @@ class _SettingsPageState extends State<SettingsPage> {
                           ),
                         ),
                         segments: const [
-                          ButtonSegment(value: 1, label: Text('1× 原尺寸')),
+                          ButtonSegment(value: 0.5, label: Text('半尺寸')),
+                          ButtonSegment(value: 1, label: Text('原尺寸')),
                           ButtonSegment(value: 2, label: Text('2×')),
-                          ButtonSegment(value: 3, label: Text('3×')),
                         ],
                         selected: {settings.normalizedPetZoom},
                         onSelectionChanged: (selection) => _save(
@@ -251,8 +251,8 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
               const SizedBox(height: 4),
               const Text(
-                '1× 即素材原生 220×124，不拉伸所以最清晰；2×/3× 按整数倍放大，'
-                '仍是硬边像素，不会变糊。',
+                '「原尺寸」按素材原生 640×360 显示，与 WebM 母版一致、不拉伸；'
+                '「半尺寸」是等比缩小，依旧锐利；「2×」用最近邻整数放大，边界是硬像素。',
                 style: TextStyle(
                   fontSize: 11,
                   height: 1.55,

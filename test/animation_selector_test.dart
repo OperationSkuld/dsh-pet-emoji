@@ -20,7 +20,7 @@ AnimationClip _clip(
     hold: loop ? ClipHold.loop : ClipHold.once,
     tags: tags,
     durationMs: 3000,
-    gifPath: 'assets/animations/$id.gif',
+    animPath: 'assets/animations/$id.webp',
   );
 }
 

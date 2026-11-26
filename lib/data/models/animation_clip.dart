@@ -24,13 +24,13 @@ class AnimationClip {
     required this.hold,
     required this.tags,
     required this.durationMs,
-    this.gifPath,
+    this.animPath,
     this.webmPath,
     this.width,
     this.height,
   });
 
-  /// 主键，与 `assets/animations/<id>.gif` 对应。
+  /// 主键，与 `assets/animations/<id>.webp` 对应。
   final String id;
 
   /// 素材原名（中文），用于文档展示与定位 WebM 母版。
@@ -45,13 +45,16 @@ class AnimationClip {
   final Map<String, double> tags;
 
   final int durationMs;
-  final String? gifPath;
+
+  /// 运行时素材：带透明通道的动画 WebP（640×360），由 WebM 母版导出。
+  final String? animPath;
   final String? webmPath;
   final int? width;
   final int? height;
 
-  /// 无 GIF 预览的素材（仅 WebM）不参与运行时调度。
-  bool get playable => gifPath != null;
+  /// 有运行时素材才参与调度。现在 114 段全部都有，保留这个判断是为了
+  /// 在素材缺失时能安静跳过而不是崩在 `Image.asset`。
+  bool get playable => animPath != null;
 
   bool get isLoop => hold == ClipHold.loop;
 
@@ -87,7 +90,7 @@ class AnimationClip {
         (key, value) => MapEntry(key, (value as num).toDouble()),
       ),
       durationMs: (json['durationMs'] as num?)?.toInt() ?? 3000,
-      gifPath: json['gif'] as String?,
+      animPath: json['anim'] as String?,
       webmPath: json['webm'] as String?,
       width: (json['width'] as num?)?.toInt(),
       height: (json['height'] as num?)?.toInt(),

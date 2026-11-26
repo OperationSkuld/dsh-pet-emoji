@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""从 assets/webm 批量重导出高分辨率透明 GIF。
+"""【备用脚本】从 assets/webm 批量重导出透明 GIF。
 
-需要本机安装 ffmpeg。只重导出「已有 GIF」的素材——只有 WebM、缺预览的
-5 段素材导出后仍需在标注表里确认，脚本不会自动改清单。
+运行时素材现在用动画 WebP（见 tool/gen_webp.py）：640×360 的 GIF 约 7MB/段，
+114 段要 800MB，而且只有 256 色。只有在确实需要 GIF 时才用本脚本。
+
+需要本机安装 ffmpeg。
 
 用法:
     python tool/rebuild_gifs.py --dry-run      # 只打印命令，不执行

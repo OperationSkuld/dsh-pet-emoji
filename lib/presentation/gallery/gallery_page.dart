@@ -27,7 +27,7 @@ class _GalleryPageState extends State<GalleryPage> {
     final services = widget.services;
     final clips = services.animations.clips
         .where((clip) {
-          if (clip.gifPath == null) return false;
+          if (clip.animPath == null) return false;
           if (_group != null && clip.group != _group) return false;
           if (_query.isEmpty) return true;
           final keyword = _query.toLowerCase();

@@ -26,9 +26,10 @@ flutter run -d windows # 或 android / ios 设备
 
 ## 新增一段动画
 
-1. 透明 GIF 放到 `assets/animations/<id>.gif`（`<id>` 用英文小写 + 连字符，
-   例如 `chi-baifan`；中文原名写在清单的 `name` 字段）。
-2. 高清母版放到 `assets/webm/<中文原名>.webm`。
+1. 高清母版放到 `assets/webm/<中文原名>.webm`（640×360、VP9、带 alpha）。
+2. 用 `python tool/gen_webp.py --only <中文原名>` 导出运行时素材
+   `assets/animations/<id>.webp`（`<id>` 用英文小写 + 连字符，例如 `chi-baifan`）。
+   不要手工做 GIF——体积是 WebP 的 5 倍以上且只有 256 色。
 3. 在 `tool/gen_manifest.py` 的 `CLIPS` 里加一行：分组、停留策略、1~6 个标签及契合度。
 4. `python tool/gen_manifest.py`，再 `python tool/gen_docs.py`。
 5. `flutter test` —— 清单完整性测试会检查文件、标签与命名是否对得上。

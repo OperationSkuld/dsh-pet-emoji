@@ -26,6 +26,7 @@ flutter:
   assets:
     # 语义清单：标签分类法 + 动画标注（由 tool/gen_manifest.py 生成）
     - assets/manifest/
-    # 运行时动画：109 段 220x124 透明 GIF（Windows / Android / iOS 通用）
+    # 运行时动画：114 段 640x360 透明动画 WebP（Windows / Android / iOS 通用）
+    # 12fps / q45 / 6s，约 117MB；由 tool/gen_webp.py 从 assets/webm 导出
     - assets/animations/
     # assets/webm/ 为高清母版，不参与打包，仅随仓库分发，见 docs/ASSETS.md

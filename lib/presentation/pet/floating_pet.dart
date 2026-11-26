@@ -3,6 +3,7 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
 import '../../app_services.dart';
+import '../../data/models/app_settings.dart';
 import '../theme/app_theme.dart';
 import '../widgets/pet_view.dart';
 import 'pet_bubble.dart';
@@ -111,9 +112,14 @@ class _FloatingPetState extends State<FloatingPet> {
     );
   }
 
-  Future<void> _setZoom(double value) async {
+  /// 按 [AppSettings.petZoomSteps] 的档位步进，避免出现非整数倍率。
+  Future<void> _stepZoom(int delta) async {
+    final steps = AppSettings.petZoomSteps;
+    final index = steps.indexOf(_zoom);
+    final next = (index + delta).clamp(0, steps.length - 1);
+    if (next == index) return;
     await _services.updateSettings(
-      _services.settings.copyWith(petZoom: value.clamp(1.0, 3.0)),
+      _services.settings.copyWith(petZoom: steps[next]),
     );
   }
 
@@ -209,12 +215,16 @@ class _FloatingPetState extends State<FloatingPet> {
             _PetAction(
               icon: Icons.zoom_out_rounded,
               tooltip: '缩小',
-              onTap: _zoom <= 1 ? null : () => _setZoom(_zoom - 1),
+              onTap: _zoom <= AppSettings.petZoomSteps.first
+                  ? null
+                  : () => _stepZoom(-1),
             ),
             _PetAction(
               icon: Icons.zoom_in_rounded,
               tooltip: '放大',
-              onTap: _zoom >= 3 ? null : () => _setZoom(_zoom + 1),
+              onTap: _zoom >= AppSettings.petZoomSteps.last
+                  ? null
+                  : () => _stepZoom(1),
             ),
             if (widget.onOpenBalance != null)
               _PetAction(

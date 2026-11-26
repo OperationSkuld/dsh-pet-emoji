@@ -1,7 +1,9 @@
 import 'dart:io';
+import 'dart:ui' as ui;
 
 import 'package:dsh_pet_emoji/data/models/semantic_profile.dart';
 import 'package:dsh_pet_emoji/data/models/tag_definition.dart';
+import 'package:dsh_pet_emoji/data/models/animation_clip.dart';
 import 'package:dsh_pet_emoji/data/repositories/animation_repository.dart';
 import 'package:dsh_pet_emoji/data/repositories/tag_repository.dart';
 import 'package:dsh_pet_emoji/domain/semantic/animation_selector.dart';
@@ -20,18 +22,27 @@ void main() {
   });
 
   group('清单完整性', () {
-    test('动画数量与可播放数量符合素材事实', () {
+    test('114 段动画全部可播放', () {
       expect(animations.clips.length, 114);
-      expect(animations.animationCount, 109);
+      expect(animations.animationCount, 114);
+      expect(animations.clips.every((c) => c.playable), isTrue);
     });
 
-    test('每段可播放动画的 GIF 与 WebM 都真实存在', () {
+    test('运行时素材是 640×360 的动画 WebP', () {
       for (final clip in animations.clips) {
-        if (clip.gifPath != null) {
+        expect(clip.animPath, endsWith('.webp'), reason: clip.id);
+        expect(clip.width, 640, reason: clip.id);
+        expect(clip.height, 360, reason: clip.id);
+      }
+    });
+
+    test('每段动画的运行时素材与 WebM 母版都真实存在', () {
+      for (final clip in animations.clips) {
+        if (clip.animPath != null) {
           expect(
-            File(clip.gifPath!).existsSync(),
+            File(clip.animPath!).existsSync(),
             isTrue,
-            reason: '${clip.id} 缺少 GIF',
+            reason: '${clip.id} 缺少运行时素材',
           );
         }
         if (clip.webmPath != null) {
@@ -71,17 +82,36 @@ void main() {
 
     test('待机动画可循环', () {
       expect(animations.idleClip.isLoop, isTrue);
-      expect(animations.idleClip.gifPath, isNotNull);
+      expect(animations.idleClip.animPath, isNotNull);
     });
 
-    test('无 GIF 的素材不参与运行时调度', () {
-      final webmOnly = animations.clips
-          .where((clip) => clip.gifPath == null)
-          .toList();
-      expect(webmOnly.length, 5);
-      for (final clip in webmOnly) {
-        expect(clip.playable, isFalse);
+    test('运行时素材能被引擎解码成多帧动画', () async {
+      // 迁移到动画 WebP 后，这条守着「Image 真能播」这件事——只检查文件存在
+      // 是不够的，格式不对会在运行时才炸。
+      for (final clip in [animations.clips.first, animations.clips.last]) {
+        final bytes = File(clip.animPath!).readAsBytesSync();
+        final codec = await ui.instantiateImageCodec(bytes);
+        expect(codec.frameCount, greaterThan(1), reason: clip.id);
+        final frame = await codec.getNextFrame();
+        expect(frame.image.width, 640, reason: clip.id);
+        expect(frame.image.height, 360, reason: clip.id);
+        frame.image.dispose();
+        codec.dispose();
       }
+    });
+
+    test('素材路径缺失时才会被标记为不可播放', () {
+      // 现实中 114 段都有素材；这里构造一条缺路径的，确认兜底判断还在
+      final broken = AnimationClip(
+        id: 'broken',
+        name: '缺素材',
+        group: 'idle',
+        hold: ClipHold.once,
+        tags: const {'idle': 1},
+        durationMs: 3000,
+      );
+      expect(broken.playable, isFalse);
+      expect(animations.clips.where((c) => !c.playable), isEmpty);
     });
 
     test('标签分类法包含全部五个分组', () {

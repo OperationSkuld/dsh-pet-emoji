@@ -62,7 +62,7 @@ def load():
 
 
 def playable(clips):
-    return [c for c in clips if c.get("gif")]
+    return [c for c in clips if c.get("anim")]
 
 
 def top_tags(clip, limit=6):
@@ -101,7 +101,7 @@ def tag_overview_table(manifest, tags) -> str:
 def tags_doc(manifest, tags) -> str:
     clips = manifest["clips"]
     playable_clips = playable(clips)
-    webm_only = [c for c in clips if not c.get("gif")]
+    webm_only = [c for c in clips if not c.get("anim")]
     keyword_total = sum(len(t["keywords"]) for t in tags["tags"])
 
     out = []
@@ -110,7 +110,7 @@ def tags_doc(manifest, tags) -> str:
     out.append("> 本文档由 `python tool/gen_docs.py` 依据 `assets/manifest/*.json` 生成，"
                "请勿手改表格；要改标签或素材标注，改 `tool/gen_manifest.py` 后重新生成。")
     out.append("")
-    out.append(f"- 动画 **{len(clips)}** 段（可播放 {len(playable_clips)}，仅 WebM {len(webm_only)}）")
+    out.append(f"- 动画 **{len(clips)}** 段（全部可播放 {len(playable_clips)}）")
     out.append(f"- 语义标签 **{len(tags['tags'])}** 个，关键词 **{keyword_total}** 条")
     out.append(f"- 标签分组 **{len(GROUP_ORDER)}** 类：情绪 / 社交 / 行为 / 时令 / 系统")
     out.append("")
@@ -178,15 +178,15 @@ def tags_doc(manifest, tags) -> str:
     for index, clip in enumerate(clips, start=1):
         hold = "循环" if clip["hold"] == "loop" else "一次性"
         seconds = f"{clip['durationMs'] / 1000:.1f}s"
-        source = "GIF+WebM" if clip.get("gif") and clip.get("webm") else (
-            "仅 WebM" if clip.get("webm") else "GIF")
+        source = "WebP+WebM" if clip.get("anim") and clip.get("webm") else (
+            "仅 WebM" if clip.get("webm") else "WebP")
         out.append(
             f"| {index} | {clip['name']} | `{clip['id']}` | {clip['group']} | {hold} | "
             f"{seconds} | {top_tags(clip)} | {source} |"
         )
     out.append("")
-    out.append("> 「仅 WebM」的动画没有 220×124 的 GIF 预览，运行时被标记为不可播放，"
-               "不参与调度；补齐 GIF 后重跑 `python tool/gen_manifest.py` 即可启用。")
+    out.append("> 运行时素材是 640×360 的动画 WebP（真 alpha），由 `assets/webm` 里的母版"
+               "经 `tool/gen_webp.py` 导出，尺寸与母版一致。")
     out.append("")
     out.append("## 6. 回落链")
     out.append("")

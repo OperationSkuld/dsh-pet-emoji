@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 import '../../data/models/animation_clip.dart';
 
-/// 素材的原生像素尺寸，与 `assets/animations/*.gif` 完全一致。
+/// 运行时素材的原生像素尺寸：640×360 的动画 WebP，与 WebM 母版完全一致。
 ///
-/// 1× 显示时按 220×124 逻辑像素绘制，即「原版大小」——不做任何拉伸，
-/// 所以不会再像之前 1.24×/1.65× 那样被双线性插值糊掉。
-const double kPetNativeWidth = 220;
-const double kPetNativeHeight = 124;
+/// 1× 显示时按 640×360 逻辑像素绘制，即「和母版一样大小」——不做任何拉伸；
+/// 0.5× 是降采样（依然锐利），2× 用最近邻整数放大（硬边不糊）。
+const double kPetNativeWidth = 640;
+const double kPetNativeHeight = 360;
 
 /// 桌宠本体：一张透明 GIF。
 ///
@@ -15,9 +15,9 @@ const double kPetNativeHeight = 124;
 /// 因此运行时不再依赖视频插件（WebM 母版的用途见 docs/ASSETS.md）。
 ///
 /// 清晰度约定：
-///   - [zoom] 为整数倍（2×/3×）时用 [FilterQuality.none]，放大后是一个像素
-///     对应一个方块，边缘锐利——“放大但不模糊”；
-///   - 1× 走默认双线性，在 100% 缩放下本身就是 1:1，不需要额外处理。
+///   - [zoom] ≥ 2 的整数倍用 [FilterQuality.none]，一个像素对应一个方块，
+///     边缘锐利——“放大但不模糊”；
+///   - 1×（1:1）与 0.5×（降采样）走双线性，前者本身就是 1:1，后者是缩小。
 class PetView extends StatelessWidget {
   const PetView({
     super.key,
@@ -30,7 +30,7 @@ class PetView extends StatelessWidget {
 
   final AnimationClip clip;
 
-  /// 整数倍放大（1 / 2 / 3）。非整数会被就近取整，避免出现半像素模糊。
+  /// 显示倍率：0.5（半尺寸）/ 1（原生尺寸）/ 2（整数放大）。
   final double zoom;
   final VoidCallback? onTap;
   final VoidCallback? onDoubleTap;
@@ -38,21 +38,35 @@ class PetView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final width = kPetNativeWidth * zoom;
-    final height = kPetNativeHeight * zoom;
-    // 整数倍放大用最近邻，保持像素锐利；1× 用双线性（此时基本是 1:1）
-    final quality = zoom > 1.001 && _isInteger(zoom)
-        ? FilterQuality.none
-        : FilterQuality.medium;
+    // 容器比素材窄时等比缩小（只缩不放）：表情库缩略图、手机页签、小窗都靠这个
+    // 兜底，避免 640 宽的素材把布局撑破。缩小属于降采样，不会糊。
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        var width = kPetNativeWidth * zoom;
+        final limit = constraints.maxWidth;
+        if (limit.isFinite && limit > 0 && limit < width) {
+          width = limit;
+        }
+        final height = width * kPetNativeHeight / kPetNativeWidth;
+        // 整数倍放大用最近邻，保持像素锐利；其余（1:1 与缩小）用双线性
+        final quality = zoom >= 2 && _isInteger(zoom)
+            ? FilterQuality.none
+            : FilterQuality.medium;
+        return _buildContent(width, height, quality);
+      },
+    );
+  }
+
+  Widget _buildContent(double width, double height, FilterQuality quality) {
 
     Widget image;
-    if (clip.gifPath == null) {
+    if (clip.animPath == null) {
       image = SizedBox(
         width: width,
         height: height,
         child: const Center(
           child: Text(
-            '该动画暂无 GIF 预览',
+            '该动画暂无预览',
             style: TextStyle(fontSize: 12, color: Color(0xFF9AA1AC)),
           ),
         ),
@@ -63,7 +77,7 @@ class PetView extends StatelessWidget {
         switchInCurve: Curves.easeOut,
         switchOutCurve: Curves.easeIn,
         child: Image.asset(
-          clip.gifPath!,
+          clip.animPath!,
           key: ValueKey(clip.id),
           width: width,
           height: height,
@@ -84,9 +98,10 @@ class PetView extends StatelessWidget {
       );
     }
 
+    final shadowHeight = showShadow ? 14.0 * (width / (kPetNativeWidth * zoom)) : 0.0;
     final content = SizedBox(
       width: width,
-      height: height + (showShadow ? 14 : 0),
+      height: height + shadowHeight,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
