@@ -16,6 +16,8 @@ permissions:
 env:
   APP_NAME: dsh-pet-emoji
   FLUTTER_CHANNEL: stable
+  # 钉死版本：与本地开发环境一致，避免上游 stable 升级导致构建漂移
+  FLUTTER_VERSION: "3.47.4"
 
 jobs:
   windows:
@@ -26,6 +28,7 @@ jobs:
 
       - uses: subosito/flutter-action@v2
         with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
           channel: ${{ env.FLUTTER_CHANNEL }}
           cache: true
 
@@ -61,6 +64,7 @@ jobs:
 
       - uses: subosito/flutter-action@v2
         with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
           channel: ${{ env.FLUTTER_CHANNEL }}
           cache: true
 
@@ -88,6 +92,7 @@ jobs:
 
       - uses: subosito/flutter-action@v2
         with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
           channel: ${{ env.FLUTTER_CHANNEL }}
           cache: true
 
