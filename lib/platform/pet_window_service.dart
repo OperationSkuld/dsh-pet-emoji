@@ -63,7 +63,10 @@ class PetWindowService {
             : const Color(0xFFF7F8FB),
       );
       await windowManager.setSize(
-        Size(compactSize.width * scale.clamp(0.8, 1.4), compactSize.height * scale.clamp(0.8, 1.4)),
+        Size(
+          compactSize.width * scale.clamp(0.8, 1.4),
+          compactSize.height * scale.clamp(0.8, 1.4),
+        ),
       );
       await windowManager.center();
       await windowManager.show();

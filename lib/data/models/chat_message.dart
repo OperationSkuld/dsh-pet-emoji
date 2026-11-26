@@ -50,7 +50,7 @@ class ChatMessage {
 
   /// 发给 API 的最小结构。
   Map<String, String> toApiJson() => {
-        'role': isUser ? 'user' : 'assistant',
-        'content': content,
-      };
+    'role': isUser ? 'user' : 'assistant',
+    'content': content,
+  };
 }

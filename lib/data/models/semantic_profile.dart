@@ -28,8 +28,8 @@ class SemanticProfile {
     required this.intensity,
     List<String> evidence = const [],
     this.source = 'local',
-  })  : scores = Map.unmodifiable(scores),
-        evidence = List.unmodifiable(evidence);
+  }) : scores = Map.unmodifiable(scores),
+       evidence = List.unmodifiable(evidence);
 
   /// 标签 → 权重。已裁剪到 0~1，并按权重降序去噪。
   final Map<String, double> scores;
@@ -86,10 +86,10 @@ class SemanticProfile {
   }
 
   static SemanticProfile empty() => SemanticProfile(
-        scores: const {},
-        intent: DialogIntent.chat,
-        intensity: 0,
-      );
+    scores: const {},
+    intent: DialogIntent.chat,
+    intensity: 0,
+  );
 
   @override
   String toString() =>

@@ -30,11 +30,11 @@ class DeepSeekException implements Exception {
 
   /// 桌宠应当播放的反馈标签。
   String get feedbackTag => switch (kind) {
-        DeepSeekErrorKind.insufficientBalance => 'balance_empty',
-        DeepSeekErrorKind.unauthorized => 'confused',
-        DeepSeekErrorKind.canceled => 'idle',
-        _ => 'error',
-      };
+    DeepSeekErrorKind.insufficientBalance => 'balance_empty',
+    DeepSeekErrorKind.unauthorized => 'confused',
+    DeepSeekErrorKind.canceled => 'idle',
+    _ => 'error',
+  };
 
   @override
   String toString() => message;
@@ -66,10 +66,10 @@ class DeepSeekClient {
   final http.Client _http;
 
   Map<String, String> get _headers => {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': 'Bearer $apiKey',
-      };
+    'Content-Type': 'application/json',
+    'Accept': 'application/json',
+    'Authorization': 'Bearer $apiKey',
+  };
 
   Uri _endpoint(String path) {
     var base = baseUrl.trim();
@@ -101,10 +101,7 @@ class DeepSeekClient {
     try {
       response = await _http.send(request).timeout(timeout);
     } on TimeoutException {
-      throw DeepSeekException(
-        DeepSeekErrorKind.network,
-        '请求超时，请检查网络或稍后重试',
-      );
+      throw DeepSeekException(DeepSeekErrorKind.network, '请求超时，请检查网络或稍后重试');
     } on SocketException catch (error) {
       throw DeepSeekException(
         DeepSeekErrorKind.network,
@@ -124,7 +121,9 @@ class DeepSeekClient {
 
     try {
       await for (final line
-          in response.stream.transform(utf8.decoder).transform(const LineSplitter())) {
+          in response.stream
+              .transform(utf8.decoder)
+              .transform(const LineSplitter())) {
         final trimmed = line.trim();
         if (trimmed.isEmpty || !trimmed.startsWith('data:')) continue;
         final data = trimmed.substring(5).trim();
@@ -194,41 +193,41 @@ class DeepSeekClient {
     final suffix = detail == null ? '' : '（$detail）';
     return switch (statusCode) {
       400 => DeepSeekException(
-          DeepSeekErrorKind.badRequest,
-          '请求参数有误$suffix',
-          statusCode: statusCode,
-          detail: detail,
-        ),
+        DeepSeekErrorKind.badRequest,
+        '请求参数有误$suffix',
+        statusCode: statusCode,
+        detail: detail,
+      ),
       401 => DeepSeekException(
-          DeepSeekErrorKind.unauthorized,
-          'API Key 无效或已失效$suffix',
-          statusCode: statusCode,
-          detail: detail,
-        ),
+        DeepSeekErrorKind.unauthorized,
+        'API Key 无效或已失效$suffix',
+        statusCode: statusCode,
+        detail: detail,
+      ),
       402 => DeepSeekException(
-          DeepSeekErrorKind.insufficientBalance,
-          '账户余额不足，请先充值$suffix',
-          statusCode: statusCode,
-          detail: detail,
-        ),
+        DeepSeekErrorKind.insufficientBalance,
+        '账户余额不足，请先充值$suffix',
+        statusCode: statusCode,
+        detail: detail,
+      ),
       429 => DeepSeekException(
-          DeepSeekErrorKind.rateLimited,
-          '请求过于频繁，请稍后再试$suffix',
-          statusCode: statusCode,
-          detail: detail,
-        ),
+        DeepSeekErrorKind.rateLimited,
+        '请求过于频繁，请稍后再试$suffix',
+        statusCode: statusCode,
+        detail: detail,
+      ),
       >= 500 => DeepSeekException(
-          DeepSeekErrorKind.server,
-          'DeepSeek 服务端异常（$statusCode）$suffix',
-          statusCode: statusCode,
-          detail: detail,
-        ),
+        DeepSeekErrorKind.server,
+        'DeepSeek 服务端异常（$statusCode）$suffix',
+        statusCode: statusCode,
+        detail: detail,
+      ),
       _ => DeepSeekException(
-          DeepSeekErrorKind.badResponse,
-          '请求失败（$statusCode）$suffix',
-          statusCode: statusCode,
-          detail: detail,
-        ),
+        DeepSeekErrorKind.badResponse,
+        '请求失败（$statusCode）$suffix',
+        statusCode: statusCode,
+        detail: detail,
+      ),
     };
   }
 
@@ -274,7 +273,10 @@ class DeepSeekClient {
     } on TimeoutException {
       throw DeepSeekException(DeepSeekErrorKind.network, '标注请求超时');
     } on SocketException catch (error) {
-      throw DeepSeekException(DeepSeekErrorKind.network, '网络不可达：${error.message}');
+      throw DeepSeekException(
+        DeepSeekErrorKind.network,
+        '网络不可达：${error.message}',
+      );
     }
 
     final body = await streamed.stream.bytesToString();

@@ -25,25 +25,34 @@ class _GalleryPageState extends State<GalleryPage> {
   @override
   Widget build(BuildContext context) {
     final services = widget.services;
-    final clips = services.animations.clips.where((clip) {
-      if (clip.gifPath == null) return false;
-      if (_group != null && clip.group != _group) return false;
-      if (_query.isEmpty) return true;
-      final keyword = _query.toLowerCase();
-      final tagLabels = clip.tags.keys.map(services.tags.labelOf).join(' ');
-      return clip.name.toLowerCase().contains(keyword) ||
-          clip.id.contains(keyword) ||
-          tagLabels.contains(keyword);
-    }).toList(growable: false);
+    final clips = services.animations.clips
+        .where((clip) {
+          if (clip.gifPath == null) return false;
+          if (_group != null && clip.group != _group) return false;
+          if (_query.isEmpty) return true;
+          final keyword = _query.toLowerCase();
+          final tagLabels = clip.tags.keys.map(services.tags.labelOf).join(' ');
+          return clip.name.toLowerCase().contains(keyword) ||
+              clip.id.contains(keyword) ||
+              tagLabels.contains(keyword);
+        })
+        .toList(growable: false);
 
-    final groups = services.animations.playableClips.map((clip) => clip.group).toSet().toList()
-      ..sort();
+    final groups =
+        services.animations.playableClips
+            .map((clip) => clip.group)
+            .toSet()
+            .toList()
+          ..sort();
 
     return Scaffold(
       appBar: AppBar(
         title: Row(
           children: [
-            const Text('表情库', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
+            const Text(
+              '表情库',
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+            ),
             const SizedBox(width: 8),
             SoftTag('${services.animations.animationCount} 段可播放'),
             const SizedBox(width: 6),
@@ -93,16 +102,20 @@ class _GalleryPageState extends State<GalleryPage> {
           Expanded(
             child: clips.isEmpty
                 ? const Center(
-                    child: Text('没有匹配的动画', style: TextStyle(color: AppColors.textTertiary)),
+                    child: Text(
+                      '没有匹配的动画',
+                      style: TextStyle(color: AppColors.textTertiary),
+                    ),
                   )
                 : GridView.builder(
                     padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
-                    gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                      maxCrossAxisExtent: 210,
-                      mainAxisSpacing: 12,
-                      crossAxisSpacing: 12,
-                      childAspectRatio: 0.95,
-                    ),
+                    gridDelegate:
+                        const SliverGridDelegateWithMaxCrossAxisExtent(
+                          maxCrossAxisExtent: 210,
+                          mainAxisSpacing: 12,
+                          crossAxisSpacing: 12,
+                          childAspectRatio: 0.95,
+                        ),
                     itemCount: clips.length,
                     itemBuilder: (context, index) {
                       final clip = clips[index];
@@ -129,18 +142,18 @@ class _GalleryPageState extends State<GalleryPage> {
   }
 
   String _groupLabel(String group) => switch (group) {
-        'idle' => '待机',
-        'emotion' => '情绪',
-        'social' => '社交',
-        'food' => '吃喝',
-        'work' => '工作',
-        'play' => '玩耍',
-        'festival' => '节日',
-        'money' => '余额',
-        'sleep' => '睡眠',
-        'interaction' => '交互',
-        _ => group,
-      };
+    'idle' => '待机',
+    'emotion' => '情绪',
+    'social' => '社交',
+    'food' => '吃喝',
+    'work' => '工作',
+    'play' => '玩耍',
+    'festival' => '节日',
+    'money' => '余额',
+    'sleep' => '睡眠',
+    'interaction' => '交互',
+    _ => group,
+  };
 
   void _showDetail(BuildContext context, AnimationClip clip) {
     final services = widget.services;
@@ -149,7 +162,10 @@ class _GalleryPageState extends State<GalleryPage> {
       builder: (context) => AlertDialog(
         backgroundColor: Colors.white,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-        title: Text(clip.name, style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w600)),
+        title: Text(
+          clip.name,
+          style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+        ),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -157,7 +173,11 @@ class _GalleryPageState extends State<GalleryPage> {
             Text(
               'id: ${clip.id}\n时长: ${(clip.durationMs / 1000).toStringAsFixed(1)}s'
               ' · 停留: ${clip.isLoop ? '循环' : '一次性'}',
-              style: const TextStyle(fontSize: 12, color: AppColors.textTertiary, height: 1.6),
+              style: const TextStyle(
+                fontSize: 12,
+                color: AppColors.textTertiary,
+                height: 1.6,
+              ),
             ),
             const SizedBox(height: 12),
             Wrap(
@@ -176,7 +196,10 @@ class _GalleryPageState extends State<GalleryPage> {
             if (clip.webmPath != null)
               Text(
                 '母版: ${clip.webmPath!.replaceFirst('assets/webm/', '')}',
-                style: const TextStyle(fontSize: 11, color: AppColors.textTertiary),
+                style: const TextStyle(
+                  fontSize: 11,
+                  color: AppColors.textTertiary,
+                ),
               ),
           ],
         ),
@@ -199,7 +222,11 @@ class _GalleryPageState extends State<GalleryPage> {
 }
 
 class _GroupChip extends StatelessWidget {
-  const _GroupChip({required this.label, required this.selected, required this.onTap});
+  const _GroupChip({
+    required this.label,
+    required this.selected,
+    required this.onTap,
+  });
 
   final String label;
   final bool selected;
@@ -219,7 +246,9 @@ class _GroupChip extends StatelessWidget {
             color: selected ? AppColors.primarySoft : AppColors.surface,
             borderRadius: BorderRadius.circular(999),
             border: Border.all(
-              color: selected ? AppColors.primary.withValues(alpha: 0.3) : AppColors.border,
+              color: selected
+                  ? AppColors.primary.withValues(alpha: 0.3)
+                  : AppColors.border,
             ),
           ),
           child: Text(
@@ -251,7 +280,8 @@ class _ClipCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final topTags = clip.tags.entries.toList()..sort((a, b) => b.value.compareTo(a.value));
+    final topTags = clip.tags.entries.toList()
+      ..sort((a, b) => b.value.compareTo(a.value));
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(12),
@@ -266,7 +296,9 @@ class _ClipCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
-              child: Center(child: PetView(clip: clip, scale: 0.72, showShadow: false)),
+              child: Center(
+                child: PetView(clip: clip, scale: 0.72, showShadow: false),
+              ),
             ),
             Row(
               children: [
@@ -275,7 +307,10 @@ class _ClipCard extends StatelessWidget {
                     clip.name,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(fontSize: 12.5, fontWeight: FontWeight.w500),
+                    style: const TextStyle(
+                      fontSize: 12.5,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                 ),
                 InkWell(
@@ -283,7 +318,11 @@ class _ClipCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(999),
                   child: const Padding(
                     padding: EdgeInsets.all(2),
-                    child: Icon(Icons.info_outline_rounded, size: 14, color: AppColors.textTertiary),
+                    child: Icon(
+                      Icons.info_outline_rounded,
+                      size: 14,
+                      color: AppColors.textTertiary,
+                    ),
                   ),
                 ),
               ],

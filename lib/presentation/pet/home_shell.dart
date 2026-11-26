@@ -45,7 +45,9 @@ class _HomeShellState extends State<HomeShell> {
 
   void _openGallery() {
     Navigator.of(context).push(
-      MaterialPageRoute<void>(builder: (_) => GalleryPage(services: widget.services)),
+      MaterialPageRoute<void>(
+        builder: (_) => GalleryPage(services: widget.services),
+      ),
     );
   }
 
@@ -59,10 +61,8 @@ class _HomeShellState extends State<HomeShell> {
       PageRouteBuilder<void>(
         opaque: false,
         transitionDuration: const Duration(milliseconds: 180),
-        pageBuilder: (context, animation, secondaryAnimation) => CompactPetPage(
-          services: widget.services,
-          window: widget.window,
-        ),
+        pageBuilder: (context, animation, secondaryAnimation) =>
+            CompactPetPage(services: widget.services, window: widget.window),
         transitionsBuilder: (context, animation, secondaryAnimation, child) =>
             FadeTransition(opacity: animation, child: child),
       ),
@@ -117,7 +117,9 @@ class _HomeShellState extends State<HomeShell> {
                 onOpenSettings: _openSettings,
                 onOpenBalance: _openBalance,
                 onOpenGallery: _openGallery,
-                onToggleCompactWindow: widget.services.isDesktop ? _enterCompact : null,
+                onToggleCompactWindow: widget.services.isDesktop
+                    ? _enterCompact
+                    : null,
                 compact: constraints.maxWidth < 520,
               ),
               _PetTab(
@@ -138,12 +140,20 @@ class _HomeShellState extends State<HomeShell> {
             destinations: const [
               NavigationDestination(
                 icon: Icon(Icons.chat_bubble_outline_rounded, size: 20),
-                selectedIcon: Icon(Icons.chat_bubble_rounded, size: 20, color: AppColors.primary),
+                selectedIcon: Icon(
+                  Icons.chat_bubble_rounded,
+                  size: 20,
+                  color: AppColors.primary,
+                ),
                 label: '对话',
               ),
               NavigationDestination(
                 icon: Icon(Icons.pets_outlined, size: 20),
-                selectedIcon: Icon(Icons.pets_rounded, size: 20, color: AppColors.primary),
+                selectedIcon: Icon(
+                  Icons.pets_rounded,
+                  size: 20,
+                  color: AppColors.primary,
+                ),
                 label: '桌宠',
               ),
             ],
@@ -199,7 +209,9 @@ class _PetSidebar extends StatelessWidget {
                       petWindowAlwaysOnTop: !settings.petWindowAlwaysOnTop,
                     );
                     await services.updateSettings(next);
-                    await PetWindowService().setAlwaysOnTop(next.petWindowAlwaysOnTop);
+                    await PetWindowService().setAlwaysOnTop(
+                      next.petWindowAlwaysOnTop,
+                    );
                   },
                   icon: Icon(
                     settings.petWindowAlwaysOnTop
@@ -237,7 +249,10 @@ class _PetSidebar extends StatelessWidget {
           Expanded(
             child: Center(
               child: SingleChildScrollView(
-                padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 18,
+                  vertical: 12,
+                ),
                 child: PetStage(
                   pet: services.pet,
                   tags: services.tags,
@@ -298,7 +313,10 @@ class _PetTab extends StatelessWidget {
               padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
               child: Row(
                 children: [
-                  const Text('大肥鱼', style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600)),
+                  const Text(
+                    '大肥鱼',
+                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+                  ),
                   const SizedBox(width: 8),
                   const SoftTag('语义表情桌宠'),
                   const Spacer(),

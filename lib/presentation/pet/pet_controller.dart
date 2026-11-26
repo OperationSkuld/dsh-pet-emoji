@@ -21,8 +21,8 @@ class PetController extends ChangeNotifier {
     required this.repository,
     required this.selector,
     bool ambient = true,
-  })  : _ambientEnabled = ambient,
-        _current = repository.idleClip;
+  }) : _ambientEnabled = ambient,
+       _current = repository.idleClip;
 
   final AnimationRepository repository;
   final AnimationSelector selector;
@@ -188,7 +188,10 @@ class PetController extends ChangeNotifier {
 
     _holdTimer?.cancel();
     if (clip.isLoop) {
-      _holdTimer = Timer(Duration(milliseconds: clip.holdMs + 6000), _backToIdle);
+      _holdTimer = Timer(
+        Duration(milliseconds: clip.holdMs + 6000),
+        _backToIdle,
+      );
     } else {
       _holdTimer = Timer(Duration(milliseconds: clip.holdMs), _backToIdle);
     }

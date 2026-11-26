@@ -41,10 +41,10 @@ class BalanceEntry {
   final double toppedUpBalance;
 
   String get symbol => switch (currency.toUpperCase()) {
-        'CNY' => '¥',
-        'USD' => r'$',
-        _ => '$currency ',
-      };
+    'CNY' => '¥',
+    'USD' => r'$',
+    _ => '$currency ',
+  };
 
   String get formatted => '$symbol${totalBalance.toStringAsFixed(2)}';
 

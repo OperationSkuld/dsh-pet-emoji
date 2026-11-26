@@ -47,7 +47,8 @@ class _ComposerState extends State<Composer> {
 
   KeyEventResult _handleKey(FocusNode node, KeyEvent event) {
     if (event is! KeyDownEvent) return KeyEventResult.ignored;
-    final isEnter = event.logicalKey == LogicalKeyboardKey.enter ||
+    final isEnter =
+        event.logicalKey == LogicalKeyboardKey.enter ||
         event.logicalKey == LogicalKeyboardKey.numpadEnter;
     if (!isEnter) return KeyEventResult.ignored;
     final shift = HardwareKeyboard.instance.isShiftPressed;
@@ -91,14 +92,20 @@ class _ComposerState extends State<Composer> {
                 enabledBorder: InputBorder.none,
                 focusedBorder: InputBorder.none,
                 hintText: widget.hintText,
-                hintStyle: const TextStyle(color: AppColors.textTertiary, fontSize: 14.5),
+                hintStyle: const TextStyle(
+                  color: AppColors.textTertiary,
+                  fontSize: 14.5,
+                ),
               ),
             ),
           ),
           const SizedBox(height: 8),
           Row(
             children: [
-              _ModelPicker(model: widget.model, onChanged: widget.onModelChanged),
+              _ModelPicker(
+                model: widget.model,
+                onChanged: widget.onModelChanged,
+              ),
               const SizedBox(width: 8),
               _PillButton(
                 icon: Icons.account_balance_wallet_outlined,
@@ -108,7 +115,10 @@ class _ComposerState extends State<Composer> {
               const Spacer(),
               Text(
                 widget.compact ? '' : 'Enter 发送 · Shift+Enter 换行',
-                style: const TextStyle(fontSize: 11, color: AppColors.textTertiary),
+                style: const TextStyle(
+                  fontSize: 11,
+                  color: AppColors.textTertiary,
+                ),
               ),
               const SizedBox(width: 10),
               _SendButton(
@@ -184,7 +194,9 @@ class _ModelPicker extends StatelessWidget {
                 Icon(
                   option == model ? Icons.check_rounded : Icons.circle_outlined,
                   size: 14,
-                  color: option == model ? AppColors.primary : AppColors.textTertiary,
+                  color: option == model
+                      ? AppColors.primary
+                      : AppColors.textTertiary,
                 ),
                 const SizedBox(width: 8),
                 Text(option, style: const TextStyle(fontSize: 13)),
@@ -198,7 +210,11 @@ class _ModelPicker extends StatelessWidget {
 }
 
 class _PillButton extends StatelessWidget {
-  const _PillButton({required this.icon, required this.label, required this.onTap});
+  const _PillButton({
+    required this.icon,
+    required this.label,
+    required this.onTap,
+  });
 
   final IconData icon;
   final String label;
@@ -223,7 +239,11 @@ class _PillButton extends StatelessWidget {
             const SizedBox(width: 4),
             Text(
               label,
-              style: const TextStyle(fontSize: 11.5, color: AppColors.textSecondary, height: 1.2),
+              style: const TextStyle(
+                fontSize: 11.5,
+                color: AppColors.textSecondary,
+                height: 1.2,
+              ),
             ),
           ],
         ),

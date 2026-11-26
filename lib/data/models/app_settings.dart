@@ -10,8 +10,9 @@ enum PetWindowBackground {
   final String label;
   final String description;
 
-  static PetWindowBackground parse(Object? raw) =>
-      raw == 'transparent' ? PetWindowBackground.transparent : PetWindowBackground.card;
+  static PetWindowBackground parse(Object? raw) => raw == 'transparent'
+      ? PetWindowBackground.transparent
+      : PetWindowBackground.card;
 }
 
 /// 用户设置。API Key 以明文存放于 SharedPreferences，详见 docs/ARCHITECTURE.md「安全」。

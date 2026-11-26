@@ -59,9 +59,9 @@ class AppServices extends ChangeNotifier {
   bool get isMobile => !kIsWeb && (Platform.isAndroid || Platform.isIOS);
 
   DeepSeekClient clientFor(AppSettings value) => DeepSeekClient(
-        baseUrl: value.baseUrl.isEmpty ? kDefaultBaseUrl : value.baseUrl,
-        apiKey: value.apiKey,
-      );
+    baseUrl: value.baseUrl.isEmpty ? kDefaultBaseUrl : value.baseUrl,
+    apiKey: value.apiKey,
+  );
 
   Future<void> updateSettings(AppSettings next) async {
     await settingsRepository.save(next);

@@ -11,10 +11,14 @@ class TagRepository {
   final List<TagDefinition> tags;
   final List<TagGroup> groups;
 
-  late final Map<String, TagDefinition> _byId = {for (final tag in tags) tag.id: tag};
+  late final Map<String, TagDefinition> _byId = {
+    for (final tag in tags) tag.id: tag,
+  };
 
   static Future<TagRepository> load({AssetBundle? bundle}) async {
-    final raw = await (bundle ?? rootBundle).loadString('assets/manifest/tags.json');
+    final raw = await (bundle ?? rootBundle).loadString(
+      'assets/manifest/tags.json',
+    );
     final decoded = jsonDecode(raw) as Map<String, dynamic>;
     final tags = (decoded['tags'] as List<dynamic>)
         .map((item) => TagDefinition.fromJson(item as Map<String, dynamic>))
@@ -37,6 +41,7 @@ class TagRepository {
       tags.where((tag) => tag.group == group).toList(growable: false);
 
   /// 词典标签（有自然语言关键词的）——系统标签不需要参与分词。
-  Iterable<TagDefinition> get lexiconTags =>
-      tags.where((tag) => tag.keywords.isNotEmpty && tag.group != TagGroup.system);
+  Iterable<TagDefinition> get lexiconTags => tags.where(
+    (tag) => tag.keywords.isNotEmpty && tag.group != TagGroup.system,
+  );
 }

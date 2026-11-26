@@ -34,19 +34,23 @@ class MessageBubble extends StatelessWidget {
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: isUser ? MainAxisAlignment.end : MainAxisAlignment.start,
+        mainAxisAlignment: isUser
+            ? MainAxisAlignment.end
+            : MainAxisAlignment.start,
         children: [
-          if (!isUser) ...[
-            const _AssistantAvatar(),
-            const SizedBox(width: 12),
-          ],
+          if (!isUser) ...[const _AssistantAvatar(), const SizedBox(width: 12)],
           Flexible(
             child: Column(
-              crossAxisAlignment: isUser ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+              crossAxisAlignment: isUser
+                  ? CrossAxisAlignment.end
+                  : CrossAxisAlignment.start,
               children: [
                 if (isUser)
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 11),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 11,
+                    ),
                     decoration: BoxDecoration(
                       color: AppColors.primarySoft,
                       borderRadius: const BorderRadius.only(
@@ -56,14 +60,20 @@ class MessageBubble extends StatelessWidget {
                         bottomRight: Radius.circular(4),
                       ),
                     ),
-                    child: RichTextView(text: message.content, style: AppTheme.body),
+                    child: RichTextView(
+                      text: message.content,
+                      style: AppTheme.body,
+                    ),
                   )
                 else
                   Container(
                     decoration: const BoxDecoration(color: Colors.transparent),
                     child: message.content.isEmpty && message.isStreaming
                         ? const _TypingIndicator()
-                        : RichTextView(text: message.content, style: AppTheme.body),
+                        : RichTextView(
+                            text: message.content,
+                            style: AppTheme.body,
+                          ),
                   ),
                 if (!isUser && message.status == ChatStatus.failed)
                   Padding(
@@ -71,26 +81,44 @@ class MessageBubble extends StatelessWidget {
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        const Icon(Icons.error_outline, size: 15, color: AppColors.danger),
+                        const Icon(
+                          Icons.error_outline,
+                          size: 15,
+                          color: AppColors.danger,
+                        ),
                         const SizedBox(width: 6),
-                        const Text('回复中断', style: TextStyle(fontSize: 12.5, color: AppColors.danger)),
+                        const Text(
+                          '回复中断',
+                          style: TextStyle(
+                            fontSize: 12.5,
+                            color: AppColors.danger,
+                          ),
+                        ),
                         if (onRetry != null) ...[
                           const SizedBox(width: 10),
                           TextButton(
                             onPressed: onRetry,
                             style: TextButton.styleFrom(
                               minimumSize: const Size(0, 28),
-                              padding: const EdgeInsets.symmetric(horizontal: 8),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 8,
+                              ),
                               foregroundColor: AppColors.primary,
                             ),
-                            child: const Text('重试', style: TextStyle(fontSize: 12.5)),
+                            child: const Text(
+                              '重试',
+                              style: TextStyle(fontSize: 12.5),
+                            ),
                           ),
                         ],
                       ],
                     ),
                   ),
                 if (!isUser && showSemantic && message.profile != null)
-                  _SemanticStrip(profile: message.profile!, tagLabelOf: tagLabelOf),
+                  _SemanticStrip(
+                    profile: message.profile!,
+                    tagLabelOf: tagLabelOf,
+                  ),
                 if (!isUser && message.content.isNotEmpty)
                   _ActionRow(message: message),
               ],
@@ -195,7 +223,10 @@ class _ActionRow extends StatelessWidget {
               await Clipboard.setData(ClipboardData(text: message.content));
               if (context.mounted) {
                 ScaffoldMessenger.maybeOf(context)?.showSnackBar(
-                  const SnackBar(content: Text('已复制'), duration: Duration(seconds: 1)),
+                  const SnackBar(
+                    content: Text('已复制'),
+                    duration: Duration(seconds: 1),
+                  ),
                 );
               }
             },
@@ -207,7 +238,11 @@ class _ActionRow extends StatelessWidget {
 }
 
 class _MiniAction extends StatelessWidget {
-  const _MiniAction({required this.icon, required this.label, required this.onTap});
+  const _MiniAction({
+    required this.icon,
+    required this.label,
+    required this.onTap,
+  });
 
   final IconData icon;
   final String label;
@@ -225,7 +260,13 @@ class _MiniAction extends StatelessWidget {
           children: [
             Icon(icon, size: 13, color: AppColors.textTertiary),
             const SizedBox(width: 4),
-            Text(label, style: const TextStyle(fontSize: 11.5, color: AppColors.textTertiary)),
+            Text(
+              label,
+              style: const TextStyle(
+                fontSize: 11.5,
+                color: AppColors.textTertiary,
+              ),
+            ),
           ],
         ),
       ),

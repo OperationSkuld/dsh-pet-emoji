@@ -33,7 +33,10 @@ class PetView extends StatelessWidget {
         width: width,
         height: height,
         child: const Center(
-          child: Text('该动画暂无 GIF 预览', style: TextStyle(fontSize: 12, color: Color(0xFF9AA1AC))),
+          child: Text(
+            '该动画暂无 GIF 预览',
+            style: TextStyle(fontSize: 12, color: Color(0xFF9AA1AC)),
+          ),
         ),
       );
     } else {
@@ -53,7 +56,10 @@ class PetView extends StatelessWidget {
             width: width,
             height: height,
             child: const Center(
-              child: Text('素材加载失败', style: TextStyle(fontSize: 12, color: Color(0xFF9AA1AC))),
+              child: Text(
+                '素材加载失败',
+                style: TextStyle(fontSize: 12, color: Color(0xFF9AA1AC)),
+              ),
             ),
           ),
         ),

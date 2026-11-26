@@ -23,20 +23,36 @@ void main() {
   group('文档与清单同步', () {
     test('docs/TAGS.md 覆盖全部动画', () {
       for (final clip in animations.clips) {
-        expect(tagsDoc.contains('`${clip.id}`'), isTrue, reason: '缺少 ${clip.id}');
-        expect(tagsDoc.contains(clip.name), isTrue, reason: '缺少中文名 ${clip.name}');
+        expect(
+          tagsDoc.contains('`${clip.id}`'),
+          isTrue,
+          reason: '缺少 ${clip.id}',
+        );
+        expect(
+          tagsDoc.contains(clip.name),
+          isTrue,
+          reason: '缺少中文名 ${clip.name}',
+        );
       }
     });
 
     test('docs/TAGS.md 覆盖全部标签', () {
       for (final tag in tags.tags) {
-        expect(tagsDoc.contains('`${tag.id}`'), isTrue, reason: '缺少标签 ${tag.id}');
+        expect(
+          tagsDoc.contains('`${tag.id}`'),
+          isTrue,
+          reason: '缺少标签 ${tag.id}',
+        );
       }
     });
 
     test('README 的标签总览包含每个标签的中文名', () {
       for (final tag in tags.tags) {
-        expect(readme.contains(tag.label), isTrue, reason: 'README 缺少标签 ${tag.label}');
+        expect(
+          readme.contains(tag.label),
+          isTrue,
+          reason: 'README 缺少标签 ${tag.label}',
+        );
       }
     });
 
@@ -71,15 +87,27 @@ void main() {
     test('署名信息包含两位作者与「非官方」声明', () {
       for (final file in ['README.md', 'NOTICE.md', 'LICENSE-ASSETS.md']) {
         final content = File(file).readAsStringSync();
-        expect(content.contains(kPrototypeAuthor.replaceFirst('B 站 ', '')), isTrue, reason: file);
-        expect(content.contains(kDeepSeekDesigner.replaceFirst('B 站 ', '')), isTrue, reason: file);
+        expect(
+          content.contains(kPrototypeAuthor.replaceFirst('B 站 ', '')),
+          isTrue,
+          reason: file,
+        );
+        expect(
+          content.contains(kDeepSeekDesigner.replaceFirst('B 站 ', '')),
+          isTrue,
+          reason: file,
+        );
       }
       expect(readme.contains('非 DeepSeek 官方形象'), isTrue);
-      expect(File('LICENSE').readAsStringSync().contains('MIT License'), isTrue);
+      expect(
+        File('LICENSE').readAsStringSync().contains('MIT License'),
+        isTrue,
+      );
     });
 
     test('应用内「许可与出处」引用了同一份常量', () {
-      final page = File('lib/presentation/settings/settings_page.dart').readAsStringSync();
+      final page = File('lib/presentation/settings/settings_page.dart')
+          .readAsStringSync();
       expect(page.contains('kUpstreamRepoUrl'), isTrue);
       expect(page.contains('kLicenseStatement'), isTrue);
       expect(page.contains('kPrototypeAuthor'), isTrue);

@@ -35,7 +35,9 @@ class SettingsRepository {
       showSemanticPanel: prefs.getBool(_kSemanticPanel) ?? false,
       petScale: prefs.getDouble(_kPetScale) ?? 1.0,
       petWindowAlwaysOnTop: prefs.getBool(_kAlwaysOnTop) ?? true,
-      petWindowBackground: PetWindowBackground.parse(prefs.getString(_kPetBackground)),
+      petWindowBackground: PetWindowBackground.parse(
+        prefs.getString(_kPetBackground),
+      ),
       speechBubble: prefs.getBool(_kSpeech) ?? true,
     );
     return SettingsRepository._(prefs, settings);

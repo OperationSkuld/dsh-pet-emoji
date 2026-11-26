@@ -11,9 +11,9 @@ class AnimationRepository {
     List<AnimationClip> clips, {
     this.frameWidth = 220,
     this.frameHeight = 124,
-  })  : clips = List.unmodifiable(clips),
-        _byId = {for (final clip in clips) clip.id: clip},
-        _byTag = _buildIndex(clips) {
+  }) : clips = List.unmodifiable(clips),
+       _byId = {for (final clip in clips) clip.id: clip},
+       _byTag = _buildIndex(clips) {
     if (_idleClip == null) {
       throw StateError('素材清单缺少可用的待机动画（需含 idle 标签且带 GIF）');
     }
@@ -40,7 +40,9 @@ class AnimationRepository {
     'bored': ['dazed', 'idle'],
   };
 
-  static Map<String, List<AnimationClip>> _buildIndex(List<AnimationClip> clips) {
+  static Map<String, List<AnimationClip>> _buildIndex(
+    List<AnimationClip> clips,
+  ) {
     final index = <String, List<AnimationClip>>{};
     for (final clip in clips) {
       if (!clip.playable) continue;
@@ -49,7 +51,9 @@ class AnimationRepository {
       }
     }
     for (final entry in index.entries) {
-      entry.value.sort((a, b) => b.affinity(entry.key).compareTo(a.affinity(entry.key)));
+      entry.value.sort(
+        (a, b) => b.affinity(entry.key).compareTo(a.affinity(entry.key)),
+      );
     }
     return index;
   }
@@ -70,7 +74,8 @@ class AnimationRepository {
     );
   }
 
-  Iterable<AnimationClip> get playableClips => clips.where((clip) => clip.playable);
+  Iterable<AnimationClip> get playableClips =>
+      clips.where((clip) => clip.playable);
 
   AnimationClip? byId(String id) => _byId[id];
 
@@ -79,7 +84,9 @@ class AnimationRepository {
     final list = _byTag[tag];
     if (list == null || list.isEmpty) return const [];
     if (minAffinity <= 0) return list;
-    return list.where((clip) => clip.affinity(tag) >= minAffinity).toList(growable: false);
+    return list
+        .where((clip) => clip.affinity(tag) >= minAffinity)
+        .toList(growable: false);
   }
 
   bool hasTag(String tag) => clipsWithTag(tag, minAffinity: 0.85).isNotEmpty;
@@ -97,9 +104,10 @@ class AnimationRepository {
   AnimationClip get idleClip => _idleClip!;
 
   AnimationClip? get _idleClip {
-    final candidates = clipsWithTag('idle', minAffinity: 0.8)
-        .where((clip) => clip.isLoop)
-        .toList(growable: false);
+    final candidates = clipsWithTag(
+      'idle',
+      minAffinity: 0.8,
+    ).where((clip) => clip.isLoop).toList(growable: false);
     if (candidates.isNotEmpty) return candidates.first;
     final onlyIdle = clipsWithTag('idle');
     if (onlyIdle.isNotEmpty) return onlyIdle.first;
@@ -108,13 +116,16 @@ class AnimationRepository {
 
   /// 空闲时自动播放的素材池：只有「可长时间停留」的安静动作。
   late final List<AnimationClip> ambientClips = playableClips
-      .where((clip) => clip.isLoop && (clip.group == 'idle' || clip.group == 'sleep'))
+      .where(
+        (clip) =>
+            clip.isLoop && (clip.group == 'idle' || clip.group == 'sleep'),
+      )
       .where((clip) => !clip.tags.containsKey('money'))
       .toList(growable: false);
 
   /// 点击反馈池。
-  late final List<AnimationClip> tapClips =
-      clipsWithTag('tap').toList(growable: false);
+  late final List<AnimationClip> tapClips = clipsWithTag('tap')
+      .toList(growable: false);
 
   /// 拖拽反馈。
   AnimationClip? get dragClip {
@@ -124,9 +135,9 @@ class AnimationRepository {
 
   /// 入睡序列：开始 → 循环 → 起床。
   List<AnimationClip> get sleepSequence => [
-        for (final id in ['shuijiao-kaishi', 'shuijiao-xunhuan', 'shuijiao-qilai'])
-          if (_byId[id] != null) _byId[id]!,
-      ];
+    for (final id in ['shuijiao-kaishi', 'shuijiao-xunhuan', 'shuijiao-qilai'])
+      if (_byId[id] != null) _byId[id]!,
+  ];
 
   int get animationCount => playableClips.length;
   int get tagCount => _byTag.keys.length;

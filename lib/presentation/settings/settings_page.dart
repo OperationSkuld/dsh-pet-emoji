@@ -19,10 +19,12 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  late final TextEditingController _apiKey =
-      TextEditingController(text: widget.services.settings.apiKey);
-  late final TextEditingController _baseUrl =
-      TextEditingController(text: widget.services.settings.baseUrl);
+  late final TextEditingController _apiKey = TextEditingController(
+    text: widget.services.settings.apiKey,
+  );
+  late final TextEditingController _baseUrl = TextEditingController(
+    text: widget.services.settings.baseUrl,
+  );
   bool _obscure = true;
   bool _testing = false;
 
@@ -63,7 +65,10 @@ class _SettingsPageState extends State<SettingsPage> {
     final settings = _settings;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('设置', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
+        title: const Text(
+          '设置',
+          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+        ),
         backgroundColor: Colors.white,
         surfaceTintColor: Colors.white,
         elevation: 0,
@@ -86,13 +91,17 @@ class _SettingsPageState extends State<SettingsPage> {
                   suffixIcon: IconButton(
                     onPressed: () => setState(() => _obscure = !_obscure),
                     icon: Icon(
-                      _obscure ? Icons.visibility_off_outlined : Icons.visibility_outlined,
+                      _obscure
+                          ? Icons.visibility_off_outlined
+                          : Icons.visibility_outlined,
                       size: 18,
                     ),
                   ),
                 ),
                 onChanged: (value) => _save(
-                  (current) => widget.services.updateSettings(current.copyWith(apiKey: value.trim())),
+                  (current) => widget.services.updateSettings(
+                    current.copyWith(apiKey: value.trim()),
+                  ),
                 ),
               ),
               const SizedBox(height: 12),
@@ -104,27 +113,42 @@ class _SettingsPageState extends State<SettingsPage> {
                   helperText: '可填反向代理地址，例如 https://api.deepseek.com 或带 /v1 的网关',
                 ),
                 onChanged: (value) => _save(
-                  (current) => widget.services.updateSettings(current.copyWith(baseUrl: value.trim())),
+                  (current) => widget.services.updateSettings(
+                    current.copyWith(baseUrl: value.trim()),
+                  ),
                 ),
               ),
               const SizedBox(height: 14),
               Row(
                 children: [
-                  const Text('模型', style: TextStyle(fontSize: 13, color: AppColors.textSecondary)),
+                  const Text(
+                    '模型',
+                    style: TextStyle(
+                      fontSize: 13,
+                      color: AppColors.textSecondary,
+                    ),
+                  ),
                   const SizedBox(width: 12),
                   DropdownButton<String>(
-                    value: kSupportedModels.contains(settings.model) ? settings.model : kSupportedModels.first,
+                    value: kSupportedModels.contains(settings.model)
+                        ? settings.model
+                        : kSupportedModels.first,
                     underline: const SizedBox.shrink(),
-                    style: const TextStyle(fontSize: 13.5, color: AppColors.textPrimary),
+                    style: const TextStyle(
+                      fontSize: 13.5,
+                      color: AppColors.textPrimary,
+                    ),
                     items: [
                       for (final model in kSupportedModels)
                         DropdownMenuItem(value: model, child: Text(model)),
                     ],
                     onChanged: (value) {
                       if (value == null) return;
-                      _save((current) => widget.services.updateSettings(
-                            current.copyWith(model: value),
-                          ));
+                      _save(
+                        (current) => widget.services.updateSettings(
+                          current.copyWith(model: value),
+                        ),
+                      );
                     },
                   ),
                   const Spacer(),
@@ -190,7 +214,13 @@ class _SettingsPageState extends State<SettingsPage> {
               const SizedBox(height: 6),
               Row(
                 children: [
-                  const Text('桌宠尺寸', style: TextStyle(fontSize: 13, color: AppColors.textSecondary)),
+                  const Text(
+                    '桌宠尺寸',
+                    style: TextStyle(
+                      fontSize: 13,
+                      color: AppColors.textSecondary,
+                    ),
+                  ),
                   Expanded(
                     child: Slider(
                       value: settings.petScale.clamp(0.8, 1.6),
@@ -208,7 +238,10 @@ class _SettingsPageState extends State<SettingsPage> {
                   ),
                   Text(
                     '${(settings.petScale * 100).round()}%',
-                    style: const TextStyle(fontSize: 12, color: AppColors.textTertiary),
+                    style: const TextStyle(
+                      fontSize: 12,
+                      color: AppColors.textTertiary,
+                    ),
                   ),
                 ],
               ),
@@ -256,8 +289,10 @@ class _SettingsPageState extends State<SettingsPage> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(background.label,
-                                    style: const TextStyle(fontSize: 13.5)),
+                                Text(
+                                  background.label,
+                                  style: const TextStyle(fontSize: 13.5),
+                                ),
                                 Text(
                                   background.description,
                                   style: const TextStyle(
@@ -288,7 +323,10 @@ class _SettingsPageState extends State<SettingsPage> {
           Center(
             child: Text(
               '$kAppNameEn v$kVersion · 代码 MIT · 素材 CC BY-NC-SA 4.0',
-              style: const TextStyle(fontSize: 11, color: AppColors.textTertiary),
+              style: const TextStyle(
+                fontSize: 11,
+                color: AppColors.textTertiary,
+              ),
             ),
           ),
           const SizedBox(height: 24),
@@ -312,13 +350,20 @@ class _Section extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(title, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
+          Text(
+            title,
+            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+          ),
           if (subtitle != null)
             Padding(
               padding: const EdgeInsets.only(top: 4, bottom: 10),
               child: Text(
                 subtitle!,
-                style: const TextStyle(fontSize: 12, color: AppColors.textTertiary, height: 1.5),
+                style: const TextStyle(
+                  fontSize: 12,
+                  color: AppColors.textTertiary,
+                  height: 1.5,
+                ),
               ),
             ),
           Container(
@@ -363,7 +408,11 @@ class _SwitchRow extends StatelessWidget {
       title: Text(title, style: const TextStyle(fontSize: 13.5)),
       subtitle: Text(
         subtitle,
-        style: const TextStyle(fontSize: 11.5, color: AppColors.textTertiary, height: 1.4),
+        style: const TextStyle(
+          fontSize: 11.5,
+          color: AppColors.textTertiary,
+          height: 1.4,
+        ),
       ),
     );
   }
@@ -407,12 +456,20 @@ class _LicenseSection extends StatelessWidget {
               const SizedBox(height: 8),
               const Text(
                 kLicenseStatement,
-                style: TextStyle(fontSize: 12, height: 1.7, color: AppColors.textSecondary),
+                style: TextStyle(
+                  fontSize: 12,
+                  height: 1.7,
+                  color: AppColors.textSecondary,
+                ),
               ),
               const SizedBox(height: 10),
               Text(
                 '衍生 / 改版 / 换皮作品须在 GitHub 仓库、产品官网等公开渠道附上：\n$kUpstreamRepoUrl',
-                style: const TextStyle(fontSize: 12, height: 1.7, color: AppColors.textSecondary),
+                style: const TextStyle(
+                  fontSize: 12,
+                  height: 1.7,
+                  color: AppColors.textSecondary,
+                ),
               ),
             ],
           ),
@@ -439,13 +496,20 @@ class _LinkLine extends StatelessWidget {
             width: 96,
             child: Text(
               label,
-              style: const TextStyle(fontSize: 12, color: AppColors.textTertiary),
+              style: const TextStyle(
+                fontSize: 12,
+                color: AppColors.textTertiary,
+              ),
             ),
           ),
           Expanded(
             child: SelectableText(
               value,
-              style: const TextStyle(fontSize: 12, height: 1.55, color: AppColors.textSecondary),
+              style: const TextStyle(
+                fontSize: 12,
+                height: 1.55,
+                color: AppColors.textSecondary,
+              ),
             ),
           ),
           IconButton(
@@ -455,11 +519,18 @@ class _LinkLine extends StatelessWidget {
               await Clipboard.setData(ClipboardData(text: value));
               if (context.mounted) {
                 ScaffoldMessenger.maybeOf(context)?.showSnackBar(
-                  const SnackBar(content: Text('已复制'), duration: Duration(seconds: 1)),
+                  const SnackBar(
+                    content: Text('已复制'),
+                    duration: Duration(seconds: 1),
+                  ),
                 );
               }
             },
-            icon: const Icon(Icons.copy_rounded, size: 14, color: AppColors.textTertiary),
+            icon: const Icon(
+              Icons.copy_rounded,
+              size: 14,
+              color: AppColors.textTertiary,
+            ),
           ),
         ],
       ),

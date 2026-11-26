@@ -83,7 +83,9 @@ class AnimationClip {
       name: json['name'] as String? ?? json['id'] as String,
       group: json['group'] as String? ?? 'misc',
       hold: ClipHold.parse(json['hold']),
-      tags: rawTags.map((key, value) => MapEntry(key, (value as num).toDouble())),
+      tags: rawTags.map(
+        (key, value) => MapEntry(key, (value as num).toDouble()),
+      ),
       durationMs: (json['durationMs'] as num?)?.toInt() ?? 3000,
       gifPath: json['gif'] as String?,
       webmPath: json['webm'] as String?,

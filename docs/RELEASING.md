@@ -1,14 +1,16 @@
 # 发布流程
 
-## 0. 先替换仓库占位符
+## 0. 仓库地址
 
-仓库里凡是 `OWNER` 都是占位符（README 徽章、文档链接、`lib/core/app_links.dart`、
-workflow 里的下载地址）。创建仓库后执行一次：
+本仓库的链接目前指向 `OperationSkuld/dsh-pet-emoji`（`lib/core/app_links.dart` 的
+`kRepoOwner`）。如果你要在自己的账号 / fork 下发布，执行一次：
 
 ```bash
 bash tool/set_owner.sh <你的GitHub用户名>
 git add -A && git commit -m "chore: point links to <用户名>"
 ```
+
+脚本会改 README、docs/ 与 `lib/core/app_links.dart` 里的账号名，不会碰脚本自身。
 
 ## 1. 创建 GitHub 仓库
 

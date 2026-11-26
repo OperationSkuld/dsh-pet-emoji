@@ -28,10 +28,18 @@ void main() {
     test('每段可播放动画的 GIF 与 WebM 都真实存在', () {
       for (final clip in animations.clips) {
         if (clip.gifPath != null) {
-          expect(File(clip.gifPath!).existsSync(), isTrue, reason: '${clip.id} 缺少 GIF');
+          expect(
+            File(clip.gifPath!).existsSync(),
+            isTrue,
+            reason: '${clip.id} 缺少 GIF',
+          );
         }
         if (clip.webmPath != null) {
-          expect(File(clip.webmPath!).existsSync(), isTrue, reason: '${clip.id} 缺少 WebM');
+          expect(
+            File(clip.webmPath!).existsSync(),
+            isTrue,
+            reason: '${clip.id} 缺少 WebM',
+          );
         }
       }
     });
@@ -40,7 +48,11 @@ void main() {
       final known = tags.tags.map((tag) => tag.id).toSet();
       for (final clip in animations.clips) {
         for (final tag in clip.tags.keys) {
-          expect(known.contains(tag), isTrue, reason: '${clip.id} 引用了未定义标签 $tag');
+          expect(
+            known.contains(tag),
+            isTrue,
+            reason: '${clip.id} 引用了未定义标签 $tag',
+          );
         }
         expect(clip.tags, isNotEmpty, reason: '${clip.id} 没有任何标签');
       }
@@ -63,7 +75,9 @@ void main() {
     });
 
     test('无 GIF 的素材不参与运行时调度', () {
-      final webmOnly = animations.clips.where((clip) => clip.gifPath == null).toList();
+      final webmOnly = animations.clips
+          .where((clip) => clip.gifPath == null)
+          .toList();
       expect(webmOnly.length, 5);
       for (final clip in webmOnly) {
         expect(clip.playable, isFalse);
@@ -88,7 +102,11 @@ void main() {
     });
 
     String pickFor(String user, String reply, {DateTime? now}) {
-      final profile = analyzer.analyze(userText: user, replyText: reply, now: now);
+      final profile = analyzer.analyze(
+        userText: user,
+        replyText: reply,
+        now: now,
+      );
       return selector.select(profile).id;
     }
 
@@ -96,18 +114,31 @@ void main() {
       final id = pickFor('你今天真可爱！', '嘿嘿，被夸到了');
       final clip = animations.byId(id)!;
       final positive = ['joy', 'excited', 'shy', 'laugh', 'praise', 'love'];
-      expect(clip.tags.keys.any(positive.contains), isTrue, reason: '$id 未命中正向标签');
+      expect(
+        clip.tags.keys.any(positive.contains),
+        isTrue,
+        reason: '$id 未命中正向标签',
+      );
     });
 
     test('余额不足时落到金钱或沮丧类表情', () {
       final id = pickFor('我的余额不足了，怎么办', '余额不足需要先充值');
       final clip = animations.byId(id)!;
-      final expected = ['money', 'sad', 'balance_empty', 'balance_low', 'confused'];
+      final expected = [
+        'money',
+        'sad',
+        'balance_empty',
+        'balance_low',
+        'confused',
+      ];
       expect(clip.tags.keys.any(expected.contains), isTrue, reason: id);
     });
 
     test('代码问题会挑到工作类表情', () {
-      final id = pickFor('这段 Flutter 代码报错了', '```dart\nvoid main() {}\n```\n这样改就行');
+      final id = pickFor(
+        '这段 Flutter 代码报错了',
+        '```dart\nvoid main() {}\n```\n这样改就行',
+      );
       final clip = animations.byId(id)!;
       expect(clip.group, anyOf('work', 'emotion'), reason: id);
     });
@@ -138,7 +169,10 @@ void main() {
     });
 
     test('语义结果非空并带意图', () {
-      final profile = analyzer.analyze(userText: '帮我看看这个 bug', replyText: '这段代码有问题');
+      final profile = analyzer.analyze(
+        userText: '帮我看看这个 bug',
+        replyText: '这段代码有问题',
+      );
       expect(profile.isEmpty, isFalse);
       expect(profile.intent, isA<DialogIntent>());
       expect(profile.evidence, isNotEmpty);

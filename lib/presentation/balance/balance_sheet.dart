@@ -83,7 +83,10 @@ class _BalanceSheetState extends State<BalanceSheet> {
                   children: [
                     const Text(
                       'DeepSeek 账户余额',
-                      style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                     const Spacer(),
                     IconButton(
@@ -92,7 +95,9 @@ class _BalanceSheetState extends State<BalanceSheet> {
                           ? const SizedBox(
                               width: 16,
                               height: 16,
-                              child: CircularProgressIndicator(strokeWidth: 1.8),
+                              child: CircularProgressIndicator(
+                                strokeWidth: 1.8,
+                              ),
                             )
                           : const Icon(Icons.refresh_rounded, size: 18),
                       tooltip: '刷新',
@@ -103,7 +108,10 @@ class _BalanceSheetState extends State<BalanceSheet> {
                 if (chat.lastError != null && info == null)
                   _ErrorBox(message: chat.lastError!, onRetry: _refresh)
                 else
-                  _AmountBlock(primary: primary, loading: _loading && info == null),
+                  _AmountBlock(
+                    primary: primary,
+                    loading: _loading && info == null,
+                  ),
                 if (primary != null) ...[
                   const SizedBox(height: 18),
                   _Breakdown(entry: primary),
@@ -111,15 +119,26 @@ class _BalanceSheetState extends State<BalanceSheet> {
                   if (tier != null) ...[
                     Row(
                       children: [
-                        SoftTag('档位 · ${tier.label}', icon: Icons.emoji_emotions_outlined),
+                        SoftTag(
+                          '档位 · ${tier.label}',
+                          icon: Icons.emoji_emotions_outlined,
+                        ),
                         const SizedBox(width: 8),
-                        if (clip != null) SoftTag('表情 · ${clip.name}', icon: Icons.movie_outlined),
+                        if (clip != null)
+                          SoftTag(
+                            '表情 · ${clip.name}',
+                            icon: Icons.movie_outlined,
+                          ),
                       ],
                     ),
                     const SizedBox(height: 10),
                     Text(
                       _tierHint(tier),
-                      style: const TextStyle(fontSize: 12, color: AppColors.textTertiary, height: 1.5),
+                      style: const TextStyle(
+                        fontSize: 12,
+                        color: AppColors.textTertiary,
+                        height: 1.5,
+                      ),
                     ),
                   ],
                   if (info?.fetchedAt != null)
@@ -127,7 +146,10 @@ class _BalanceSheetState extends State<BalanceSheet> {
                       padding: const EdgeInsets.only(top: 10),
                       child: Text(
                         '更新于 ${_time(info!.fetchedAt!)}',
-                        style: const TextStyle(fontSize: 11, color: AppColors.textTertiary),
+                        style: const TextStyle(
+                          fontSize: 11,
+                          color: AppColors.textTertiary,
+                        ),
                       ),
                     ),
                 ],
@@ -148,12 +170,12 @@ class _BalanceSheetState extends State<BalanceSheet> {
   }
 
   String _tierHint(BalanceTier tier) => switch (tier) {
-        BalanceTier.empty => '余额已耗尽，桌宠会翻出空钱袋——记得去 platform.deepseek.com 充值。',
-        BalanceTier.low => '不足 ¥5，够聊几句。桌宠在数金币，眉头皱得厉害。',
-        BalanceTier.normal => '够日常使用。桌宠的钱袋不响也不瘪，刚刚好。',
-        BalanceTier.good => '还算宽裕，金币叮当作响。',
-        BalanceTier.rich => '钱袋满溢，桌宠已经开始得意了。',
-      };
+    BalanceTier.empty => '余额已耗尽，桌宠会翻出空钱袋——记得去 platform.deepseek.com 充值。',
+    BalanceTier.low => '不足 ¥5，够聊几句。桌宠在数金币，眉头皱得厉害。',
+    BalanceTier.normal => '够日常使用。桌宠的钱袋不响也不瘪，刚刚好。',
+    BalanceTier.good => '还算宽裕，金币叮当作响。',
+    BalanceTier.rich => '钱袋满溢，桌宠已经开始得意了。',
+  };
 
   String _time(DateTime time) {
     String two(int value) => value.toString().padLeft(2, '0');
@@ -182,7 +204,10 @@ class _AmountBlock extends StatelessWidget {
             const SizedBox(width: 10),
             Text(
               loading ? '查询中…' : '暂无数据',
-              style: const TextStyle(fontSize: 13, color: AppColors.textSecondary),
+              style: const TextStyle(
+                fontSize: 13,
+                color: AppColors.textSecondary,
+              ),
             ),
           ],
         ),
@@ -195,7 +220,11 @@ class _AmountBlock extends StatelessWidget {
         children: [
           Text(
             primary!.symbol,
-            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w600, height: 1.6),
+            style: const TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.w600,
+              height: 1.6,
+            ),
           ),
           Text(
             primary!.totalBalance.toStringAsFixed(2),
@@ -211,7 +240,10 @@ class _AmountBlock extends StatelessWidget {
             padding: const EdgeInsets.only(bottom: 10),
             child: Text(
               primary!.currency,
-              style: const TextStyle(fontSize: 12, color: AppColors.textTertiary),
+              style: const TextStyle(
+                fontSize: 12,
+                color: AppColors.textTertiary,
+              ),
             ),
           ),
         ],
@@ -236,9 +268,21 @@ class _Breakdown extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Expanded(child: _Cell(label: '充值余额', value: entry.toppedUpBalance, symbol: entry.symbol)),
+          Expanded(
+            child: _Cell(
+              label: '充值余额',
+              value: entry.toppedUpBalance,
+              symbol: entry.symbol,
+            ),
+          ),
           Container(width: 1, height: 28, color: AppColors.border),
-          Expanded(child: _Cell(label: '赠送余额', value: entry.grantedBalance, symbol: entry.symbol)),
+          Expanded(
+            child: _Cell(
+              label: '赠送余额',
+              value: entry.grantedBalance,
+              symbol: entry.symbol,
+            ),
+          ),
         ],
       ),
     );
@@ -257,7 +301,10 @@ class _Cell extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Text(label, style: const TextStyle(fontSize: 11.5, color: AppColors.textTertiary)),
+        Text(
+          label,
+          style: const TextStyle(fontSize: 11.5, color: AppColors.textTertiary),
+        ),
         const SizedBox(height: 4),
         Text(
           '$symbol${value.toStringAsFixed(2)}',
@@ -290,7 +337,11 @@ class _ErrorBox extends StatelessWidget {
         children: [
           Text(
             message,
-            style: const TextStyle(fontSize: 13, color: AppColors.danger, height: 1.5),
+            style: const TextStyle(
+              fontSize: 13,
+              color: AppColors.danger,
+              height: 1.5,
+            ),
           ),
           const SizedBox(height: 8),
           TextButton(

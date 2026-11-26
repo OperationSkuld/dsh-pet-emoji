@@ -77,12 +77,19 @@ class _BootstrapErrorApp extends StatelessWidget {
                     '请确认 assets/manifest/ 与 assets/animations/ 完整，'
                     '或重新执行 python tool/gen_manifest.py',
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 11.5, color: AppColors.textTertiary, height: 1.6),
+                    style: TextStyle(
+                      fontSize: 11.5,
+                      color: AppColors.textTertiary,
+                      height: 1.6,
+                    ),
                   ),
                   const SizedBox(height: 20),
                   Text(
                     kAppNameEn,
-                    style: const TextStyle(fontSize: 11, color: AppColors.textTertiary),
+                    style: const TextStyle(
+                      fontSize: 11,
+                      color: AppColors.textTertiary,
+                    ),
                   ),
                 ],
               ),

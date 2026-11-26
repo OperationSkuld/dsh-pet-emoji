@@ -9,7 +9,7 @@ const String kAppNameEn = 'DSH Pet Emoji';
 const String kVersion = '1.0.0';
 
 /// 本仓库（Flutter 版）。
-const String kRepoOwner = 'OWNER';
+const String kRepoOwner = 'OperationSkuld';
 const String kRepoName = 'dsh-pet-emoji';
 const String kRepoUrl = 'https://github.com/$kRepoOwner/$kRepoName';
 
@@ -21,7 +21,8 @@ const String kPrototypeAuthor = 'B 站 @上善无形';
 const String kPrototypeAuthorUrl = 'https://space.bilibili.com/4456176';
 const String kDeepSeekDesigner = 'B 站 @ZipZipPipe';
 const String kDeepSeekDesignerUrl = 'https://space.bilibili.com/4168597';
-const String kLicenseStatementUrl = 'https://www.bilibili.com/opus/1247156596114456581';
+const String kLicenseStatementUrl =
+    'https://www.bilibili.com/opus/1247156596114456581';
 const String kLicenseStatement =
     '大肥鱼是遵守CC BY-NC-SA 4.0协议的形象，不可以以任何形式商业化。'
     '若您非常喜爱该形象，希望其拥有实体，您可以自行定制。';

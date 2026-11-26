@@ -89,7 +89,9 @@ class ChatController extends ChangeNotifier {
   Future<void> retryLast() async {
     if (_generating) return;
     final failedIndex = _messages.lastIndexWhere(
-      (message) => message.role == ChatRole.assistant && message.status == ChatStatus.failed,
+      (message) =>
+          message.role == ChatRole.assistant &&
+          message.status == ChatStatus.failed,
     );
     if (failedIndex < 0) return;
     final userIndex = _messages.lastIndexWhere(
@@ -149,7 +151,9 @@ class ChatController extends ChangeNotifier {
       final reply = buffer.toString().trim();
       if (reply.isEmpty) {
         throw DeepSeekException(
-          _canceled ? DeepSeekErrorKind.canceled : DeepSeekErrorKind.badResponse,
+          _canceled
+              ? DeepSeekErrorKind.canceled
+              : DeepSeekErrorKind.badResponse,
           _canceled ? '已停止生成' : '模型没有返回内容',
         );
       }
@@ -181,7 +185,11 @@ class ChatController extends ChangeNotifier {
       Log.e('ChatController', error);
     } catch (error, stack) {
       _lastError = '出错了：$error';
-      _replace(placeholderId, content: buffer.toString().trim(), status: ChatStatus.failed);
+      _replace(
+        placeholderId,
+        content: buffer.toString().trim(),
+        status: ChatStatus.failed,
+      );
       pet.playTag('error', bubble: '呜…出错了');
       Log.e('ChatController', error, stack);
     } finally {
@@ -255,7 +263,9 @@ class ChatController extends ChangeNotifier {
         userText: userText,
         replyText: reply,
         tags: tags.tags,
-        model: settings.model == 'deepseek-reasoner' ? 'deepseek-chat' : settings.model,
+        model: settings.model == 'deepseek-reasoner'
+            ? 'deepseek-chat'
+            : settings.model,
       );
       return llm == null ? local : local.merge(llm);
     } finally {
@@ -268,7 +278,9 @@ class ChatController extends ChangeNotifier {
         .where((message) => message.content.trim().isNotEmpty)
         .where((message) => message.status != ChatStatus.failed)
         .toList(growable: false);
-    final tail = history.length > 18 ? history.sublist(history.length - 18) : history;
+    final tail = history.length > 18
+        ? history.sublist(history.length - 18)
+        : history;
     return [
       {'role': 'system', 'content': _persona},
       ...tail.map((message) => message.toApiJson()),

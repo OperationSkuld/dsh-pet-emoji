@@ -79,9 +79,10 @@ class _BubbleHost extends StatelessWidget {
       transitionBuilder: (child, animation) => FadeTransition(
         opacity: animation,
         child: ScaleTransition(
-          scale: Tween<double>(begin: 0.94, end: 1).animate(
-            CurvedAnimation(parent: animation, curve: Curves.easeOut),
-          ),
+          scale: Tween<double>(
+            begin: 0.94,
+            end: 1,
+          ).animate(CurvedAnimation(parent: animation, curve: Curves.easeOut)),
           child: child,
         ),
       ),
@@ -118,7 +119,11 @@ class _Bubble extends StatelessWidget {
         child: Text(
           text,
           textAlign: TextAlign.center,
-          style: const TextStyle(fontSize: 12.5, height: 1.45, color: AppColors.textPrimary),
+          style: const TextStyle(
+            fontSize: 12.5,
+            height: 1.45,
+            color: AppColors.textPrimary,
+          ),
         ),
       ),
     );
@@ -141,7 +146,12 @@ class _TagLine extends StatelessWidget {
       runSpacing: 6,
       children: [
         for (final entry in entries.take(3))
-          TagChip(label: tags.labelOf(entry.key), score: entry.value, showScore: false, dense: true),
+          TagChip(
+            label: tags.labelOf(entry.key),
+            score: entry.value,
+            showScore: false,
+            dense: true,
+          ),
       ],
     );
   }
@@ -172,9 +182,17 @@ class _ActionBar extends StatelessWidget {
           onTap: pet.toggleSleep,
         ),
         if (onBalance != null)
-          _Action(icon: Icons.account_balance_wallet_outlined, label: '余额', onTap: onBalance!),
+          _Action(
+            icon: Icons.account_balance_wallet_outlined,
+            label: '余额',
+            onTap: onBalance!,
+          ),
         if (onGallery != null)
-          _Action(icon: Icons.grid_view_rounded, label: '表情库', onTap: onGallery!),
+          _Action(
+            icon: Icons.grid_view_rounded,
+            label: '表情库',
+            onTap: onGallery!,
+          ),
       ],
     );
   }
@@ -204,7 +222,13 @@ class _Action extends StatelessWidget {
           children: [
             Icon(icon, size: 13, color: AppColors.textSecondary),
             const SizedBox(width: 5),
-            Text(label, style: const TextStyle(fontSize: 12, color: AppColors.textSecondary)),
+            Text(
+              label,
+              style: const TextStyle(
+                fontSize: 12,
+                color: AppColors.textSecondary,
+              ),
+            ),
           ],
         ),
       ),

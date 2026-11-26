@@ -25,7 +25,11 @@ AnimationClip _clip(
 }
 
 SemanticProfile _profile(Map<String, double> scores, {double intensity = 0.5}) {
-  return SemanticProfile(scores: scores, intent: DialogIntent.chat, intensity: intensity);
+  return SemanticProfile(
+    scores: scores,
+    intent: DialogIntent.chat,
+    intensity: intensity,
+  );
 }
 
 void main() {
@@ -39,13 +43,22 @@ void main() {
       _clip('joy-b', 'emotion', {'joy': 0.9, 'laugh': 0.7}),
       _clip('sad-a', 'emotion', {'sad': 0.9, 'tired': 0.6}),
       _clip('eat-a', 'food', {'eat': 0.9, 'joy': 0.3}),
-      _clip('money-empty', 'money', {'balance_empty': 1.0, 'sad': 0.7}, loop: true),
-      _clip('money-rich', 'money', {'balance_rich': 1.0, 'excited': 0.6}, loop: true),
+      _clip('money-empty', 'money', {
+        'balance_empty': 1.0,
+        'sad': 0.7,
+      }, loop: true),
+      _clip('money-rich', 'money', {
+        'balance_rich': 1.0,
+        'excited': 0.6,
+      }, loop: true),
       _clip('tap-a', 'emotion', {'tap': 0.9, 'shy': 0.6}),
       _clip('tap-b', 'emotion', {'tap': 0.85, 'laugh': 0.5}),
       _clip('drag-a', 'interaction', {'drag': 1.0}),
     ]);
-    selector = AnimationSelector(repository: repository, random: math.Random(7));
+    selector = AnimationSelector(
+      repository: repository,
+      random: math.Random(7),
+    );
   });
 
   group('主选片', () {

@@ -24,10 +24,34 @@ class SemanticAnalyzer {
 
   static const List<String> _negations = ['不', '没', '别', '未', '勿', '非', '无'];
   static const List<String> _intensifiers = [
-    '非常', '特别', '超级', '超级无敌', '十分', '格外', '异常', '真的', '真的超级',
-    '太', '很', '超', '巨', '贼', '极', '最', '好',
+    '非常',
+    '特别',
+    '超级',
+    '超级无敌',
+    '十分',
+    '格外',
+    '异常',
+    '真的',
+    '真的超级',
+    '太',
+    '很',
+    '超',
+    '巨',
+    '贼',
+    '极',
+    '最',
+    '好',
   ];
-  static const List<String> _diminishers = ['有点', '有些', '稍微', '略微', '略', '一点点', '一点', '还算'];
+  static const List<String> _diminishers = [
+    '有点',
+    '有些',
+    '稍微',
+    '略微',
+    '略',
+    '一点点',
+    '一点',
+    '还算',
+  ];
 
   /// 用户输入与模型回复的权重：回复决定宠物当下的表情基调。
   static const double _userWeight = 0.55;
@@ -38,7 +62,9 @@ class SemanticAnalyzer {
     for (final tag in tags) {
       if (tag.group == TagGroup.system) continue;
       for (final keyword in tag.keywords) {
-        lexemes.add(_Lexeme(word: keyword.toLowerCase(), tagId: tag.id, base: tag.base));
+        lexemes.add(
+          _Lexeme(word: keyword.toLowerCase(), tagId: tag.id, base: tag.base),
+        );
       }
     }
     // 长词优先，保证「余额不足」不会被「余额」抢先命中。
@@ -114,7 +140,11 @@ class SemanticAnalyzer {
         if (_intensifiers.any(rawPrefix.contains)) modifier = 1.3;
         if (_diminishers.any(rawPrefix.contains)) modifier = 0.7;
 
-        final decay = switch (hit) { 0 => 1.0, 1 => 0.6, _ => 0.4 };
+        final decay = switch (hit) {
+          0 => 1.0,
+          1 => 0.6,
+          _ => 0.4,
+        };
         final value = lexeme.base * sourceWeight * modifier * decay;
         _saturate(scores, lexeme.tagId, value);
         _saturate(rawScores, lexeme.tagId, lexeme.base * modifier * decay);
@@ -235,7 +265,9 @@ class SemanticAnalyzer {
     if (festivalHits.isNotEmpty) {
       _saturate(scores, 'festival', 0.75);
       if (festivalHits.contains('valentine')) _saturate(scores, 'love', 0.45);
-      if (festivalHits.contains('christmas')) _saturate(scores, 'season_winter', 0.35);
+      if (festivalHits.contains('christmas')) {
+        _saturate(scores, 'season_winter', 0.35);
+      }
     }
   }
 
@@ -256,7 +288,10 @@ class SemanticAnalyzer {
     return count;
   }
 
-  DialogIntent _inferIntent(Map<String, double> scores, Map<String, double> raw) {
+  DialogIntent _inferIntent(
+    Map<String, double> scores,
+    Map<String, double> raw,
+  ) {
     const threshold = 0.6;
     double at(String tag) => math.max(scores[tag] ?? 0, raw[tag] ?? 0);
 
@@ -272,7 +307,9 @@ class SemanticAnalyzer {
     if (at('work') >= threshold) return DialogIntent.work;
     if (at('eat') >= threshold) return DialogIntent.food;
     if (at('money') >= threshold) return DialogIntent.money;
-    if (at('play') >= threshold || at('dance') >= threshold || at('game') >= threshold) {
+    if (at('play') >= threshold ||
+        at('dance') >= threshold ||
+        at('game') >= threshold) {
       return DialogIntent.play;
     }
     return DialogIntent.chat;

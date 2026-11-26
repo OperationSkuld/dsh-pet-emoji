@@ -21,7 +21,8 @@ class LlmTagger {
     String model = 'deepseek-chat',
   }) async {
     final allowed = tags.map((tag) => '${tag.id}(${tag.label})').join('、');
-    final system = '''
+    final system =
+        '''
 你是「桌面宠物表情」的语义标注器。根据用户与助手的对话，为宠物挑选 1~4 个语义标签。
 只能使用下列标签 id：$allowed
 另外给出 intent，取值：${DialogIntent.values.map((e) => e.name).join('/')}。

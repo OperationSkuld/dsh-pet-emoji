@@ -33,7 +33,7 @@ class SelectionPolicy {
 /// 既保证相关又不会每次都一模一样。
 class AnimationSelector {
   AnimationSelector({required this.repository, math.Random? random})
-      : _random = random ?? math.Random();
+    : _random = random ?? math.Random();
 
   final AnimationRepository repository;
   final math.Random _random;
@@ -146,17 +146,24 @@ class AnimationSelector {
     final pool = repository.tapClips
         .where((clip) => !recentIds.contains(clip.id))
         .toList(growable: false);
-    if (pool.isEmpty) return repository.tapClips.isEmpty ? null : repository.tapClips.first;
+    if (pool.isEmpty) {
+      return repository.tapClips.isEmpty ? null : repository.tapClips.first;
+    }
     return pool[_random.nextInt(pool.length)];
   }
 
-  double _score(AnimationClip clip, SemanticProfile profile, SelectionPolicy policy) {
+  double _score(
+    AnimationClip clip,
+    SemanticProfile profile,
+    SelectionPolicy policy,
+  ) {
     var sum = 0.0;
     var matched = 0;
     profile.scores.forEach((tag, weight) {
       final affinity = clip.affinity(tag);
       if (affinity > 0) {
-        sum += weight * affinity * (_sceneTags.contains(tag) ? _sceneFactor : 1.0);
+        sum +=
+            weight * affinity * (_sceneTags.contains(tag) ? _sceneFactor : 1.0);
         matched++;
       }
     });

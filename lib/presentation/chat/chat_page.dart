@@ -74,7 +74,8 @@ class _ChatPageState extends State<ChatPage> {
     await _chat.send(text);
   }
 
-  Future<void> _updateSettings(AppSettings next) => widget.services.updateSettings(next);
+  Future<void> _updateSettings(AppSettings next) =>
+      widget.services.updateSettings(next);
 
   @override
   Widget build(BuildContext context) {
@@ -162,7 +163,9 @@ class _ChatPageState extends State<ChatPage> {
                         tagLabelOf: widget.services.tags.labelOf,
                         showSemantic: settings.showSemanticPanel,
                         onToggleSemantic: () => _updateSettings(
-                          settings.copyWith(showSemanticPanel: !settings.showSemanticPanel),
+                          settings.copyWith(
+                            showSemanticPanel: !settings.showSemanticPanel,
+                          ),
                         ),
                       ),
                     ],
@@ -196,80 +199,109 @@ class _HeaderBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final settings = services.settings;
     final balance = chat.balance?.primary;
-    return Container(
-      height: 58,
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      decoration: const BoxDecoration(
-        border: Border(bottom: BorderSide(color: AppColors.border)),
-      ),
-      child: Row(
-        children: [
-          Container(
-            width: 28,
-            height: 28,
-            decoration: BoxDecoration(
-              gradient: const LinearGradient(
-                colors: [Color(0xFF4D6BFE), Color(0xFF7B93FF)],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        // 窄屏（手机竖屏）只留必要元素，避免标题栏溢出。
+        final roomy = constraints.maxWidth >= 520;
+        return Container(
+          height: 58,
+          padding: EdgeInsets.symmetric(horizontal: roomy ? 20 : 12),
+          decoration: const BoxDecoration(
+            border: Border(bottom: BorderSide(color: AppColors.border)),
+          ),
+          child: Row(
+            children: [
+              Container(
+                width: 28,
+                height: 28,
+                decoration: BoxDecoration(
+                  gradient: const LinearGradient(
+                    colors: [Color(0xFF4D6BFE), Color(0xFF7B93FF)],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                  borderRadius: BorderRadius.circular(9),
+                ),
+                alignment: Alignment.center,
+                child: const Text('🐳', style: TextStyle(fontSize: 14)),
               ),
-              borderRadius: BorderRadius.circular(9),
-            ),
-            alignment: Alignment.center,
-            child: const Text('🐳', style: TextStyle(fontSize: 14)),
-          ),
-          const SizedBox(width: 10),
-          const Text(
-            '大肥鱼',
-            style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600, letterSpacing: 0.2),
-          ),
-          const SizedBox(width: 8),
-          const SoftTag('语义表情桌宠'),
-          if (services.isDesktop) ...[
-            const SizedBox(width: 8),
-            SoftTag(
-              services.isWindows ? 'Windows' : 'Desktop',
-              icon: Icons.desktop_windows_outlined,
-            ),
-          ],
-          const Spacer(),
-          if (balance != null)
-            Padding(
-              padding: const EdgeInsets.only(right: 6),
-              child: Text(
-                '余额 ${balance.formatted}',
-                style: const TextStyle(fontSize: 12, color: AppColors.textSecondary),
+              const SizedBox(width: 10),
+              const Text(
+                '大肥鱼',
+                style: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w600,
+                  letterSpacing: 0.2,
+                ),
               ),
-            ),
-          IconButton(
-            tooltip: settings.showSemanticPanel ? '隐藏语义标签' : '显示语义标签',
-            onPressed: () => services.updateSettings(
-              settings.copyWith(showSemanticPanel: !settings.showSemanticPanel),
-            ),
-            icon: Icon(
-              Icons.local_offer_outlined,
-              size: 18,
-              color: settings.showSemanticPanel ? AppColors.primary : AppColors.textSecondary,
-            ),
+              const SizedBox(width: 8),
+              if (roomy) const SoftTag('语义表情桌宠'),
+              if (roomy && services.isDesktop) ...[
+                const SizedBox(width: 8),
+                SoftTag(
+                  services.isWindows ? 'Windows' : 'Desktop',
+                  icon: Icons.desktop_windows_outlined,
+                ),
+              ],
+              const Spacer(),
+              if (roomy && balance != null)
+                Padding(
+                  padding: const EdgeInsets.only(right: 6),
+                  child: Text(
+                    '余额 ${balance.formatted}',
+                    style: const TextStyle(
+                      fontSize: 12,
+                      color: AppColors.textSecondary,
+                    ),
+                  ),
+                ),
+              IconButton(
+                tooltip: settings.showSemanticPanel ? '隐藏语义标签' : '显示语义标签',
+                onPressed: () => services.updateSettings(
+                  settings.copyWith(
+                    showSemanticPanel: !settings.showSemanticPanel,
+                  ),
+                ),
+                icon: Icon(
+                  Icons.local_offer_outlined,
+                  size: 18,
+                  color: settings.showSemanticPanel
+                      ? AppColors.primary
+                      : AppColors.textSecondary,
+                ),
+              ),
+              if (onToggleCompact != null)
+                IconButton(
+                  tooltip: '桌面小窗',
+                  onPressed: onToggleCompact,
+                  icon: const Icon(
+                    Icons.open_in_new_rounded,
+                    size: 17,
+                    color: AppColors.textSecondary,
+                  ),
+                ),
+              IconButton(
+                tooltip: '表情库',
+                onPressed: onOpenGallery,
+                icon: const Icon(
+                  Icons.grid_view_rounded,
+                  size: 18,
+                  color: AppColors.textSecondary,
+                ),
+              ),
+              IconButton(
+                tooltip: '设置',
+                onPressed: onOpenSettings,
+                icon: const Icon(
+                  Icons.settings_outlined,
+                  size: 18,
+                  color: AppColors.textSecondary,
+                ),
+              ),
+            ],
           ),
-          if (onToggleCompact != null)
-            IconButton(
-              tooltip: '桌面小窗',
-              onPressed: onToggleCompact,
-              icon: const Icon(Icons.open_in_new_rounded, size: 17, color: AppColors.textSecondary),
-            ),
-          IconButton(
-            tooltip: '表情库',
-            onPressed: onOpenGallery,
-            icon: const Icon(Icons.grid_view_rounded, size: 18, color: AppColors.textSecondary),
-          ),
-          IconButton(
-            tooltip: '设置',
-            onPressed: onOpenSettings,
-            icon: const Icon(Icons.settings_outlined, size: 18, color: AppColors.textSecondary),
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 }
@@ -301,7 +333,11 @@ class _ConfigBanner extends StatelessWidget {
                   style: TextStyle(fontSize: 12.5, color: Color(0xFF8A6D24)),
                 ),
               ),
-              Icon(Icons.chevron_right_rounded, size: 16, color: Color(0xFF9A7B2E)),
+              Icon(
+                Icons.chevron_right_rounded,
+                size: 16,
+                color: Color(0xFF9A7B2E),
+              ),
             ],
           ),
         ),
@@ -337,7 +373,10 @@ class _FooterHint extends StatelessWidget {
               borderRadius: BorderRadius.circular(999),
               child: Text(
                 '本次语义：${profile.topTags(3).map((e) => tagLabelOf(e.key)).join(' · ')}',
-                style: const TextStyle(fontSize: 11, color: AppColors.textTertiary),
+                style: const TextStyle(
+                  fontSize: 11,
+                  color: AppColors.textTertiary,
+                ),
               ),
             ),
             const SizedBox(width: 12),
@@ -405,12 +444,20 @@ class _WelcomeView extends StatelessWidget {
               const SizedBox(height: 18),
               const Text(
                 '我是大肥鱼，今天想聊点什么？',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, height: 1.4),
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600,
+                  height: 1.4,
+                ),
               ),
               const SizedBox(height: 8),
               const Text(
                 '聊完之后，我会根据对话的语义挑一段动画给你看。',
-                style: TextStyle(fontSize: 13, color: AppColors.textSecondary, height: 1.6),
+                style: TextStyle(
+                  fontSize: 13,
+                  color: AppColors.textSecondary,
+                  height: 1.6,
+                ),
               ),
               const SizedBox(height: 26),
               Wrap(
@@ -460,7 +507,11 @@ class _SuggestionCard extends StatelessWidget {
         ),
         child: Text(
           text,
-          style: const TextStyle(fontSize: 13, color: AppColors.textPrimary, height: 1.4),
+          style: const TextStyle(
+            fontSize: 13,
+            color: AppColors.textPrimary,
+            height: 1.4,
+          ),
         ),
       ),
     );

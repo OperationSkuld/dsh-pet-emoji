@@ -8,7 +8,11 @@ import 'pet_stage.dart';
 
 /// 桌面小窗模式：无边框、置顶，只留宠物与一个迷你输入框。
 class CompactPetPage extends StatefulWidget {
-  const CompactPetPage({super.key, required this.services, required this.window});
+  const CompactPetPage({
+    super.key,
+    required this.services,
+    required this.window,
+  });
 
   final AppServices services;
   final PetWindowService window;
@@ -36,7 +40,8 @@ class _CompactPetPageState extends State<CompactPetPage> {
   @override
   Widget build(BuildContext context) {
     final settings = widget.services.settings;
-    final transparent = settings.petWindowBackground == PetWindowBackground.transparent;
+    final transparent =
+        settings.petWindowBackground == PetWindowBackground.transparent;
 
     return Scaffold(
       backgroundColor: Colors.transparent,
@@ -72,7 +77,9 @@ class _CompactPetPageState extends State<CompactPetPage> {
                           width: 28,
                           height: 3,
                           decoration: BoxDecoration(
-                            color: AppColors.textTertiary.withValues(alpha: 0.4),
+                            color: AppColors.textTertiary.withValues(
+                              alpha: 0.4,
+                            ),
                             borderRadius: BorderRadius.circular(999),
                           ),
                         ),
@@ -94,14 +101,15 @@ class _CompactPetPageState extends State<CompactPetPage> {
                 Expanded(
                   child: Center(
                     child: SingleChildScrollView(
-                      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 14,
+                        vertical: 4,
+                      ),
                       child: PetStage(
                         pet: widget.services.pet,
                         tags: widget.services.tags,
                         scale: 1.2 * settings.petScale.clamp(0.8, 1.4),
                         showActions: true,
-                        onBalance: () {},
-                        onGallery: () {},
                       ),
                     ),
                   ),
@@ -109,7 +117,10 @@ class _CompactPetPageState extends State<CompactPetPage> {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 6,
+                      vertical: 4,
+                    ),
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(12),
@@ -142,7 +153,10 @@ class _CompactPetPageState extends State<CompactPetPage> {
                             foregroundColor: Colors.white,
                             minimumSize: const Size(30, 30),
                           ),
-                          icon: const Icon(Icons.arrow_upward_rounded, size: 16),
+                          icon: const Icon(
+                            Icons.arrow_upward_rounded,
+                            size: 16,
+                          ),
                         ),
                       ],
                     ),

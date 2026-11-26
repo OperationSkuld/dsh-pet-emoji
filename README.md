@@ -297,7 +297,7 @@ tool/
 ├─ gen_manifest.py  标注表 → assets/manifest/*.json（唯一事实源）
 ├─ gen_docs.py      清单 → README 表格 + docs/TAGS.md
 ├─ rebuild_gifs.py  WebM → 高分辨率 GIF（需 ffmpeg）
-└─ set_owner.sh     替换 README/代码里的 OWNER 占位符
+└─ set_owner.sh     一键把仓库地址改成你的账号（fork 后常用）
 ```
 
 ## 三端差异与已知限制

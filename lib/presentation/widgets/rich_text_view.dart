@@ -46,9 +46,7 @@ class RichTextView extends StatelessWidget {
     final trimmed = content.trim();
     if (trimmed.isEmpty) return const SizedBox.shrink();
     final textSpan = TextSpan(text: trimmed, style: baseStyle);
-    return selectable
-        ? SelectableText.rich(textSpan)
-        : Text.rich(textSpan);
+    return selectable ? SelectableText.rich(textSpan) : Text.rich(textSpan);
   }
 
   Widget _codeBlock(String code, String? language) {
@@ -109,12 +107,21 @@ class RichTextView extends StatelessWidget {
       final afterFence = index + match.end;
       final close = source.indexOf('```', afterFence);
       if (close < 0) {
-        segments.add(_Segment(source.substring(afterFence), code: source.substring(afterFence)));
+        segments.add(
+          _Segment(
+            source.substring(afterFence),
+            code: source.substring(afterFence),
+          ),
+        );
         index = source.length;
         break;
       }
       segments.add(
-        _Segment('', code: source.substring(afterFence, close), language: match.group(1)),
+        _Segment(
+          '',
+          code: source.substring(afterFence, close),
+          language: match.group(1),
+        ),
       );
       index = close + 3;
     }
