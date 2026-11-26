@@ -173,7 +173,10 @@ class ChatController extends ChangeNotifier {
         profile: semantic,
         reasoning: reasoning.toString(),
       );
-      pet.react(semantic, bubble: _bubbleFor(reply));
+      pet.react(
+        semantic,
+        bubble: settings.speechBubble ? _bubbleFor(reply) : null,
+      );
     } on DeepSeekException catch (error) {
       _lastError = error.message;
       _replace(
