@@ -20,12 +20,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
----
-
-注意：本许可证只覆盖**代码**。`assets/` 下的动画、提示词、源视频与角色形象另按
-CC BY-NC-SA 4.0 授权，详见 [LICENSE-ASSETS.md](LICENSE-ASSETS.md)。
-
-Note: this license covers **code only**. Animations, prompts, source videos and
-the character likeness under `assets/` are licensed separately under
-CC BY-NC-SA 4.0 — see [LICENSE-ASSETS.md](LICENSE-ASSETS.md).

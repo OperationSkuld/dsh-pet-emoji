@@ -6,6 +6,10 @@
 代码：MIT。素材与形象：CC BY-NC-SA 4.0。详见 [LICENSE](LICENSE) 与
 [LICENSE-ASSETS.md](LICENSE-ASSETS.md)。
 
+> `LICENSE` 中的 MIT **只覆盖代码**（`lib/`、`test/`、`tool/`、三端平台工程与构建脚本）。
+> `assets/` 下的动画、提示词、源视频与角色形象另按 CC BY-NC-SA 4.0 授权，
+> 不可商用，详见 [LICENSE-ASSETS.md](LICENSE-ASSETS.md)。
+
 ## 上游项目
 
 本项目的动画素材、提示词与素材生成思路来自：
