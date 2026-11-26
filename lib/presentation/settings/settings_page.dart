@@ -263,7 +263,7 @@ class _SettingsPageState extends State<SettingsPage> {
           if (widget.services.isDesktop)
             _Section(
               title: '桌面窗口',
-              subtitle: '无边框小窗，适合把宠物摆在角落；不占用「始终置顶」。',
+              subtitle: '无边框小窗，适合把宠物摆在角落；窗口不置顶，不会盖住其他应用。',
               children: [
                 for (final background in PetWindowBackground.values)
                   InkWell(
