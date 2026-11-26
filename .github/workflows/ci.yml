@@ -27,6 +27,11 @@ jobs:
       - name: 校验文档与清单同步
         run: python3 tool/gen_docs.py --check
 
+      - name: 校验三端图标与母版一致
+        run: |
+          pip install --quiet pillow
+          python3 tool/gen_icons.py --check
+
       - name: pub get
         run: flutter pub get
 

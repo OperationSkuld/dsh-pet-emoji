@@ -211,7 +211,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   ),
                 ),
               ),
-              const SizedBox(height: 6),
+              const SizedBox(height: 10),
               Row(
                 children: [
                   const Text(
@@ -221,29 +221,43 @@ class _SettingsPageState extends State<SettingsPage> {
                       color: AppColors.textSecondary,
                     ),
                   ),
+                  const SizedBox(width: 12),
                   Expanded(
-                    child: Slider(
-                      value: settings.petScale.clamp(0.8, 1.6),
-                      min: 0.8,
-                      max: 1.6,
-                      divisions: 8,
-                      activeColor: AppColors.primary,
-                      label: '${(settings.petScale * 100).round()}%',
-                      onChanged: (value) => _save(
-                        (current) => widget.services.updateSettings(
-                          current.copyWith(petScale: value),
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: SegmentedButton<double>(
+                        showSelectedIcon: false,
+                        style: ButtonStyle(
+                          visualDensity: VisualDensity.compact,
+                          textStyle: WidgetStateProperty.all(
+                            const TextStyle(fontSize: 12),
+                          ),
+                        ),
+                        segments: const [
+                          ButtonSegment(value: 1, label: Text('1× 原尺寸')),
+                          ButtonSegment(value: 2, label: Text('2×')),
+                          ButtonSegment(value: 3, label: Text('3×')),
+                        ],
+                        selected: {settings.normalizedPetZoom},
+                        onSelectionChanged: (selection) => _save(
+                          (current) => widget.services.updateSettings(
+                            current.copyWith(petZoom: selection.first),
+                          ),
                         ),
                       ),
                     ),
                   ),
-                  Text(
-                    '${(settings.petScale * 100).round()}%',
-                    style: const TextStyle(
-                      fontSize: 12,
-                      color: AppColors.textTertiary,
-                    ),
-                  ),
                 ],
+              ),
+              const SizedBox(height: 4),
+              const Text(
+                '1× 即素材原生 220×124，不拉伸所以最清晰；2×/3× 按整数倍放大，'
+                '仍是硬边像素，不会变糊。',
+                style: TextStyle(
+                  fontSize: 11,
+                  height: 1.55,
+                  color: AppColors.textTertiary,
+                ),
               ),
             ],
           ),

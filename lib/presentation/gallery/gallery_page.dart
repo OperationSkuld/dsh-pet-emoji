@@ -122,15 +122,8 @@ class _GalleryPageState extends State<GalleryPage> {
                       return _ClipCard(
                         clip: clip,
                         labelOf: services.tags.labelOf,
-                        onTap: () {
-                          services.pet.play(clip, bubble: clip.name);
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text('播放：${clip.name}'),
-                              duration: const Duration(milliseconds: 1200),
-                            ),
-                          );
-                        },
+                        onTap: () => _playAndReturn(clip),
+                        onTagTap: (tag) => _playTagAndReturn(tag),
                         onInfo: () => _showDetail(context, clip),
                       );
                     },
@@ -139,6 +132,21 @@ class _GalleryPageState extends State<GalleryPage> {
         ],
       ),
     );
+  }
+
+  /// 播放某段动画并退回主界面：桌宠就在主界面上，所以「回主界面」= 关闭表情库。
+  ///
+  /// 返回 `true` 让外壳知道「确实播了」，移动端据此切回桌宠页签。
+  void _playAndReturn(AnimationClip clip) {
+    widget.services.pet.play(clip, bubble: clip.name);
+    Navigator.of(context).pop(true);
+  }
+
+  /// 点标签时按该标签挑一段动画播，然后同样回到主界面。
+  void _playTagAndReturn(String tag) {
+    final services = widget.services;
+    services.pet.playTag(tag, bubble: services.tags.labelOf(tag));
+    Navigator.of(context).pop(true);
   }
 
   String _groupLabel(String group) => switch (group) {
@@ -206,8 +214,8 @@ class _GalleryPageState extends State<GalleryPage> {
         actions: [
           TextButton(
             onPressed: () {
-              services.pet.play(clip, bubble: clip.name);
               Navigator.of(context).pop();
+              _playAndReturn(clip);
             },
             child: const Text('播放'),
           ),
@@ -270,12 +278,14 @@ class _ClipCard extends StatelessWidget {
     required this.clip,
     required this.labelOf,
     required this.onTap,
+    required this.onTagTap,
     required this.onInfo,
   });
 
   final AnimationClip clip;
   final String Function(String) labelOf;
   final VoidCallback onTap;
+  final ValueChanged<String> onTagTap;
   final VoidCallback onInfo;
 
   @override
@@ -297,7 +307,8 @@ class _ClipCard extends StatelessWidget {
           children: [
             Expanded(
               child: Center(
-                child: PetView(clip: clip, scale: 0.72, showShadow: false),
+                // 缩略图 0.7×：缩小属于重采样，不会像放大那样发虚
+                child: PetView(clip: clip, zoom: 0.7, showShadow: false),
               ),
             ),
             Row(
@@ -333,7 +344,11 @@ class _ClipCard extends StatelessWidget {
               runSpacing: 4,
               children: [
                 for (final entry in topTags.take(2))
-                  TagChip(label: labelOf(entry.key), dense: true),
+                  TagChip(
+                    label: labelOf(entry.key),
+                    dense: true,
+                    onTap: () => onTagTap(entry.key),
+                  ),
               ],
             ),
           ],

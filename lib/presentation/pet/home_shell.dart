@@ -9,9 +9,14 @@ import '../settings/settings_page.dart';
 import '../theme/app_theme.dart';
 import '../widgets/tag_chip.dart';
 import 'compact_pet_page.dart';
+import 'floating_pet.dart';
 import 'pet_stage.dart';
 
-/// 应用外壳：宽屏用「对话 + 桌宠侧栏」，窄屏用底部双页签。
+/// 应用外壳。
+///
+/// - 宽屏（桌面）：对话铺满整窗，桌宠是浮在最上层、可在窗口内任意拖动的一只；
+///   右侧不再有固定的桌宠侧栏。
+/// - 窄屏（移动端）：底部双页签「对话 / 桌宠」。
 class HomeShell extends StatefulWidget {
   const HomeShell({super.key, required this.services, required this.window});
 
@@ -43,19 +48,25 @@ class _HomeShellState extends State<HomeShell> {
     );
   }
 
-  void _openGallery() {
-    Navigator.of(context).push(
-      MaterialPageRoute<void>(
+  /// 表情库点选后会自行 pop，并回传 `true` 表示「已开始播放」。
+  /// 窄屏此时切到桌宠页签，否则动画播在看不见的地方。
+  Future<void> _openGallery() async {
+    final played = await Navigator.of(context).push<bool>(
+      MaterialPageRoute<bool>(
         builder: (_) => GalleryPage(services: widget.services),
       ),
     );
+    if (!mounted || played != true) return;
+    final wide =
+        MediaQuery.sizeOf(context).width >= 1000 && widget.services.isDesktop;
+    if (!wide && _tab != 1) setState(() => _tab = 1);
   }
 
   void _openBalance() => showBalanceSheet(context, widget.services);
 
   Future<void> _enterCompact() async {
     final settings = widget.services.settings;
-    await widget.window.enterCompact(settings, settings.petScale);
+    await widget.window.enterCompact(settings);
     if (!mounted) return;
     await Navigator.of(context).push(
       PageRouteBuilder<void>(
@@ -85,9 +96,9 @@ class _HomeShellState extends State<HomeShell> {
         final wide = constraints.maxWidth >= 1000 && widget.services.isDesktop;
         if (wide) {
           return Scaffold(
-            body: Row(
+            body: Stack(
               children: [
-                Expanded(
+                Positioned.fill(
                   child: ChatPage(
                     services: widget.services,
                     onOpenSettings: _openSettings,
@@ -96,12 +107,10 @@ class _HomeShellState extends State<HomeShell> {
                     onToggleCompactWindow: _enterCompact,
                   ),
                 ),
-                _PetSidebar(
+                FloatingPet(
                   services: widget.services,
                   onOpenBalance: _openBalance,
                   onOpenGallery: _openGallery,
-                  onEnterCompact: _enterCompact,
-                  onOpenSettings: _openSettings,
                 ),
               ],
             ),
@@ -164,129 +173,6 @@ class _HomeShellState extends State<HomeShell> {
   }
 }
 
-class _PetSidebar extends StatelessWidget {
-  const _PetSidebar({
-    required this.services,
-    required this.onOpenBalance,
-    required this.onOpenGallery,
-    required this.onEnterCompact,
-    required this.onOpenSettings,
-  });
-
-  final AppServices services;
-  final VoidCallback onOpenBalance;
-  final VoidCallback onOpenGallery;
-  final VoidCallback onEnterCompact;
-  final VoidCallback onOpenSettings;
-
-  @override
-  Widget build(BuildContext context) {
-    final settings = services.settings;
-    return Container(
-      width: 336,
-      decoration: const BoxDecoration(
-        gradient: AppColors.stageGradient,
-        border: Border(left: BorderSide(color: AppColors.border)),
-      ),
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(18, 16, 12, 6),
-            child: Row(
-              children: [
-                const Text(
-                  '桌宠',
-                  style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
-                ),
-                const SizedBox(width: 8),
-                const SoftTag('本地语义驱动'),
-                const Spacer(),
-                IconButton(
-                  tooltip: settings.petWindowAlwaysOnTop ? '取消置顶' : '始终置顶',
-                  visualDensity: VisualDensity.compact,
-                  onPressed: () async {
-                    final next = settings.copyWith(
-                      petWindowAlwaysOnTop: !settings.petWindowAlwaysOnTop,
-                    );
-                    await services.updateSettings(next);
-                    await PetWindowService().setAlwaysOnTop(
-                      next.petWindowAlwaysOnTop,
-                    );
-                  },
-                  icon: Icon(
-                    settings.petWindowAlwaysOnTop
-                        ? Icons.push_pin_rounded
-                        : Icons.push_pin_outlined,
-                    size: 16,
-                    color: settings.petWindowAlwaysOnTop
-                        ? AppColors.primary
-                        : AppColors.textTertiary,
-                  ),
-                ),
-                IconButton(
-                  tooltip: '桌面小窗',
-                  visualDensity: VisualDensity.compact,
-                  onPressed: onEnterCompact,
-                  icon: const Icon(
-                    Icons.open_in_new_rounded,
-                    size: 16,
-                    color: AppColors.textTertiary,
-                  ),
-                ),
-                IconButton(
-                  tooltip: '设置',
-                  visualDensity: VisualDensity.compact,
-                  onPressed: onOpenSettings,
-                  icon: const Icon(
-                    Icons.settings_outlined,
-                    size: 16,
-                    color: AppColors.textTertiary,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Expanded(
-            child: Center(
-              child: SingleChildScrollView(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 18,
-                  vertical: 12,
-                ),
-                child: PetStage(
-                  pet: services.pet,
-                  tags: services.tags,
-                  scale: 1.24 * settings.petScale.clamp(0.8, 1.6),
-                  onBalance: onOpenBalance,
-                  onGallery: onOpenGallery,
-                ),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(18, 0, 18, 16),
-            child: Column(
-              children: [
-                const Divider(height: 1),
-                const SizedBox(height: 12),
-                Text(
-                  '对话结束时，${services.animations.animationCount} 段动画里会有一段被语义挑中。'
-                  '点她一下试试，双击可以哄睡。',
-                  style: const TextStyle(
-                    fontSize: 11,
-                    height: 1.6,
-                    color: AppColors.textTertiary,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
 class _PetTab extends StatelessWidget {
   const _PetTab({
     required this.services,
@@ -335,7 +221,7 @@ class _PetTab extends StatelessWidget {
                   child: PetStage(
                     pet: services.pet,
                     tags: services.tags,
-                    scale: 1.65 * services.settings.petScale.clamp(0.8, 1.6),
+                    zoom: services.settings.normalizedPetZoom,
                     onBalance: onOpenBalance,
                     onGallery: onOpenGallery,
                   ),

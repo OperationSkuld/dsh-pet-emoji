@@ -297,6 +297,7 @@ tool/
 ├─ gen_manifest.py  标注表 → assets/manifest/*.json（唯一事实源）
 ├─ gen_docs.py      清单 → README 表格 + docs/TAGS.md
 ├─ rebuild_gifs.py  WebM → 高分辨率 GIF（需 ffmpeg）
+├─ gen_icons.py     一张 .ico → Windows/Android/iOS 全部图标尺寸
 └─ set_owner.sh     一键把仓库地址改成你的账号（fork 后常用）
 ```
 
@@ -304,10 +305,14 @@ tool/
 
 | | Windows | Android | iOS |
 | --- | --- | --- | --- |
-| 布局 | 侧栏常驻桌宠（≥1000px） | 底部双页签 | 底部双页签 |
+| 布局 | 对话铺满整窗 + 桌宠浮在最上层，可在窗口内任意拖动（≥1000px）；窄窗退化双页签 | 底部双页签 | 底部双页签 |
 | 桌面小窗 | ✅ 无边框置顶 | — | — |
 | 真·逐像素透明窗口 | ⚠️ 受 Flutter 桌面合成限制，可能退化为圆角卡片 | — | — |
 
+- **桌宠清晰度**：运行时素材是 220×124 的透明 GIF，所以默认按 1× 原生尺寸渲染，
+  不做任何拉伸；设置里可切 2×/3×，整数倍用最近邻放大，边缘是硬像素而不是糊。
+  再往上就受素材分辨率限制——`assets/webm/` 里的 640×360 母版才是画质上限，
+  重导办法见 [docs/ASSETS.md](docs/ASSETS.md)。
 - **Windows 透明窗口**：Flutter 桌面端不支持逐像素 alpha，设置里的「尝试透明」
   在部分系统上会变成不透明窗口，此时请用「圆角卡片」。要真透明需接入
   `flutter_acrylic` 或改用 Web overlay，本仓库不默认引入。

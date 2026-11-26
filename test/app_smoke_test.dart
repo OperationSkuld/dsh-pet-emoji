@@ -13,14 +13,10 @@ void main() {
 
   testWidgets('首页可渲染，并能切到桌宠页签', (tester) async {
     SharedPreferences.setMockInitialValues({'dsh.model': 'deepseek-chat'});
-    final settings = await SettingsRepository.load();
-    final animations = await AnimationRepository.load();
-    final tags = await TagRepository.load();
-
     final services = AppServices(
-      animations: animations,
-      tags: tags,
-      settingsRepository: settings,
+      animations: await AnimationRepository.load(),
+      tags: await TagRepository.load(),
+      settingsRepository: await SettingsRepository.load(),
     );
 
     await tester.pumpWidget(

@@ -17,7 +17,11 @@ class SettingsRepository {
   static const _kAmbient = 'dsh.ambient';
   static const _kLlmTagging = 'dsh.llmTagging';
   static const _kSemanticPanel = 'dsh.semanticPanel';
-  static const _kPetScale = 'dsh.petScale';
+  static const _kPetZoom = 'dsh.petZoom';
+  /// 兼容旧键：早先存的是 0.8~1.6 的连续缩放。
+  static const _kLegacyPetScale = 'dsh.petScale';
+  static const _kPetOffsetX = 'dsh.petOffsetX';
+  static const _kPetOffsetY = 'dsh.petOffsetY';
   static const _kAlwaysOnTop = 'dsh.alwaysOnTop';
   static const _kPetBackground = 'dsh.petBackground';
   static const _kSpeech = 'dsh.speech';
@@ -33,7 +37,12 @@ class SettingsRepository {
       ambientAnimations: prefs.getBool(_kAmbient) ?? true,
       llmSemanticTagging: prefs.getBool(_kLlmTagging) ?? false,
       showSemanticPanel: prefs.getBool(_kSemanticPanel) ?? false,
-      petScale: prefs.getDouble(_kPetScale) ?? 1.0,
+      petZoom:
+          prefs.getDouble(_kPetZoom) ??
+          prefs.getDouble(_kLegacyPetScale) ??
+          1,
+      petOffsetX: prefs.getDouble(_kPetOffsetX) ?? -1,
+      petOffsetY: prefs.getDouble(_kPetOffsetY) ?? -1,
       petWindowAlwaysOnTop: prefs.getBool(_kAlwaysOnTop) ?? true,
       petWindowBackground: PetWindowBackground.parse(
         prefs.getString(_kPetBackground),
@@ -52,7 +61,9 @@ class SettingsRepository {
       _prefs.setBool(_kAmbient, settings.ambientAnimations),
       _prefs.setBool(_kLlmTagging, settings.llmSemanticTagging),
       _prefs.setBool(_kSemanticPanel, settings.showSemanticPanel),
-      _prefs.setDouble(_kPetScale, settings.petScale),
+      _prefs.setDouble(_kPetZoom, settings.petZoom),
+      _prefs.setDouble(_kPetOffsetX, settings.petOffsetX),
+      _prefs.setDouble(_kPetOffsetY, settings.petOffsetY),
       _prefs.setBool(_kAlwaysOnTop, settings.petWindowAlwaysOnTop),
       _prefs.setString(_kPetBackground, settings.petWindowBackground.name),
       _prefs.setBool(_kSpeech, settings.speechBubble),

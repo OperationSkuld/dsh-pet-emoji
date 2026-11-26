@@ -108,7 +108,7 @@ class _CompactPetPageState extends State<CompactPetPage> {
                       child: PetStage(
                         pet: widget.services.pet,
                         tags: widget.services.tags,
-                        scale: 1.2 * settings.petScale.clamp(0.8, 1.4),
+                        zoom: settings.normalizedPetZoom,
                         showActions: true,
                       ),
                     ),

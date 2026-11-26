@@ -40,7 +40,7 @@ lib/
 │  └─ llm_tagger.dart            可选的模型辅助标注
 ├─ presentation/
 │  ├─ chat/                      对话页、气泡、输入区、控制器
-│  ├─ pet/                       舞台、侧栏、桌面小窗、PetController
+│  ├─ pet/                       舞台、浮动桌宠、桌面小窗、PetController
 │  ├─ balance/                   余额面板
 │  ├─ gallery/                   表情库
 │  ├─ settings/                  设置 + 许可

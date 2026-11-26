@@ -50,9 +50,10 @@ class PetWindowService {
   }
 
   /// 切换到「桌面小窗」：无边框、置顶、紧凑尺寸。
-  Future<void> enterCompact(AppSettings settings, double scale) async {
+  Future<void> enterCompact(AppSettings settings) async {
     if (!supported) return;
     _compact = true;
+    final zoom = settings.normalizedPetZoom;
     try {
       await windowManager.setResizable(false);
       await windowManager.setAsFrameless();
@@ -62,10 +63,11 @@ class PetWindowService {
             ? Colors.transparent
             : const Color(0xFFF7F8FB),
       );
+      // 桌宠每放大一档，多留出一只宠物的宽度/高度
       await windowManager.setSize(
         Size(
-          compactSize.width * scale.clamp(0.8, 1.4),
-          compactSize.height * scale.clamp(0.8, 1.4),
+          compactSize.width + (zoom - 1) * 150,
+          compactSize.height + (zoom - 1) * 110,
         ),
       );
       await windowManager.center();
