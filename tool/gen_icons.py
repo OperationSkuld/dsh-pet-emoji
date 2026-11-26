@@ -96,6 +96,55 @@ def encode_png(image: Image.Image) -> bytes:
     return buffer.getvalue()
 
 
+# 不同 Pillow 版本 / 不同构建的 PNG 编码器（zlib 策略、滤波器选择、重采样
+# 收尾取整）会产出不同字节，像素也可能差几个色阶，但肉眼完全一样。
+# 所以 PNG 只比像素、并留容差；.ico 是原样复制，仍要求逐字节一致。
+MAX_ICON_DELTA = 8  # 全尺寸逐像素允许的最大色阶差
+MAX_FINGERPRINT_DELTA = 24  # 16×16 指纹允许的最大色阶差（兜底，跨版本极稳）
+FINGERPRINT_SIZE = 16
+
+
+def _fingerprint(image: Image.Image) -> Image.Image:
+    """缩到 16×16 的粗指纹：对重采样细节不敏感，但换个图标必然对不上。"""
+    return image.convert("RGBA").resize(
+        (FINGERPRINT_SIZE, FINGERPRINT_SIZE), Image.BILINEAR
+    )
+
+
+def _max_delta(a: Image.Image, b: Image.Image) -> int:
+    diff = ImageChops.difference(a, b)
+    if diff.getbbox() is None:
+        return 0
+    return max(high for _low, high in diff.getextrema())
+
+
+def matches(path: Path, content: bytes) -> bool:
+    """判断磁盘上的图标是否就是这份内容（PNG 按像素比，ico 按字节比）。"""
+    if not path.exists():
+        return False
+    raw = path.read_bytes()
+    if raw == content:
+        return True
+    if path.suffix.lower() != ".png":
+        return False
+    try:
+        have = Image.open(io.BytesIO(raw))
+        have.load()
+        want = Image.open(io.BytesIO(content))
+        want.load()
+    except Exception:
+        return False
+    if have.size != want.size:
+        return False
+    if _max_delta(have.convert("RGBA"), want.convert("RGBA")) <= MAX_ICON_DELTA:
+        return True
+    # 构建差异大到全尺寸比不过时，退到指纹比对
+    return (
+        _max_delta(_fingerprint(have), _fingerprint(want))
+        <= MAX_FINGERPRINT_DELTA
+    )
+
+
 def build_outputs() -> list[tuple[Path, bytes]]:
     master = load_master()
     outputs: list[tuple[Path, bytes]] = []
@@ -115,6 +164,26 @@ def build_outputs() -> list[tuple[Path, bytes]]:
     return outputs
 
 
+def _stale_detail(path: Path, expected: dict[Path, bytes]) -> str:
+    """失败时把「差多少」打出来，省得下次只能靠猜。"""
+    content = expected.get(path)
+    if content is None or not path.exists():
+        return "  ← 文件缺失"
+    try:
+        have = Image.open(path)
+        have.load()
+        want = Image.open(io.BytesIO(content))
+        want.load()
+    except Exception:
+        return "  ← 读不出来"
+    if have.size != want.size:
+        return f"  ← 尺寸 {have.size}，应为 {want.size}"
+    return (
+        f"  ← 最大色阶差 {_max_delta(have.convert('RGBA'), want.convert('RGBA'))}"
+        f"（容忍 {MAX_ICON_DELTA}）"
+    )
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
@@ -132,7 +201,7 @@ def main() -> int:
 
     for path, content in outputs:
         if args.check:
-            if not path.exists() or path.read_bytes() != content:
+            if not matches(path, content):
                 stale.append(path)
             continue
         path.parent.mkdir(parents=True, exist_ok=True)
@@ -140,9 +209,12 @@ def main() -> int:
 
     if args.check:
         if stale:
-            print(f"图标与母版不一致（{len(stale)} 个），请运行 python tool/gen_icons.py：")
+            print(
+                f"图标与母版不一致（{len(stale)} 个），请运行 python tool/gen_icons.py"
+            )
+            print(f"（Pillow {getattr(Image, '__version__', '?')}）")
             for path in stale:
-                print(f"  - {path.relative_to(ROOT)}")
+                print(f"  - {path.relative_to(ROOT)}{_stale_detail(path, dict(outputs))}")
             return 1
         print(f"图标一致（{len(outputs)} 个文件）")
         return 0
